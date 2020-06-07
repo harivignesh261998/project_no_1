@@ -1,0 +1,29 @@
+.q{
+    margin-top: 4%;
+    margin-left: 4%;
+}
+.w{
+    margin-left: 5%;
+    margin-top: 1.5%; 
+}
+.e{
+    margin-left: 5%;
+}
+.r{
+    margin-left: 5%;
+    margin-top: -1%;
+}
+.card{
+   
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-left: 25%;
+    margin-top: -10%;
+}
+
+.card{
+    -webkit-box-shadow:-1px 9px 40px -12px rgba(0,0,0,0.75);
+    -maz-box-shadow:-1px 9px 40px -12px rgba(0,0,0,0.75);
+    box-shadow: -1px 9px 40px -12px rgb(0, 0, 0,0.75);
+
+}

@@ -1,0 +1,60 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import { PracticeComponent } from './components/practice/practice.component';
+import { TricksComponent } from './components/tricks/tricks.component';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { LearningportalComponent } from './components/learningportal/learningportal.component';
+import { AgespartnersComponent } from './components/agespartners/agespartners.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+
+
+import { SolveComponent } from './components/solve/solve.component';
+import { HttpClientModule} from '@angular/common/http';
+import { ClockcalComponent } from './components/clockcal/clockcal.component';
+import { AuthGuard } from 'src/app/auth-guard';
+import { DocsComponent } from './components/docs/docs.component';
+import { PracticetestComponent } from './components/practicetest/practicetest.component';
+
+
+
+
+
+const routes: Routes = [
+  
+  //{path:'',redirectTo:'login'},
+  //{path:'',component:LoginComponent},
+  {path:'',component:LoginComponent},
+  {path:'login',component:LoginComponent},
+  
+  {path:'register',component:RegisterComponent},
+  {path:'dashboard',component:DashboardComponent,canActivate:[AuthGuard]},
+  {path:'clockcal',component:ClockcalComponent},
+  //{path:'',redirectTo:'/practice',pathMatch:'full'},
+  {path:'practice',component:PracticeComponent,canActivate:[AuthGuard]},
+  {path:'tricks',component:TricksComponent,canActivate:[AuthGuard]},
+  {path:'leaderboard',component:LeaderboardComponent,canActivate:[AuthGuard]},
+  {path:'profile',component:ProfileComponent,canActivate:[AuthGuard]},
+  {path:'practice/learningportal',component:LearningportalComponent,canActivate:[AuthGuard]},
+  {path:'practice/learningportal/agespartners',component:AgespartnersComponent,canActivate:[AuthGuard]},
+  {path:'practice/learningportal/clockcal',component:ClockcalComponent,canActivate:[AuthGuard]},
+  {path:'learningportal',component:LearningportalComponent,canActivate:[AuthGuard]},
+  {path:'practicetest',component:PracticetestComponent,canActivate:[AuthGuard]},
+  {path:'practice/practicetest',component:PracticetestComponent,canActivate:[AuthGuard]},
+  {path:'practice/learningportal/agespartners/solve',component:SolveComponent,canActivate:[AuthGuard]},
+  {path:'practice/learningportal/clockcal/solve',component:SolveComponent,canActivate:[AuthGuard] },
+  {path:'solve',component:SolveComponent,canActivate:[AuthGuard]},
+  {path:'practicetest/solve',component:SolveComponent,canActivate:[AuthGuard]},
+  {path:'practice/practicetest/solve',component:SolveComponent,canActivate:[AuthGuard]},
+  {path:'docs',component:DocsComponent,canActivate:[AuthGuard]}
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes),HttpClientModule],
+  exports: [RouterModule],
+  providers:[AuthGuard]
+})
+export class AppRoutingModule { }

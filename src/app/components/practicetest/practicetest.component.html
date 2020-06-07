@@ -1,0 +1,67 @@
+
+
+    <div class="header"> 
+        <p><a routerLink='/practice'>Practice</a> ><span style="pointer-events: none;"> Practice Test</span></p>
+        <h3 class="header_1">Practice Portal</h3>
+        <hr>
+    </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-4-lg">
+                    <div *ngFor='let ques of practice'>
+                        <div class="card" style="width: 50rem;height: 9rem;">
+                            <div class="card-body">
+                                <h5>{{ques.message}}</h5>
+                                <p class="e"><span style="color: green;">Easy</span>,Max Score:15</p>
+                                <a  class="btn btn-outline-success float-right" (click)='solve(ques._id)'>Solve Challenge</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+<!-- <div class="filter">
+    <p>STATUS</p>
+    <div class="ui checkbox">
+        <input type="checkbox" name="example">
+        <label>Solved</label>
+        <br>
+        <input type="checkbox" name="example">
+        <label>Unsolved</label>
+      </div>
+      <div>
+          <br>
+      </div>
+
+      <p>DIFFICULTY</p>
+      <div class="ui checkbox">
+        <input type="checkbox" name="example">
+        <label>Easy</label>
+        <br>
+        <input type="checkbox" name="example">
+        <label>Medium</label>
+        <br>
+        <input type="checkbox" name="example">
+        <label>Hard</label>
+        
+      </div>
+
+
+
+
+</div>
+     -->
+
+    
+    
+       
+    
+    
+    
+    
+    
+    
+
