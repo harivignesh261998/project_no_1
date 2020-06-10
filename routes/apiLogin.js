@@ -29,13 +29,7 @@ routerLogin.post('/studentLogin', async (req,res,next) => {
                             message: "LOGIN SUCCESSFUL",
                             token: token,
                             expiresIn: 3600,
-                            studentId: userData._id,
-                            firstName: userData.firstName,
-                            lastName: userData.lastName,
-                            mailId: userData.mailId,
-                            collegeId: userData.collegeId,
-                            aTest: userData.aTest,
-                            cTest: userData.cTest
+                            studentId: userData._id
                         })
                     }
                     else {

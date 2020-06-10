@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const PracticeSchema = new Schema({
     topic: String,
     message: String,
+    difficulty: String,
     ques: String,
     option1: String,
     option2: String,
@@ -14,5 +15,5 @@ const PracticeSchema = new Schema({
     answer: String
 })
 
-const Practice = mongoose.model('practice', PracticeSchema);
+const Practice = mongoose.model('Practice', PracticeSchema);
 module.exports = Practice;

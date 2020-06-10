@@ -53,6 +53,8 @@ checkanswer(){
     else{
       this.scorePoints=0;
     }
+
+    this.authService.updatePractice(this.practice._id);
     console.log(this.scorePoints);
     
   }

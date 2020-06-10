@@ -5,55 +5,87 @@
         <h3 class="header_1">Practice Portal</h3>
         <hr>
     </div>
-
+    
         <div class="container">
             <div class="row">
                 <div class="col-4-lg">
-                    <div *ngFor='let ques of practice'>
+                    <div *ngFor='let ques of practicediff'>
                         <div class="card" style="width: 50rem;height: 9rem;">
                             <div class="card-body">
                                 <h5>{{ques.message}}</h5>
-                                <p class="e"><span style="color: green;">Easy</span>,Max Score:15</p>
+                                    <p class="e"><span ng-style='color'>{{ques.difficulty}}</span>,Max Score:15</p>
                                 <a  class="btn btn-outline-success float-right" (click)='solve(ques._id)'>Solve Challenge</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </div>
-
-<!-- <div class="filter">
+     
+<div class="filter">
     <p>STATUS</p>
     <div class="ui checkbox">
-        <input type="checkbox" name="example">
+        <input type="checkbox" name="example" value="Solved">
         <label>Solved</label>
         <br>
-        <input type="checkbox" name="example">
+        <input type="checkbox" name="example" value="Unsolved">
         <label>Unsolved</label>
       </div>
       <div>
-          <br>
+          <hr style="width: 180%;">
       </div>
+     
 
       <p>DIFFICULTY</p>
-      <div class="ui checkbox">
-        <input type="checkbox" name="example">
+      <!-- <div class="ui checkbox">
+        <input type="checkbox" name="example" value='Easy' onchange="filter(event)">
         <label>Easy</label>
         <br>
-        <input type="checkbox" name="example">
+        <input type="checkbox" name="example" value='Medium' onchange="filter(event)">
         <label>Medium</label>
         <br>
-        <input type="checkbox" name="example">
+        <input type="checkbox" name="example" value="Hard" onchange="filter(event)">
         <label>Hard</label>
+        <div>
+          <hr style="width: 180%;">
+        </div>
+      </div> -->
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="diff">
+        <mat-radio-button value=Easy (onchange)='filter($event)'>Easy</mat-radio-button>
+        <br>
+        <mat-radio-button value=Medium (onchange)='filter($event)'>Medium</mat-radio-button>
+        <br>
+        <mat-radio-button value=Hard (onchange)='filter($event)'>Hard</mat-radio-button>
+        <div>
+            <hr style="width: 180%;">
+          </div>
+
+
+          </mat-radio-group>
+
+      <p>DOMAIN</p>
+      <div class="ui checkbox">
+        <input type="checkbox" name="example">
+        <label>Ages and Partners</label>
+        <br>
+        <input type="checkbox" name="example">
+        <label>Ratio</label>
+        <br>
+        <input type="checkbox" name="example">
+        <label>Coding and Decoding</label>
         
       </div>
 
 
 
 
+
 </div>
-     -->
+
+    
+
+        
+    
 
     
     

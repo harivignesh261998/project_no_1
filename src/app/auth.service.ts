@@ -61,8 +61,7 @@ private clgURl:string='/assets/data/college.csv'
             this.token=token;
             this.userId=response.studentId;
             
-            //const a=this.userId.toString();
-            console.log('hai hello is this'+this.userId);
+            
            
             if(token){
                 
@@ -157,7 +156,8 @@ private saveAuthData(token:string ,expirationDate:Date,userId:Object){
 private clearAuthData(){
     localStorage.removeItem("token");
     localStorage.removeItem("expiration");
-    
+    localStorage.removeItem('userId');
+    localStorage.removeItem('id');
 }
 
 private getAuthData(){
@@ -262,7 +262,10 @@ getUsername():Observable<GlobalUserData[]>{
 
     }
 
-   
+    updatePractice(id:string){
+        this.http.post('apiPracticeQuestionsUpdate/',id);    
+    
+    }
 
    
 

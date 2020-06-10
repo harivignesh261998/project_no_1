@@ -1,7 +1,6 @@
 const express = require('express');
 const routerTest = express.Router();
 const Student = require('../models/student')
-//const ATestStudentRecord = require('../models/aTestStudentRecord');
 const ATest = require('../models/aTest');
 const CTest = require('../models/cTest');
 

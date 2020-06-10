@@ -7,7 +7,6 @@ routerStudentDashboard.get('/profile/:id', function(req,res,next){
     Student.findById(req.params.id).then((studentProfile => {
         res.status(200).json({
             practicedQuestions: studentProfile.practicedQuestions,
-            _id: studentProfile._id,
             firstName: studentProfile.firstName,
             lastName: studentProfile.lastName,
             mailId: studentProfile.mailId,

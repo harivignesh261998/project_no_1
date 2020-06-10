@@ -5,6 +5,8 @@ import {Subscription, Observable} from 'rxjs'
 import { Router } from '@angular/router';
 
 
+
+
 @Component({
   selector: 'app-practicetest',
   templateUrl: './practicetest.component.html',
@@ -15,8 +17,10 @@ export class PracticetestComponent implements OnInit {
 globalPractice:GlobalPracticeSummary[];
 golabal:GlobalPracticeSummary[];
 practice
+practicediff
 message='Practice Test'
 act:any
+public diff:string;
   constructor(private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
@@ -24,10 +28,8 @@ act:any
     this.authService.getPractice().subscribe(res=>{
       this.globalPractice=res;
       this.practice=this.globalPractice['practiceQuestions'];
-      console.log(this.practice);
-      for(let a of this.practice){
-        console.log(a.ques);
-      }
+      this.practicediff=this.practice;
+
     })
     
 
@@ -42,8 +44,20 @@ act:any
 
   }
 
-  
+  filter(event){
+    console.log(event.value);
+    let a=event.value;
+    this.practice.forEach(cs => {
+      if(a==cs.difficulty){
+        this.practicediff=cs;
+      }
+      
+      
+    });
+    
+
+  }
 
 
-  
 }
+

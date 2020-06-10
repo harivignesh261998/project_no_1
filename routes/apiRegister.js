@@ -24,9 +24,7 @@ router.post('/studentRegister', async(req,res,next) => {
                 mailId: req.body.mailId,
                 password: hashedPassword,
                 collegeId: req.body.collegeId,
-                practicedQuestions: req.body.practicedQuestions,
-                aTest: req.body.aTest,
-                cTest: req.body.cTest
+                practicedQuestions: req.body.practicedQuestions
             });
        student.save(function(err,result){
            if(err){
