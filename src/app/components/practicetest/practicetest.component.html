@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-4-lg">
-                    <div *ngFor='let ques of practicediff'>
+                     <div *ngFor='let ques of practice'> 
                         <div class="card" style="width: 50rem;height: 9rem;">
                             <div class="card-body">
                                 <h5>{{ques.message}}</h5>
@@ -24,38 +24,46 @@
      
 <div class="filter">
     <p>STATUS</p>
-    <div class="ui checkbox">
+    <!-- <div class="ui checkbox">
         <input type="checkbox" name="example" value="Solved">
         <label>Solved</label>
         <br>
         <input type="checkbox" name="example" value="Unsolved">
         <label>Unsolved</label>
-      </div>
-      <div>
-          <hr style="width: 180%;">
-      </div>
+      </div> -->
+      <mat-radio-group aria-label="Select an option" >
+        <mat-radio-button value='Solved' (change)='status($event)'>Solved</mat-radio-button>
+        <br>
+        <mat-radio-button value='Unsolved' (change)='status($event)'>Unsolved</mat-radio-button>
+        <div>
+            <hr style="width: 180%;">
+          </div>
+
+
+          </mat-radio-group>
+      
      
 
       <p>DIFFICULTY</p>
       <!-- <div class="ui checkbox">
-        <input type="checkbox" name="example" value='Easy' onchange="filter(event)">
+        <input type="checkbox" name="example" value='Easy'>
         <label>Easy</label>
         <br>
-        <input type="checkbox" name="example" value='Medium' onchange="filter(event)">
+        <input type="checkbox" name="example" value='Medium' >
         <label>Medium</label>
         <br>
-        <input type="checkbox" name="example" value="Hard" onchange="filter(event)">
+        <input type="checkbox" name="example" value="Hard" >
         <label>Hard</label>
         <div>
           <hr style="width: 180%;">
         </div>
       </div> -->
-      <mat-radio-group aria-label="Select an option" [(ngModel)]="diff">
-        <mat-radio-button value=Easy (onchange)='filter($event)'>Easy</mat-radio-button>
+      <mat-radio-group aria-label="Select an option" >
+        <mat-radio-button value=Easy (change)='filter($event)'>Easy</mat-radio-button>
         <br>
-        <mat-radio-button value=Medium (onchange)='filter($event)'>Medium</mat-radio-button>
+        <mat-radio-button value=Medium (change)='filter($event)'>Medium</mat-radio-button>
         <br>
-        <mat-radio-button value=Hard (onchange)='filter($event)'>Hard</mat-radio-button>
+        <mat-radio-button value=Hard (change)='filter($event)'>Hard</mat-radio-button>
         <div>
             <hr style="width: 180%;">
           </div>
@@ -64,8 +72,8 @@
           </mat-radio-group>
 
       <p>DOMAIN</p>
-      <div class="ui checkbox">
-        <input type="checkbox" name="example">
+      <!-- <div class="ui checkbox">
+        <input type="checkbox" name="example" value='Ages and Partners' (change)='domain($event)'>
         <label>Ages and Partners</label>
         <br>
         <input type="checkbox" name="example">
@@ -74,26 +82,12 @@
         <input type="checkbox" name="example">
         <label>Coding and Decoding</label>
         
-      </div>
-
-
-
-
-
+      </div> -->
+      <mat-radio-group aria-label="Select an option" >
+        <mat-radio-button value='Ages and Partners' (change)='domain($event)'>Ages and Partners</mat-radio-button>
+        <br>
+        <mat-radio-button value='Ratio' (change)='domain($event)'>Ratio</mat-radio-button>
+        <br>
+        <mat-radio-button value='Coding and Decoding' (change)='domain($event)'>Coding and Decoding</mat-radio-button>
+          </mat-radio-group>
 </div>
-
-    
-
-        
-    
-
-    
-    
-       
-    
-    
-    
-    
-    
-    
-

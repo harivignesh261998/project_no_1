@@ -35,7 +35,7 @@ a{
     
 } 
 .filter{
-    position: fixed;
+    position: absolute;
     z-index: 2;
     padding-left:8%;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { GlobalPracticeSummary } from 'src/app/models/global-data';
 import {Subscription, Observable} from 'rxjs'
@@ -13,14 +13,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./practicetest.component.css']
 })
 @Injectable({providedIn:"root"})
-export class PracticetestComponent implements OnInit {
+export class PracticetestComponent implements OnInit  {
 globalPractice:GlobalPracticeSummary[];
 golabal:GlobalPracticeSummary[];
 practice
-practicediff
+practicediff:[]
+diff
+
 message='Practice Test'
 act:any
-public diff:string;
+isFilter=false;
+difffilter:[];
+
+
+
+
+
   constructor(private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
@@ -28,13 +36,14 @@ public diff:string;
     this.authService.getPractice().subscribe(res=>{
       this.globalPractice=res;
       this.practice=this.globalPractice['practiceQuestions'];
-      this.practicediff=this.practice;
+     // this.practicediff=this.practice;
 
     })
     
 
   }
 
+ 
   solve(id:string){
     // console.log(id);
     this.authService.getElement(id);
@@ -43,21 +52,27 @@ public diff:string;
    this.router.navigate(['practice/practicetest/solve']);
 
   }
-
-  filter(event){
-    console.log(event.value);
-    let a=event.value;
-    this.practice.forEach(cs => {
-      if(a==cs.difficulty){
-        this.practicediff=cs;
-      }
-      
-      
-    });
-    
-
+ 
+filter(event:any){
+  //console.log(event.value);
+  for( let a of this.practice){
+    if(event.value==a['difficulty']){
+      console.log('sure');
+      this.practice=a;
+    }
   }
 
+  
+}
+
+domain(event:any){
+  console.log(event.value);
+  
+}
+status(event:any){
+  console.log(event.value);
+  
+}
 
 }
 
