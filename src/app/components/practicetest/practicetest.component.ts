@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/auth.service';
 import { GlobalPracticeSummary } from 'src/app/models/global-data';
 import {Subscription, Observable} from 'rxjs'
 import { Router } from '@angular/router';
+import * as _ from 'lodash';
 
 
 
@@ -16,18 +17,17 @@ import { Router } from '@angular/router';
 export class PracticetestComponent implements OnInit  {
 globalPractice:GlobalPracticeSummary[];
 golabal:GlobalPracticeSummary[];
-practice
-practicediff:[]
-diff
-
+public practice
 message='Practice Test'
-act:any
-isFilter=false;
-difffilter:[];
+status:any;
+topic:any;
+difficulty:any;
+filterdata:any;
 
 
 
 
+filters={}
 
   constructor(private authService:AuthService,private router:Router) { }
 
@@ -35,44 +35,47 @@ difffilter:[];
 
     this.authService.getPractice().subscribe(res=>{
       this.globalPractice=res;
-      this.practice=this.globalPractice['practiceQuestions'];
-     // this.practicediff=this.practice;
-
+      this.practice=this.globalPractice['practiceQuestions'];  
+      this.applyFilters(); 
     })
     
 
   }
 
- 
-  solve(id:string){
-    // console.log(id);
-    this.authService.getElement(id);
-    this.authService.getstatusbar(this.message);
-
-   this.router.navigate(['practice/practicetest/solve']);
+  private applyFilters(){
+    this.filterdata=_.filter(this.practice,_.conforms(this.filters));
 
   }
- 
-filter(event:any){
-  //console.log(event.value);
-  for( let a of this.practice){
-    if(event.value==a['difficulty']){
-      console.log('sure');
-      this.practice=a;
+
+  filterExact(property:string,rule:any){
+    this.filters[property]=val=>val==rule
+    this.applyFilters();
+  }
+
+ filterBoolean(property:string,rule:boolean){
+   if(!rule){
+      this.removeFilter(property)
+   }
+   else{
+     this.filters[property]=val=>val
+     this.applyFilters();
+   }
+ }
+
+
+removeFilter(property:string){
+  delete this.filters[property]
+  this[property]=null;
+  this.applyFilters();
+
+}
+
+solve(id:string){
+      this.authService.getElement(id);
+      this.authService.getstatusbar(this.message);
+      this.router.navigate(['practice/practicetest/solve']);
     }
-  }
 
-  
-}
-
-domain(event:any){
-  console.log(event.value);
-  
-}
-status(event:any){
-  console.log(event.value);
-  
-}
 
 }
 
