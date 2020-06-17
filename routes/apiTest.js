@@ -3,6 +3,7 @@ const routerTest = express.Router();
 const Student = require('../models/student')
 const ATest = require('../models/aTest');
 const CTest = require('../models/cTest');
+const { findByIdAndUpdate } = require('../models/student');
 
 
 //post new aTest in the DB
@@ -36,23 +37,44 @@ routerTest.post('/newCTest', function(req,res,next){
 });
 
 
-//update aTest data in the db
-routerTest.put('/aTestUpdate/:id', function(req,res,next){
-    console.log("enter");
-    console.log(req.params.id);
-    Student.findByIdAndUpdate({_id: req.params.id}, req.body).then(function(err, aTestRecord){
-            console.log(aTestRecord);
-    })
-});
+//get an specific aTest using ID from the ATest Collection
+routerTest.get('/getATest/:id', function(req,res,next){
+    ATest.findById(req.params.id).then((aTest => {
+        console.log(aTest);
+        res.status(200).json(aTest);
+    }))
+})
 
-//update cTest data in the db
-routerTest.put('/cTestUpdate/:id', function(req,res,next){
-    console.log("enter");
-    console.log(req.params.id);
-    Student.findByIdAndUpdate({_id: req.params.id}, req.body).then(function(err, cTestRecord){
-            console.log(cTestRecord);
-    })
-});
 
+//get an specific cTest using ID from the CTest Collection
+routerTest.get('/getCTest/:id', function(req,res,next){
+    CTest.findById(req.params.id).then((cTest => {
+        console.log(cTest);
+        res.status(200).json(cTest);
+    }))
+})
+
+//add question manually to a specific aTest in the ATest Collection
+routerTest.post('/addAQuestion/:id', function(req,res,next){
+    ATest.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((aTest) => {
+        var question = req.body
+        aTest.questions.push(question);
+        aTest.save(question);
+        res.status(201).json(aTest);
+        console.log(aTest);
+    })
+})
+
+
+//add question manually to a specific aTest in the ATest Collection
+routerTest.post('/addCQuestion/:id', function(req,res,next){
+    CTest.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((cTest) => {
+        var question = req.body
+        cTest.questions.push(question);
+        cTest.save(question);
+        res.status(201).json(cTest);
+        console.log(cTest);
+    })
+})
 
 module.exports = routerTest;

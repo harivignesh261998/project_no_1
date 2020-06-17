@@ -23,8 +23,10 @@ router.post('/studentRegister', async(req,res,next) => {
                 lastName: req.body.lastName,
                 mailId: req.body.mailId,
                 password: hashedPassword,
-                collegeId: req.body.collegeId,
-                practicedQuestions: req.body.practicedQuestions
+                contact: req.body.contact,
+                degree: req.body.degree,
+                department: req.body.department,
+                graduatingYear: req.graduatingYear
             });
        student.save(function(err,result){
            if(err){

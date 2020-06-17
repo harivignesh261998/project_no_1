@@ -267,7 +267,10 @@ getUsername():Observable<GlobalUserData[]>{
     
     }
 
-   
+   getATest(){
+      return this.http.get('apiTest/getCTest/5ed9f0bbed1bff210c8f2aec');
+       
+   }
 
 }
 

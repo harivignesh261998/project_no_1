@@ -17,6 +17,10 @@ import { ClockcalComponent } from './components/clockcal/clockcal.component';
 import { AuthGuard } from 'src/app/auth-guard';
 import { DocsComponent } from './components/docs/docs.component';
 import { PracticetestComponent } from './components/practicetest/practicetest.component';
+import { PortalComponent } from './components/portal/portal.component';
+import { CportalComponent } from './components/cportal/cportal.component';
+import { AportalComponent } from './components/aportal/aportal.component';
+
 
 
 
@@ -48,7 +52,16 @@ const routes: Routes = [
   {path:'solve',component:SolveComponent,canActivate:[AuthGuard]},
   {path:'practicetest/solve',component:SolveComponent,canActivate:[AuthGuard]},
   {path:'practice/practicetest/solve',component:SolveComponent,canActivate:[AuthGuard]},
-  {path:'docs',component:DocsComponent,canActivate:[AuthGuard]}
+  {path:'docs',component:DocsComponent,canActivate:[AuthGuard]},
+  {path:'portal',component:PortalComponent,canActivate:[AuthGuard]},
+  {path:'portal',component:PortalComponent,canActivate:[AuthGuard]},
+  {path:'practice/portal',component:PortalComponent,canActivate:[AuthGuard]},
+  {path:'aportal',component:AportalComponent,canActivate:[AuthGuard]},
+  {path:'practice/portal/aportal',component:AportalComponent,canActivate:[AuthGuard]},
+  {path:'cportal',component:CportalComponent,canActivate:[AuthGuard]},
+  {path:'practice/portal/cportal',component:CportalComponent,canActivate:[AuthGuard]},
+
+
 
 ];
 

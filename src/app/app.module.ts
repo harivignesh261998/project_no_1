@@ -38,6 +38,9 @@ import {MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/materia
 import { DocsComponent } from './components/docs/docs.component';
 import {MatSelectModule} from '@angular/material/select'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { PortalComponent } from './components/portal/portal.component';
+import { AportalComponent } from './components/aportal/aportal.component';
+import { CportalComponent } from './components/cportal/cportal.component';
 
 
 
@@ -62,6 +65,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     ClockcalComponent,
     ErrorComponent,
     DocsComponent,
+    PortalComponent,
+    AportalComponent,
+    CportalComponent,
     
   ],
   imports: [
@@ -87,7 +93,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatSnackBarModule,
     MatSelectModule,
     MatAutocompleteModule,
-    
+   
     
 
 
