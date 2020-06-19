@@ -24,6 +24,9 @@ private clgURl:string='/assets/data/college.csv'
     private isAuthenticated=false;
     private token:string;
     private tokenTimer:any;
+    public testid;
+    public duraation;
+    public testname
     private authStatusListner=new Subject<boolean>();
     constructor(private http:HttpClient,private router:Router){}
     getToken(){
@@ -268,9 +271,55 @@ getUsername():Observable<GlobalUserData[]>{
     }
 
    getATest(){
-      return this.http.get('apiTest/getCTest/5ed9f0bbed1bff210c8f2aec');
+      return this.http.get('apiTest/getATests');
        
    }
+   atestId(id){
+      
+       this.testid=id;
+      
+   }
+
+   getAtestbyID(){
+       return this.http.get('apiTest/getATest/'+this.testid);
+   }
+
+
+   getCTest(){
+       return this.http.get('apiTest/getCTests');
+   }
+
+   CtestID(id){
+       this.testid=id;
+   }
+
+   getCtestbyID(){
+       return this.http.get('apiTest/getCTest/'+this.testid);
+   }
+getIsSolved(){
+    this.userId=JSON.parse(localStorage.getItem('userId'));
+    return this.http.get('apiStudentDashboard/profile/'+this.userId);
+}
+
+
+giveduration(id,name){
+    //console.log(id);
+    this.testname=name
+    this.duraation=id
+}
+
+getDuration(){
+    if(this.testname=='Atest'){
+        return this.http.get('apiTest/getATest/'+this.duraation);
+    }
+    else{
+        return this.http.get('apiTest/getCTest/'+this.duraation);
+    }
+   
+}
+
+
+
 
 }
 

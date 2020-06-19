@@ -54,6 +54,25 @@ routerTest.get('/getCTest/:id', function(req,res,next){
     }))
 })
 
+
+//get all the aTests from the ATest Collection
+routerTest.get('/getATests', function(req,res,next){
+    ATest.find({}, {_id: 1, testName: 1, createdOn: 1, duration: 1}).then((aTests) => {
+        res.status(201).json(aTests)
+        console.log(aTests)
+    })
+})
+
+
+//get all the cTests from the CTest Collection
+routerTest.get('/getCTests', function(req,res,next){
+    CTest.find({}, {_id: 1, testName: 1, createdOn: 1, duration: 1}).then((cTests) => {
+        res.status(201).json(cTests)
+        console.log(cTests)
+    })
+})
+
+
 //add question manually to a specific aTest in the ATest Collection
 routerTest.post('/addAQuestion/:id', function(req,res,next){
     ATest.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((aTest) => {
@@ -76,5 +95,25 @@ routerTest.post('/addCQuestion/:id', function(req,res,next){
         console.log(cTest);
     })
 })
+
+
+//update aTest data in the db
+routerTest.put('/aTestUpdate/:id', function(req,res,next){
+    console.log("enter");
+    console.log(req.params.id);
+    Student.findByIdAndUpdate(req.params.id, req.body).then(function(err, aTestRecord){
+            console.log(aTestRecord);
+    })
+});
+
+//update cTest data in the db
+routerTest.put('/cTestUpdate/:id', function(req,res,next){
+    console.log("enter");
+    console.log(req.params.id);
+    Student.findByIdAndUpdate(req.params.id, req.body).then(function(err, cTestRecord){
+            console.log(cTestRecord);
+    })
+});
+
 
 module.exports = routerTest;

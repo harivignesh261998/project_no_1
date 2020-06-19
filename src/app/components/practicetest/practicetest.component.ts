@@ -23,7 +23,8 @@ status:any;
 topic:any;
 difficulty:any;
 filterdata:any;
-
+solved=true;
+solvedData;
 
 
 
@@ -38,16 +39,24 @@ filters={}
       this.practice=this.globalPractice['practiceQuestions'];  
       this.applyFilters(); 
     })
-    
+
+   this.authService.getIsSolved().subscribe(res=>{
+     this.solvedData=res['practicedQuestions'];
+    //  console.log(this.practice);
+    //  this.applyFilters();
+   })
 
   }
 
   private applyFilters(){
     this.filterdata=_.filter(this.practice,_.conforms(this.filters));
+    console.log('second ',this.filterdata);
+    console.log('seco-nd',this.filters);
 
   }
 
   filterExact(property:string,rule:any){
+    console.log('hai-hello->',rule);
     this.filters[property]=val=>val==rule
     this.applyFilters();
   }
@@ -76,6 +85,7 @@ solve(id:string){
       this.router.navigate(['practice/practicetest/solve']);
     }
 
+    
 
 }
 

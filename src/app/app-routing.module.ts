@@ -20,6 +20,9 @@ import { PracticetestComponent } from './components/practicetest/practicetest.co
 import { PortalComponent } from './components/portal/portal.component';
 import { CportalComponent } from './components/cportal/cportal.component';
 import { AportalComponent } from './components/aportal/aportal.component';
+import { AsolveComponent } from './components/asolve/asolve.component';
+import { CsolveComponent } from './components/csolve/csolve.component';
+import { InstructionsComponent } from './components/instructions/instructions.component';
 
 
 
@@ -60,6 +63,16 @@ const routes: Routes = [
   {path:'practice/portal/aportal',component:AportalComponent,canActivate:[AuthGuard]},
   {path:'cportal',component:CportalComponent,canActivate:[AuthGuard]},
   {path:'practice/portal/cportal',component:CportalComponent,canActivate:[AuthGuard]},
+  {path:'asolve',component:AsolveComponent,canActivate:[AuthGuard]},
+  {path:'practice/portal/aportal/asolve',component:AsolveComponent,canActivate:[AuthGuard]},
+  {path:'csolve',component:AsolveComponent,canActivate:[AuthGuard]},
+  {path:'practice/portal/cportal/csolve',component:CsolveComponent,canActivate:[AuthGuard]},
+  {path:'instructions',component:InstructionsComponent,canActivate:[AuthGuard]},
+  {path:'practice/portal/cportal/instructions',component:InstructionsComponent,canActivate:[AuthGuard]},
+  {path:'practice/portal/aportal/instructions',component:InstructionsComponent,canActivate:[AuthGuard]},
+
+
+
 
 
 

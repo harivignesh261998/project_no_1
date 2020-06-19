@@ -38,14 +38,19 @@ const StudentSchema = new Schema({
         type: String,
         required: [true, 'Password is required']
     },
+    contact: Number,
+    degree: String,
+    department: String,
+    graduatingYear: Date,
     isVerified: {type: Boolean, default: false},
     collegeId: { type: mongoose.Schema.Types.ObjectId, ref: 'College' },
     collegeName:{ type: String},
     practicedQuestions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Practice' }],
+    overallScore: {type: Number, default: 0},
     aTest: [ ATestSchema ],
     cTest: [ CTestSchema ]
 })
 
 
 const Student = mongoose.model('Student',StudentSchema);
-module.exports = Student;
+module.exports = Student; 

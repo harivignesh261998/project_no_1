@@ -29,6 +29,7 @@
     "eva-icons": "^1.1.2",
     "express": "^4.17.1",
     "firebase": "^7.14.2",
+    "ngx-countdown": "^9.0.1",
     "nodemon": "^2.0.4",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

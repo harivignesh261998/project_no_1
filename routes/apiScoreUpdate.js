@@ -49,4 +49,16 @@ routerScoreUpdate.get('/cTestScore/:id', function(req,res,next){
     });
 
 
+//update overall Test score to the Student collection when one attempts Rractices and Tests
+routerScoreUpdate.put('/overallScoreUpdate/:id', function(req,res,next){
+    Student.findById(req.params.id).then((student => {
+        var sum = req.body.score + student.overallScore
+        student.overallScore = sum
+        student.save(student.overallScore)
+        console.log(student.overallScore)
+        res.status(201).json(student.overallScore)
+    }))
+})
+
+
 module.exports = routerScoreUpdate;

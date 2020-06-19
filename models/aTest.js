@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const aTestSchema = new Schema({
     testName: String,
     createdOn: Date,
+	duration: Number,
 	questions: [{ ques: String,
 		option1: String,
 		option2: String,

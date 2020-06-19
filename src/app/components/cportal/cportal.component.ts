@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cportal',
@@ -6,10 +8,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cportal.component.css']
 })
 export class CportalComponent implements OnInit {
+CTest;
+name='Ctest'
 
-  constructor() { }
+  constructor(private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
+    this.authService.getCTest().subscribe(res=>{
+      console.log(res);
+      this.CTest=res;
+      // for(let a of this.CTest){
+      //   console.log(a.testName);
+      // }
+    })
   }
+
+ min(id){
+   this.authService.giveduration(id,this.name);
+   this.router.navigate(['practice/portal/cportal/instructions'])
+ }
+
 
 }

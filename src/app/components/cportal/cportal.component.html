@@ -1,0 +1,25 @@
+<div class="header"> 
+    <p><a routerLink='/practice'>Practice</a> ><span style="pointer-events: none;">Exam Portal</span></p>
+    <h3 class="header_1">Practice Portal</h3>
+    <hr>
+</div>
+
+<div class="row">
+
+    <div *ngFor='let ques of CTest'> 
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ques.testName}}</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a class="btn btn-outline-success float-right" (click)='min(ques._id)'>Take Test</a>
+                  </div>
+                  <div class="card-footer text-muted">
+                      Duration:{{ques.duration}} minutes
+                    </div>  
+          </div>
+    </div>
+
+    </div>
+    
+  </div>

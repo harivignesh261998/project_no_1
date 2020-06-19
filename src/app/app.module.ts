@@ -41,6 +41,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { PortalComponent } from './components/portal/portal.component';
 import { AportalComponent } from './components/aportal/aportal.component';
 import { CportalComponent } from './components/cportal/cportal.component';
+import { CsolveComponent } from './components/csolve/csolve.component';
+import { AsolveComponent } from './components/asolve/asolve.component';
+import { InstructionsComponent } from './components/instructions/instructions.component';
+import { CountdownModule } from 'ngx-countdown';
 
 
 
@@ -68,6 +72,9 @@ import { CportalComponent } from './components/cportal/cportal.component';
     PortalComponent,
     AportalComponent,
     CportalComponent,
+    CsolveComponent,
+    AsolveComponent,
+    InstructionsComponent,
     
   ],
   imports: [
@@ -93,6 +100,7 @@ import { CportalComponent } from './components/cportal/cportal.component';
     MatSnackBarModule,
     MatSelectModule,
     MatAutocompleteModule,
+    CountdownModule,
    
     
 

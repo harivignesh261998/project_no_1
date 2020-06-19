@@ -1,15 +1,11 @@
 const mongoose  = require('mongoose');
 const Schema = mongoose.Schema;
 
-//create question Schema & Models
-const questionsSchema = new Schema({
-    
-})
-
 //create cTest Schema & Models
 const cTestSchema = new Schema({
     testName: String,
     createdOn: Date,
+    duration: Number,
 	questions: [{ ques: String,
         option1: String,
         option2: String,
