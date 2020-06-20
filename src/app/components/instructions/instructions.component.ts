@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,13 +13,14 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 
 export class InstructionsComponent implements OnInit{
 name;
-counter=60;
+counter=0;
+timeleft=60;
 noofq;
 topic
-
+counterr;
 IsDisabled=true;
 duration;
-  constructor(private authService:AuthService) {
+  constructor(private authService:AuthService,private router:Router) {
   
   }
 
@@ -39,13 +41,15 @@ this.authService.getDuration().subscribe(res=>{
   this.topic=res['testName']
   
 })
+
     
     
     
    
     let intervalId = setInterval(() => {
-      this.counter = this.counter - 1;
-      if(this.counter === 0){
+      this.counterr = this.convertSeconds(this.timeleft - this.counter);
+      this.counter++;
+      if(this.counter === this.timeleft){
         clearInterval(intervalId)
         this.IsDisabled=false ;
       } 
@@ -56,9 +60,27 @@ this.authService.getDuration().subscribe(res=>{
 
     
   }
+  convertSeconds(s){
+    let min=Math.floor(s/60);
+    let sec=s%60;
+    return min.toLocaleString('en-us',{minimumIntegerDigits:2}) +':'+sec.toLocaleString('en-us',{minimumIntegerDigits:2});
+
+
+  }
 
  
 
-  
+  getQues(){
+    let name=this.authService.getName()
+  //  console.log('this is the name->',name)
+   
+if(name=='Atest'){
+    this.router.navigate(['practice/portal/aportal/asolve']);
+  }
+  else
+  {
+    this.router.navigate(['practice/portal/cportal/csolve']);
+  }
+}
 
 }

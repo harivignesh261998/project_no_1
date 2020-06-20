@@ -18,7 +18,7 @@
         <p class="duration">
             Test Duration &nbsp; &nbsp; &nbsp; &nbsp; No. of questions
             <br>
-            <b> {{duration}} mins &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; {{noofq}} questions</b>
+            <b>   {{duration}} mins &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; {{noofq}} questions</b>
         </p>
         <br>
         <p>Topic:<b>{{topic}}</b></p>
@@ -46,9 +46,9 @@
     <div *ngIf='IsDisabled'>
         <button mat-raised-button color="success" disabled>Take Test</button> 
         &nbsp;&nbsp;
-        <p style="display: inline;">00:{{counter}}</p>      
+        <p style="display: inline;">{{counterr}}</p>      
     </div>
     <div *ngIf='!IsDisabled'>
-        <a  class="btn btn-outline-success">Take Test</a>   
+        <a  class="btn btn-outline-success" (click)='getQues()'>Take Test</a>   
     </div>
 </div>

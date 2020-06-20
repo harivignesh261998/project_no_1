@@ -25,6 +25,7 @@ name='Ctest'
 
  min(id){
    this.authService.giveduration(id,this.name);
+   this.authService.atestId(id);
    this.router.navigate(['practice/portal/cportal/instructions'])
  }
 

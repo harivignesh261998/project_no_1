@@ -45,6 +45,8 @@ import { CsolveComponent } from './components/csolve/csolve.component';
 import { AsolveComponent } from './components/asolve/asolve.component';
 import { InstructionsComponent } from './components/instructions/instructions.component';
 import { CountdownModule } from 'ngx-countdown';
+import { PopupModule } from '@progress/kendo-angular-popup';
+
 
 
 
@@ -101,6 +103,7 @@ import { CountdownModule } from 'ngx-countdown';
     MatSelectModule,
     MatAutocompleteModule,
     CountdownModule,
+    PopupModule,
    
     
 

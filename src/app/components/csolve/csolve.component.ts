@@ -7,13 +7,14 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./csolve.component.css']
 })
 export class CsolveComponent implements OnInit {
-
+questions;
   constructor(private authService:AuthService) { }
 
   ngOnInit(): void {
 
-    this.authService.getCtestbyID().subscribe(res=>{
-      console.log(res);
+    this.authService.getAtestbyID().subscribe(res=>{
+      this.questions=res['questions']
+      console.log(this.questions);
     })
 
   }

@@ -281,7 +281,14 @@ getUsername():Observable<GlobalUserData[]>{
    }
 
    getAtestbyID(){
-       return this.http.get('apiTest/getATest/'+this.testid);
+       if(this.testname=='Atest'){
+        return this.http.get('apiTest/getATest/'+this.testid);
+
+       }
+       else{
+        return this.http.get('apiTest/getCTest/'+this.testid);
+       }
+       
    }
 
 
@@ -289,13 +296,13 @@ getUsername():Observable<GlobalUserData[]>{
        return this.http.get('apiTest/getCTests');
    }
 
-   CtestID(id){
-       this.testid=id;
-   }
+//    CtestID(id){
+//        this.testid=id;
+//    }
 
-   getCtestbyID(){
-       return this.http.get('apiTest/getCTest/'+this.testid);
-   }
+//    getCtestbyID(){
+//        return this.http.get('apiTest/getCTest/'+this.testid);
+//    }
 getIsSolved(){
     this.userId=JSON.parse(localStorage.getItem('userId'));
     return this.http.get('apiStudentDashboard/profile/'+this.userId);
@@ -303,9 +310,10 @@ getIsSolved(){
 
 
 giveduration(id,name){
-    //console.log(id);
-    this.testname=name
-    this.duraation=id
+    // console.log(id);
+    // console.log(name);
+    this.testname=name;
+    this.duraation=id;
 }
 
 getDuration(){
@@ -318,6 +326,10 @@ getDuration(){
    
 }
 
+getName(){
+    return this.testname;
+     
+}
 
 
 
