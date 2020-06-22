@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 
+
+
+
 @Component({
   selector: 'app-asolve',
   templateUrl: './asolve.component.html',
@@ -10,18 +13,36 @@ export class AsolveComponent implements OnInit {
 questions;
 favoriteSeason;
 counter=0;
-timeleft=10;
+timeleft:number;
 show=false;
 counterr;
-ding;
-public offset = { left: 500, top: 200 };
+title;
+numberp=20;
+public index=0;
+jia=false;
+public question
+no;
+answers=[];
+options=[];
+IsSubmit=false;
+IsDisabled=true;
+gone=false;
   constructor(private authService:AuthService) { }
 
-  ngOnInit(): void {
-    this.ding='assest/ding/ding.mp3'
+  ngOnInit():void{
+     
+    this.authService.getDuration().subscribe(res=>{
+
+      this.title=res['testName'];
+      this.timeleft=res['duration']*60;
+     // console.log(this.title);
+    })
+    
 
     this.authService.getAtestbyID().subscribe(res=>{
-      this.questions=this.shuffle(res['questions']);
+      this.question=this.shuffle(res['questions']);
+      this.no=this.question.length;
+      this.questions=this.question[this.index];
       console.log(this.questions);
     })
 
@@ -29,14 +50,17 @@ public offset = { left: 500, top: 200 };
       this.counterr= this.convertSeconds(this.timeleft - this.counter);
       this.counter++;
       if(this.counter==this.timeleft){
+        this.gone=true;
+        clearInterval(intervalId);
         
-        
-        clearInterval(intervalId)
        
-       
-      
-        
+
       } 
+      if(this.counter==60){
+      //toastr.error('Hey Candidate Hurry up only '+this.counterr+' left');
+       this.jia=true;
+       
+      }
       
   }, 1000);
 
@@ -65,9 +89,47 @@ public offset = { left: 500, top: 200 };
 
   }
 
+  next(){
+    this.index++;
+      if(this.index >= 1){
+        this.IsDisabled=false;
+      }
   
+      if(this.index==this.no-1){
+        this.IsSubmit=true;
+      }
+      
+  this.questions=this.question[this.index];
+  }
+
+  previous(){
+    this.index--;
+    if(this.index==0){
+      this.IsDisabled=true;
+    }
+    if(this.index!=this.no-1){
+      this.IsSubmit=false;
+    }
+    
+  this.questions=this.question[this.index];
+  }
+answer(){
+  
+  if(this.favoriteSeason===this.question[this.index].answer){
+    this.options[this.index]=this.favoriteSeason;
+    this.answers[this.index]=1
+  }
+  else{
+    this.options[this.index]=this.favoriteSeason;
+    this.answers[this.index]=0;
+
+  }
+}
+
+showanswer(){
+  console.log('hai')
+ console.log('answer=>',this.answers);
+ console.log('options=>',this.options);
+}
  
-
-
-
 }

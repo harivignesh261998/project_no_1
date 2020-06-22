@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class InstructionsComponent implements OnInit{
 name;
 counter=0;
-timeleft=60;
+timeleft=10;
 noofq;
 topic
 counterr;

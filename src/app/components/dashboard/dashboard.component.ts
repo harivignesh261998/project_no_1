@@ -12,6 +12,7 @@ import { InstructionsComponent } from '../instructions/instructions.component';
 export class DashboardComponent implements OnInit,OnDestroy {
  public UserIsAuthenticated=false;
  public data;
+ public hidedashboard=true;
 
 
   private authListnerSubs:Subscription;
@@ -62,6 +63,11 @@ export class DashboardComponent implements OnInit,OnDestroy {
   dashboardfull(){
     console.log('full',this.UserIsAuthenticated);
     this.UserIsAuthenticated=false;
+  }
+
+  dashsattus(){
+    this.hidedashboard=true;
+
   }
 
 }
