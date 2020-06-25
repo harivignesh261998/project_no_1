@@ -47,6 +47,7 @@ import { InstructionsComponent } from './components/instructions/instructions.co
 import { CountdownModule } from 'ngx-countdown';
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { TestresultComponent } from './components/testresult/testresult.component';
+import{ToastrModule } from 'ngx-toastr'
 
 
 
@@ -79,6 +80,7 @@ import { TestresultComponent } from './components/testresult/testresult.componen
     AsolveComponent,
     InstructionsComponent,
     TestresultComponent,
+
     
   ],
   imports: [
@@ -107,6 +109,7 @@ import { TestresultComponent } from './components/testresult/testresult.componen
     CountdownModule,
     PopupModule,
    
+   
     
 
 
@@ -115,6 +118,7 @@ import { TestresultComponent } from './components/testresult/testresult.componen
     {provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},
     {provide: HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
     {provide:MAT_SNACK_BAR_DEFAULT_OPTIONS,useClass:ErrorInterceptor,useValue:{duration:2500}},
+    
 
   ],
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
+// import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -59,9 +60,9 @@ testId;
        
 
       } 
-      if(this.counter==60){
-      //toastr.error('Hey Candidate Hurry up only '+this.counterr+' left');
-       this.jia=true;
+      if(this.counter==10){
+        //this.toasterService.Warning('Hey only'+this.counter+'left hurryup')
+      //  this.jia=true;
        
       }
       

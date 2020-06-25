@@ -19,6 +19,9 @@
       <p class="text-center"></p>
     </div>
 </div> -->
+<div class="questions">
+  <p><b>{{index+1}} of {{no}} questions</b></p>
+</div>
 
 <div  class="container maincon">
   <div  class="row">
@@ -31,7 +34,10 @@
                     <div class="col-4-lg">
                      
                           <div class="card" style="width: 100%;">
-                            <div class="card-body">
+                            <div class="card-body" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" 
+                            unselectable="on"
+                            onselectstart="return false;" 
+                            onmousedown="return false;">
                                 <p>{{questions?.ques}}</p>
                             </div>
                         </div>
