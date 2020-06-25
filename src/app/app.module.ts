@@ -46,6 +46,7 @@ import { AsolveComponent } from './components/asolve/asolve.component';
 import { InstructionsComponent } from './components/instructions/instructions.component';
 import { CountdownModule } from 'ngx-countdown';
 import { PopupModule } from '@progress/kendo-angular-popup';
+import { TestresultComponent } from './components/testresult/testresult.component';
 
 
 
@@ -77,6 +78,7 @@ import { PopupModule } from '@progress/kendo-angular-popup';
     CsolveComponent,
     AsolveComponent,
     InstructionsComponent,
+    TestresultComponent,
     
   ],
   imports: [

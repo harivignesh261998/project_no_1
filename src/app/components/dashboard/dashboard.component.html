@@ -1,4 +1,4 @@
-<nav *ngIf="UserIsAuthenticated && !hidedashboard" class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav *ngIf="UserIsAuthenticated" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" routerLink='practice'>Logo</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -32,6 +32,8 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" routerLink='profile'>Profile</a>
           <a class="dropdown-item">Settings</a>
+          <a class="dropdown-item" routerLink='testresult'>Results</a>
+
           <a class="dropdown-item" (click)='onLogout()'>Log out</a>
         </div>
       </div>

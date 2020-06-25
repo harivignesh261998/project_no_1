@@ -25,6 +25,9 @@ difficulty:any;
 filterdata:any;
 solved=true;
 solvedData;
+check=[];
+count1;
+count2;
 
 
 
@@ -36,27 +39,29 @@ filters={}
 
     this.authService.getPractice().subscribe(res=>{
       this.globalPractice=res;
-      this.practice=this.globalPractice['practiceQuestions'];  
+      this.practice=this.globalPractice['practiceQuestions']; 
+      this.count1=this.practice.length; 
       this.applyFilters(); 
     })
 
    this.authService.getIsSolved().subscribe(res=>{
      this.solvedData=res['practicedQuestions'];
-    //  console.log(this.practice);
-    //  this.applyFilters();
+     this.count2=this.solvedData.length;
+     console.log(this.solvedData);
+     this.fun();
+    
    })
 
   }
 
   private applyFilters(){
     this.filterdata=_.filter(this.practice,_.conforms(this.filters));
-    console.log('second ',this.filterdata);
-    console.log('seco-nd',this.filters);
+    
 
   }
 
   filterExact(property:string,rule:any){
-    console.log('hai-hello->',rule);
+    
     this.filters[property]=val=>val==rule
     this.applyFilters();
   }
@@ -85,7 +90,17 @@ solve(id:string){
       this.router.navigate(['practice/practicetest/solve']);
     }
 
-    
+    fun(){
+      for(let i=0;i<this.count1;i++){
+        for(let j=0;j<this.count2;j++){
+
+          if(this.practice[i]._id===this.solvedData[j]){
+            this.check[i]=true;
+          }
+
+        }
+      }
+    }
 
 }
 

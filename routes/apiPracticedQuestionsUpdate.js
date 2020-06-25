@@ -12,7 +12,7 @@ routerPracticedQuestionsUpdate.post('/:id', function(req,res,next){
     }));
 });
 
-//get Pracficed Questions IDs from the DB
+//get Practiced Questions IDs from the DB
     routerPracticedQuestionsUpdate.get('/:id', function(req,res,next){
         Student.findById(req.params.id).then((student => {
             res.status(200).json(student.practicedQuestions);

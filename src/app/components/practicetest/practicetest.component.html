@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-4-lg">
              
-                <div *ngFor='let ques of filterdata' > 
+                <div *ngFor='let ques of filterdata;let i=index' > 
                   <div class="card" style="width: 50rem;height: 9rem;">
                     <div class="card-body">
                         <h5>{{ques.message}}</h5>
@@ -23,8 +23,12 @@
                         <div *ngIf="ques.difficulty=='Hard'"> 
                           <p class="e"><span style="color: red;">{{ques.difficulty}}</span>,Max Score:30</p>
                         </div>
-                       
-                          <a  class="btn btn-outline-success float-right" (click)='solve(ques._id)'>Solve Challenge</a>   
+                       <div *ngIf='!check[i]'>
+                         <a  class="btn btn-outline-success float-right" (click)='solve(ques._id)'>Solve Challenge</a>   
+                       </div>
+                       <div *ngIf='check[i]'>
+                        <a  class="btn btn-outline-success float-right">Try Again</a>   
+                      </div>
                     </div>
                 </div>
               </div>

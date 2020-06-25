@@ -27,6 +27,7 @@ options=[];
 IsSubmit=false;
 IsDisabled=true;
 gone=false;
+testId;
   constructor(private authService:AuthService) { }
 
   ngOnInit():void{
@@ -34,6 +35,8 @@ gone=false;
     this.authService.getDuration().subscribe(res=>{
 
       this.title=res['testName'];
+      this.testId=res['_id']
+
       this.timeleft=res['duration']*60;
      // console.log(this.title);
     })
@@ -91,6 +94,12 @@ gone=false;
 
   next(){
     this.index++;
+    this.favoriteSeason='';
+    console.log(this.favoriteSeason);
+    this.favoriteSeason=this.options[this.index];
+    console.log(this.favoriteSeason);
+
+   
       if(this.index >= 1){
         this.IsDisabled=false;
       }
@@ -103,7 +112,13 @@ gone=false;
   }
 
   previous(){
+
     this.index--;
+    this.favoriteSeason='';
+    console.log(this.favoriteSeason);
+    this.favoriteSeason=this.options[this.index];
+    console.log(this.favoriteSeason);
+    
     if(this.index==0){
       this.IsDisabled=true;
     }
@@ -126,10 +141,24 @@ answer(){
   }
 }
 
-showanswer(){
-  console.log('hai')
- console.log('answer=>',this.answers);
- console.log('options=>',this.options);
-}
- 
+
+checkanswer(){
+    // console.log('options->',this.options);
+    // console.log('answers->',this.answers);
+    let count=0,attempt=true;
+    for(let a of this.answers){
+      if (a==1){
+  
+        count++;
+      }
+  
+    }
+    console.log('count->',count);
+  //this.update.push(count);
+    
+  
+     //this.authService.updateStudent(this.title,count,this.test_id,attempt);
+   this.authService.updateStudent(this.testId,this.title,count,attempt)
+
+  }
 }

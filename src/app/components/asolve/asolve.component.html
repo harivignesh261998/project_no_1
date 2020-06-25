@@ -32,7 +32,7 @@
                      
                           <div class="card" style="width: 100%;">
                             <div class="card-body">
-                                <p>{{questions.ques}}</p>
+                                <p>{{questions?.ques}}</p>
                             </div>
                         </div>
                       
@@ -49,7 +49,7 @@
                     
                           <div class="card mt-4" style="width: 18em;">
                             <div class="card-body">
-                              <mat-radio-button  value={{questions.option1}}>{{questions.option1}}</mat-radio-button>
+                              <mat-radio-button  value={{questions.option1}}>{{questions?.option1}}</mat-radio-button>
                             </div>
                         </div>
                      
@@ -59,7 +59,7 @@
                     
                           <div class="card mt-4" style="width: 18em;">
                             <div class="card-body">
-                              <mat-radio-button  value={{questions.option2}}>{{questions.option2}}</mat-radio-button>
+                              <mat-radio-button   value={{questions.option2}}>{{questions?.option2}}</mat-radio-button>
                             </div>
                         </div>
                    
@@ -72,7 +72,7 @@
                     
                         <div class="card mt-4" style="width: 18em;">
                           <div class="card-body">
-                            <mat-radio-button  value={{questions.option3}}>{{questions.option3}}</mat-radio-button>
+                            <mat-radio-button  value={{questions.option3}}>{{questions?.option3}}</mat-radio-button>
                           </div>
                       </div>
                     
@@ -82,7 +82,7 @@
                    
                         <div class="card mt-4" style="width: 18em;">
                           <div class="card-body">
-                            <mat-radio-button value={{questions.option4}}>{{questions.option4}}</mat-radio-button>
+                            <mat-radio-button  value={{questions.option4}}>{{questions?.option4}}</mat-radio-button>
                           </div>
                       </div>
                     
@@ -107,23 +107,27 @@
 
   </div>
 </div>
+<div class="next" *ngIf='IsDisabled'>
+  <button mat-raised-button color="success" disabled>Previous</button>&nbsp;  
+  <a class="btn btn-outline-success" (click)='next()'>Save & Next</a>
+ </div>
+
+ <div class="next" *ngIf='!IsDisabled && !IsSubmit'>
+  <a class="btn btn-outline-success" (click)='previous()'>Previous</a>&nbsp;  
+  <a class="btn btn-outline-success" (click)='next()'>Save & Next</a>
+ </div>
+ <div class="next" *ngIf='IsSubmit'>
+  <a class="btn btn-outline-success" (click)='previous()'>Previous</a>&nbsp;  
+  <a class="btn btn-outline-success b" (click)='checkanswer()'>Submit</a>
+ </div>
+
+ 
 
 
-<div class="next">
-  <div *ngIf='IsDisabled'>
-    <button mat-raised-button color="success" disabled>Previous</button>&nbsp;   
-  </div>
-  <div *ngIf='!IsDisabled'>
-    <a class="btn btn-outline-success" (click)='previous()'>Previous</a>&nbsp;
-  </div>
-    <div *ngIf='!IsSubmit'>
-      <a class="btn btn-outline-success" (click)='next()'>Save & Next</a>&nbsp;
-    </div>
-    <div *ngIf='IsSubmit'>
-      <a class="btn btn-outline-success" (click)='showanswer()'>Submit</a>&nbsp;
-    </div>
-</div>
 
 
 
-    <button (click)='showanswer()'>show</button>
+
+
+
+    

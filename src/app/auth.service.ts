@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import{HttpClient} from '@angular/common/http';
-import {AuthData} from './auth-data.model';
+import {AuthData, Update} from './auth-data.model';
 import {Auth} from './auth-data.model';
 import { GlobalDataSummary,GlobalData, GlobalPracticeSummary, GlobalPracticeTest, GlobalUserData} from './models/global-data'; 
 
 import { Observable, Subject, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
+import { attempt } from 'lodash';
 @Injectable({providedIn:"root"})
 export class AuthService{
     
@@ -331,7 +332,33 @@ getName(){
      
 }
 
+updateStudent(testId,title,count,attempt){
+    const update:Update={testId:testId,testName:title,score:count,attempt:attempt}
+   console.log(update);
 
+    if(this.testname=='Atest'){
+        console.log('Atest->')
+        this.http.post(`apiScoreUpdate/aTestScoreUpdate/${this.userId}`, update).subscribe(res=>{
+            console.log(res);
+        }); 
+    }
+    else{
+        console.log('Ctest->');
+        this.http.post(`apiScoreUpdate/cTestScoreUpdate/${this.userId}`,update).subscribe(res=>{
+            console.log(res)
+        });
+    }
+}
+
+
+
+isSolvedAtest(){
+    return this.http.get('apiScoreUpdate/aTestScore/'+this.userId);
+}
+
+isSolvedCtest(){
+    return this.http.get('apiScoreUpdate/cTestScore/'+this.userId);
+}
 
 }
 

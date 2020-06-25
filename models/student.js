@@ -42,6 +42,7 @@ const StudentSchema = new Schema({
     degree: String,
     department: String,
     graduatingYear: Date,
+    profilePicture: String,
     isVerified: {type: Boolean, default: false},
     collegeId: { type: mongoose.Schema.Types.ObjectId, ref: 'College' },
     collegeName:{ type: String},

@@ -9,14 +9,32 @@ import { Router } from '@angular/router';
 })
 export class AportalComponent implements OnInit {
 aTest:any;
+Solved;
 name='Atest';
+check=[];
+count1;
+count2;
+score=[];
   constructor(private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
     this.authService.getATest().subscribe(res=>{
-      console.log(res);
-      this.aTest=res
+      this.aTest=res;
+      this.count1=this.aTest.length;
+      console.log(this.aTest,this.count1)
+      
+      
     })
+
+    this.authService.isSolvedAtest().subscribe(res=>{
+      this.Solved=res;
+      this.count2=this.Solved.length;
+      console.log(this.Solved);
+      console.log(this.count2);
+      this.fun();
+
+    })
+
     
   }
 
@@ -28,10 +46,19 @@ name='Atest';
 
   
 
-  // asolve(id){
-  //   this.authService.atestId(id);
-  //   this.router.navigate(['practice/portal/aportal/asolve']);
-    
-  // }
+  fun(){
+    for(let i=0;i<this.count1;i++){
+      for(let j=0;j<this.count2;j++){
+        if(this.aTest[i]._id===this.Solved[j].testId){
+          this.score[i]=this.Solved[j].score;
+          this.check[i]=true;
+        }
+        
+      }
+    }
+    console.log('is solved->',this.check);
+  }
+
+
 
 }

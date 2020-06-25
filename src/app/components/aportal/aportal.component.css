@@ -20,3 +20,6 @@ a{
     margin-left: 30%;
     width: 25em;
 }
+button{
+    float: right;
+}

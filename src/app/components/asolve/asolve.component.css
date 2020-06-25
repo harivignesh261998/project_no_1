@@ -67,30 +67,19 @@
     bottom: -4px;
     right: 10px;
   }
-/* .question_no{
 
-    padding-left:4%;
-    margin-top: 2%;
-    
-}
-.card{
-
-    padding-left: -4%;
-    width: 15em;
-    height:15em;
-} */
-
-/* .card{
-    width: 50em;
-    height: auto;
-    padding-left: 10%;
-    z-index: 2;
-    margin-top: 10%;
-} */
 .maincon{
     padding-top: 5%;
+    /* z-index: 2;
+    position: absolute; */
+    padding-left:5% ;
+   
+
 }
 .next{
-    padding-left: 51.5%;
-    padding-top: 1%;
+  padding-left: 52%;
+     padding-top: 1%;
+    margin-top: 1%;
+
+
 }

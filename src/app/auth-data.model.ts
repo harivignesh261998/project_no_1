@@ -12,3 +12,13 @@ export interface Auth{
     password:string;
 }
 
+export interface Update{
+    testName:string;
+    score:string;
+    testId:string;
+    attempt:boolean;
+    
+
+
+}
+

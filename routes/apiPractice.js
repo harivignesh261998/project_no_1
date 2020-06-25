@@ -15,7 +15,7 @@ routerPractice.get('/practice', function(req,res,next){
 });
 
 
-//Get Practice Questions ID, Topic, Message, Difficulty, Solved & Unsolved from the Practice collection
+//Get Practice Questions ID, Topic, Message, Difficulty, Solved & Unsolved using Student Id from the Practice collection
 routerPractice.get('/practiceId/:id', function(req,res,next){
    Practice.find({}, {_id: 1, topic: 1, message: 1, difficulty: 1}).then((documents) => {
         Student.findById(req.params.id).then((studentProfile) => {
@@ -64,10 +64,19 @@ routerPractice.get('/:id', function(req,res,next){
 
 //Update Practice Questions based on ID from the DB
 routerPractice.put('/:id', function (req,res,next){
-    Practice.findByIdAndUpdate(req.params.id).then((practiceQuestions => {
-        
-    }))
-})
+    Practice.findByIdAndUpdate(req.params.id, req.body, function(err, practiceQuestion){
+        if(err){
+            res.status(503).json({
+                message: "Request failed. Please, Try again later!..."
+            })
+        }
+        else{
+            Practice.findById(req.params.id).then((practiceQuestion) => {
+                res.status(201).json(practiceQuestion)
+            })
+        }
+    });
+});
 
 
 module.exports = routerPractice;
