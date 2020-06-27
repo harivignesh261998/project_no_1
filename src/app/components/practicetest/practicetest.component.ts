@@ -27,7 +27,9 @@ solvedData;
 check=[];
 count1;
 count2;
-
+filteringdata:any;
+allcaught=false;
+image1:string="assets/image/all_caught_up"
 
 
 filters={}
@@ -40,40 +42,38 @@ filters={}
       this.globalPractice=res;
       this.practice=this.globalPractice['practiceQuestions']; 
       this.count1=this.practice.length; 
-      this.applyFilters(); 
     })
 
    this.authService.getIsSolved().subscribe(res=>{
      this.solvedData=res['practicedQuestions'];
      this.count2=this.solvedData.length;
-     console.log(this.solvedData);
+     this.applyFilters(); 
      this.fun();
-    
    })
 
   }
 
   private applyFilters(){
     this.filterdata=_.filter(this.practice,_.conforms(this.filters));
-    
-
+    console.log(this.filterdata.length);
+    if(this.filterdata.length==0){
+      console.log('hai')
+      this.allcaught=true;
+    }
+    else{
+      console.log('hello');
+      this.allcaught=false;
+    }
   }
 
   filterExact(property:string,rule:any){
     
     this.filters[property]=val=>val==rule
     this.applyFilters();
+    this.fun();
   }
 
- filterBoolean(property:string,rule:boolean){
-   if(!rule){
-      this.removeFilter(property)
-   }
-   else{
-     this.filters[property]=val=>val
-     this.applyFilters();
-   }
- }
+ 
 
 
 removeFilter(property:string){
@@ -84,19 +84,35 @@ removeFilter(property:string){
 }
 
 solve(id:string){
-      this.authService.getElement(id);
+  let cs=[];
+  let index=0;
+ for(let a in this.filterdata){
+   if(this.filterdata[a].status!='Solved'){
+     cs[index]=this.filterdata[a]._id;  
+     index++;
+   }
+ }
+
+      this.authService.getElement(id,cs);
       this.authService.getstatusbar(this.message);
+     // this.authService.givefilterid(this.filterdata._id);
       this.router.navigate(['practice/practicetest/solve']);
     }
 
     fun(){
-      for(let i=0;i<this.count1;i++){
-        for(let j=0;j<this.count2;j++){
-          if(this.practice[i]._id===this.solvedData[j]){
+    //  this.check=[]
+      for(let i=0;i<this.filterdata.length;i++){
+        for(let j=0;j<this.solvedData.length;j++){
+          if(this.filterdata[i]._id===this.solvedData[j]){
             this.check[i]=true;
+            this.filterdata[i].status='Solved';
+          }
+          else{
+            this.check[i]=false;
           }
 
         }
+        
       }
     }
 

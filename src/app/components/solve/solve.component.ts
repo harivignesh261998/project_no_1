@@ -21,6 +21,8 @@ export class SolveComponent implements OnInit{
    public message;
    public count=0;
    public scorePoints;
+   public fillid;
+   public index;
 global:GlobalPracticeTest[];
 
 practice;
@@ -30,11 +32,14 @@ practice;
     this.authService.getSolve().subscribe(res=>{
     this.global=res['practiceQuestions']
     this.practice=this.global
+    console.log(this.practice);
     })
     this.authService.getstatusbar_1().subscribe(res=>{
       this.message=res;
       console.log(this.message);
     })
+    this.fillid=this.authService.getFilterids();
+    console.log(this.fillid);
 
   }
 checkanswer(){
@@ -65,6 +70,32 @@ checkanswer(){
 
 wrong(){
   this.isWrong=false;
+}
+
+next(){
+  for(let i=0;i<this.fillid.length;i++){
+    if(this.fillid[i]===this.practice._id){
+      this.index=i;
+    }
+  }
+
+  console.log(this.fillid[this.index+1]);
+  
+if(this.fillid[this.index+1]===undefined){
+  
+  console.log('nothing to show');
+}
+else{
+        this.authService.getnextpracticeques(this.fillid[this.index+1]).subscribe(res=>{
+          this.practice=res['practiceQuestions'];
+          
+        })
+    }
+
+
+  
+
+
 }
 
 

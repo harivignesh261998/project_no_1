@@ -9,7 +9,7 @@
       <div class="container">
         <div class="row">
             <div class="col-4-lg">
-             
+              
                 <div *ngFor='let ques of filterdata;let i=index' > 
                   <div class="card" style="width: 50rem;height: 9rem;">
                     <div class="card-body">
@@ -29,7 +29,9 @@
                        <div *ngIf='check[i]'>
                         <a  class="btn btn-outline-success float-right">Try Again</a>   
                       </div>
+                    
                     </div>
+                   
                 </div>
               </div>
             </div>

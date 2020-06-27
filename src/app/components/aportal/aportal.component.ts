@@ -39,7 +39,7 @@ score=[];
   }
 
   min(id){
-    this.authService.giveduration(id,this.name,this.count1);
+    this.authService.giveduration(id,this.name);
     this.authService.atestId(id);
     this.router.navigate(['practice/portal/aportal/instructions']);
   }

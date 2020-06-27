@@ -28,6 +28,7 @@ private clgURl:string='/assets/data/college.csv'
     public duraation;
     public testname
     public count;
+    public fildata;
     private authStatusListner=new Subject<boolean>();
     constructor(private http:HttpClient,private router:Router){}
     getToken(){
@@ -227,7 +228,8 @@ getSolve():Observable<GlobalPracticeTest[]>{
     return this.http.get<GlobalPracticeTest[]>('apiPractice/'+this.id)
 }
 
-getElement(id:string){
+getElement(id:string,cs){
+    this.fildata=cs;
     this.id=id;
     this.savepracticetest(this.id);
     
@@ -310,9 +312,8 @@ getIsSolved(){
 }
 
 
-giveduration(id,name,count){
-    // console.log(id);
-    // console.log(name);
+giveduration(id,name){
+    
     this.testname=name;
     this.duraation=id;
     
@@ -368,6 +369,14 @@ getDashboardon(){
     this.authStatusListner.next(true);
 }
 
+getFilterids(){
+    return this.fildata;
+}
+
+getnextpracticeques(id){
+    return this.http.get('apiPractice/'+id);
+
+}
 
 
 }
