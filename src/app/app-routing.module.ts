@@ -9,8 +9,6 @@ import { LearningportalComponent } from './components/learningportal/learningpor
 import { AgespartnersComponent } from './components/agespartners/agespartners.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-
-
 import { SolveComponent } from './components/solve/solve.component';
 import { HttpClientModule} from '@angular/common/http';
 import { ClockcalComponent } from './components/clockcal/clockcal.component';
@@ -24,6 +22,7 @@ import { AsolveComponent } from './components/asolve/asolve.component';
 import { CsolveComponent } from './components/csolve/csolve.component';
 import { InstructionsComponent } from './components/instructions/instructions.component';
 import { TestresultComponent } from './components/testresult/testresult.component';
+
 
 
 
@@ -71,7 +70,7 @@ const routes: Routes = [
   {path:'instructions',component:InstructionsComponent,canActivate:[AuthGuard]},
   {path:'practice/portal/cportal/instructions',component:InstructionsComponent,canActivate:[AuthGuard]},
   {path:'practice/portal/aportal/instructions',component:InstructionsComponent,canActivate:[AuthGuard]},
-  {path:'testresult',component:TestresultComponent,canActivate:[AuthGuard]},
+  {path:'testresult',component:TestresultComponent,canActivate:[AuthGuard]},  
 
 
 

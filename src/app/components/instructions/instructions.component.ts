@@ -26,8 +26,7 @@ duration;
 
 
   ngOnInit(): void {
- 
-
+    this.authService.getDashboardoff();
     this.authService.getUsername().subscribe(res=>{
       this.name=res['firstName']
     })

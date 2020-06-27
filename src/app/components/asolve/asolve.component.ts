@@ -154,11 +154,8 @@ checkanswer(){
       }
   
     }
-    console.log('count->',count);
-  //this.update.push(count);
-    
-  
-     //this.authService.updateStudent(this.title,count,this.test_id,attempt);
+    this.authService.getDashboardon();
+   
    this.authService.updateStudent(this.testId,this.title,count,attempt)
 
   }

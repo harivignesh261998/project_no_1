@@ -46,8 +46,10 @@ import { AsolveComponent } from './components/asolve/asolve.component';
 import { InstructionsComponent } from './components/instructions/instructions.component';
 import { CountdownModule } from 'ngx-countdown';
 import { PopupModule } from '@progress/kendo-angular-popup';
-import { TestresultComponent } from './components/testresult/testresult.component';
-import{ToastrModule } from 'ngx-toastr'
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TestresultComponent } from './components/testresult/testresult.component'
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -80,6 +82,7 @@ import{ToastrModule } from 'ngx-toastr'
     AsolveComponent,
     InstructionsComponent,
     TestresultComponent,
+    
 
     
   ],
@@ -108,8 +111,10 @@ import{ToastrModule } from 'ngx-toastr'
     MatAutocompleteModule,
     CountdownModule,
     PopupModule,
-   
-   
+    NgbModule,
+    MatExpansionModule,
+    
+    
     
 
 

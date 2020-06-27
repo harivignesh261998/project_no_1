@@ -1,7 +1,6 @@
 import { Component, OnInit, Injectable, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { GlobalPracticeSummary } from 'src/app/models/global-data';
-import {Subscription, Observable} from 'rxjs'
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 
@@ -93,7 +92,6 @@ solve(id:string){
     fun(){
       for(let i=0;i<this.count1;i++){
         for(let j=0;j<this.count2;j++){
-
           if(this.practice[i]._id===this.solvedData[j]){
             this.check[i]=true;
           }

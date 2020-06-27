@@ -81,6 +81,12 @@
     padding-top: 1%;
     margin-top: .5%;
 }
+.sub{
+  padding-left: 58%;
+    padding-top: 1%;
+    margin-top: .5%;
+
+}
 .questions{
   padding-left: 12%;
   margin-top: 3%;
@@ -88,3 +94,11 @@
   position: absolute;
   white-space: nowrap;
 }
+/* .question{
+  padding-left: 75%;
+  margin-top:-21%;
+  z-index: 3;
+  position: absolute;
+  white-space: nowrap;
+
+} */

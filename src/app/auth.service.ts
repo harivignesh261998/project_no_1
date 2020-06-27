@@ -21,13 +21,13 @@ private clgURl:string='/assets/data/college.csv'
     public id:string;
     public mail:string;
     public response:string;
-    private qwerty:string;
     private isAuthenticated=false;
     private token:string;
     private tokenTimer:any;
     public testid;
     public duraation;
     public testname
+    public count;
     private authStatusListner=new Subject<boolean>();
     constructor(private http:HttpClient,private router:Router){}
     getToken(){
@@ -310,11 +310,12 @@ getIsSolved(){
 }
 
 
-giveduration(id,name){
+giveduration(id,name,count){
     // console.log(id);
     // console.log(name);
     this.testname=name;
     this.duraation=id;
+    
 }
 
 getDuration(){
@@ -359,6 +360,15 @@ isSolvedAtest(){
 isSolvedCtest(){
     return this.http.get('apiScoreUpdate/cTestScore/'+this.userId);
 }
+
+getDashboardoff(){
+    this.authStatusListner.next(false);
+}
+getDashboardon(){
+    this.authStatusListner.next(true);
+}
+
+
 
 }
 
