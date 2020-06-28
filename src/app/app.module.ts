@@ -46,11 +46,10 @@ import { AsolveComponent } from './components/asolve/asolve.component';
 import { InstructionsComponent } from './components/instructions/instructions.component';
 import { CountdownModule } from 'ngx-countdown';
 import { PopupModule } from '@progress/kendo-angular-popup';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TestresultComponent } from './components/testresult/testresult.component'
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import { Ng2GoogleChartsModule, GoogleChartsSettings } from 'ng2-google-charts';
 
 
 
@@ -113,6 +112,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     PopupModule,
     NgbModule,
     MatExpansionModule,
+    Ng2GoogleChartsModule,
     
     
     
