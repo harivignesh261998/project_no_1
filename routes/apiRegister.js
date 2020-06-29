@@ -3,7 +3,21 @@ const router = express.Router();
 const Student = require('../models/student');
 const College = require('../models/college');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+//const { sendConfirmationEmail } = require('../services/emailService') 
+//const nodemailer = require('nodemailer');
+//const nodemailerSendgrid = require('nodemailer-sendgrid');
+//const sgmail = require('@sendgrid/mail');
+//sgmail.setApiKey = SENDGRID_API_KEY;
 
+
+
+/*const transport = nodemailer.createTransport(
+    nodemailerSendgrid({
+        apiKey: process.env.SENDGRID_API_KEY
+    })
+);*/
 
 
 //get student data from the db
@@ -13,7 +27,7 @@ router.get('/student', function(req,res,next){
         console.log('Registrations fetched successfully');
     });
 });
-
+/*
 //add a new student to the db
 router.post('/studentRegister', async(req,res,next) => {
     try{
@@ -36,10 +50,40 @@ router.post('/studentRegister', async(req,res,next) => {
                })
            }
            else {
-            res.status(201).json({
-                message: "Registration successful"
-                 });
-            console.log(result);
+
+                const token = jwt.sign({
+                    _id: result._id},
+                    process.env.JWT_SECRET_KEY
+                )
+
+                const url = `http://localhost:4000/confirmation/${token}`
+                /*try{--------------------------------------
+                    console.log('token')
+                    console.log(url)
+                    transport.sendMail({
+                    from: 'mithunsolomon@gmail.com',
+                    to: "cytwwsbnmhfvatxmfg@ttirv.com",
+                    subject: "Confirmation Mail",
+                    html: `Confirmation Email <a href = ${url}> ${url} </a>`
+                }).then((res) => {
+                    // res.status(201).json({
+                    //     token: token,
+                    //     message: "Registration successful"
+                //});
+                console.log(res);
+                })}
+                catch{
+                    console.log(err);
+                }-------------------------------------
+
+                // res.status(201).json({
+                //     token: token,
+                //     message: "Registration successful"
+            //});
+            // console.log(result);
+
+            
+
            }
        });
     } catch{
@@ -47,7 +91,7 @@ router.post('/studentRegister', async(req,res,next) => {
             message: "Registration Failed"
         });
     }
-});
+});*/
 
 //add a new college/staff to the db
 router.post('/collegeRegister', async(req,res,next) => {
@@ -70,9 +114,9 @@ router.post('/collegeRegister', async(req,res,next) => {
                })
            }
            else {
-            res.status(201).json({
+                res.status(201).json({
                 message: "Registration successful"
-                 });
+            });
             console.log(result);
            }
        });

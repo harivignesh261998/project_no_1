@@ -6,6 +6,7 @@ const PracticeSchema = new Schema({
     topic: String,
     message: String,
     difficulty: String,
+    status: {type: String, default: 'Unsolved'},
     ques: String,
     option1: String,
     option2: String,

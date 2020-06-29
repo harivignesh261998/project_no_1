@@ -29,6 +29,8 @@ IsSubmit=false;
 IsDisabled=true;
 gone=false;
 testId;
+qno=[];
+a:number
   constructor(private authService:AuthService) { }
 
   ngOnInit():void{
@@ -46,6 +48,14 @@ testId;
     this.authService.getAtestbyID().subscribe(res=>{
       this.question=this.shuffle(res['questions']);
       this.no=this.question.length;
+      for(let i=0;i<this.question.length;i++){
+        this.qno[i]=i+1;
+        
+
+      }
+
+
+      console.log(this.qno);
       this.questions=this.question[this.index];
       console.log(this.questions);
     })
@@ -159,4 +169,27 @@ checkanswer(){
    this.authService.updateStudent(this.testId,this.title,count,attempt)
 
   }
+
+
+ q(i){
+   this.favoriteSeason='';
+   this.favoriteSeason=this.options[i];
+   this.questions=this.question[i];
+   this.index=i;
+   if(this.index >= 1){
+    this.IsDisabled=false;
+  }
+
+  if(this.index==this.no-1){
+    this.IsSubmit=true;
+  }
+
+  if(this.index==0){
+    this.IsDisabled=true;
+  }
+  if(this.index!=this.no-1){
+    this.IsSubmit=false;
+  }
+   
+ }
 }

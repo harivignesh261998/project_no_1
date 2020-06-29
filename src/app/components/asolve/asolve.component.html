@@ -111,22 +111,49 @@
          
       </div>
 
-      <div class="col">
-        <div class="container">
-          <div class="card" style="height: 18em;">
-           <div class="row">
-             <div class="col">
-               <div class="container">
-                <p>1</p> 
-               </div>
-           </div>
+      <div class="col" style="margin-left: 5%;">
 
-          </div>
+              <div *ngFor="let item of qno; let i = index">
+                <div *ngIf="i % 5 == 0" class="row">
+                  <div *ngIf='options[item-1]'> <button type="button" class="btn btn-success" (click)='q(item-1)'>{{item}}</button></div>
+                  <div *ngIf='!options[item-1]'><a class="btn btn-outline-success" (click)='q(item-1)'>{{item}}</a> </div>
+                  
+                  <div *ngIf='options[qno[i+1]-1]'>
+                    <div *ngIf="i + 1 < qno.length"> <button type="button" class="btn btn-success" (click)='q(qno[i+1]-1)'>{{qno[i + 1]}}</button></div>
+                  </div>
+                  <div *ngIf='!options[qno[i+1]-1]'>
+                    <div *ngIf="i + 1 < qno.length"> <a class="btn btn-outline-success" (click)='q(qno[i+1]-1)'>{{ qno[i + 1] }}</a></div>
+                  </div>
 
-        </div>
+                  <div *ngIf='options[qno[i+2]-1]'>
+                    <div *ngIf="i + 2 < qno.length"><button type="button" class="btn btn-danger" (click)='q(qno[i+2]-1)'>{{qno[i + 2]}}</button> </div>
+                  </div>
 
-      </div>
+                  <div *ngIf='!options[qno[i+2]-1]'>
+                    <div *ngIf="i + 2 < qno.length"> <a class="btn btn-outline-success" (click)='q(qno[i + 2]-1)'>{{ qno[i + 2] }}</a></div>
+                  </div>
 
+                  <div *ngIf='options[qno[i+3]-1]'>
+                    <div *ngIf="i + 3 < qno.length"> <button type="button" class="btn btn-success" (click)='q(qno[i+3]-1)'>{{qno[i + 3]}}</button></div>
+                  </div>
+                  <div *ngIf='options[qno[i+3]-1]'>
+                    <div *ngIf="i + 3 < qno.length"> <a class="btn btn-outline-success" (click)='q(qno[i + 3]-1)'>{{ qno[i + 3] }}</a></div>
+                  </div>
+
+
+
+                  <div *ngIf='options[qno[i+4]-1]'>
+                    <div *ngIf="i + 4 < qno.length"> <button type="button" class="btn btn-success" (click)='q(qno[i+4]-1)'>{{qno[i + 4]}}</button></div>
+                  </div>
+
+                  <div *ngIf='options[qno[i+4]-1]'>
+                    <div *ngIf="i + 4 < qno.length"> <a class="btn btn-outline-success" (click)='q(qno[i + 4]-1)'>{{ qno[i + 4] }}</a></div>
+
+                  </div>
+
+                </div>
+              </div>
+        
   </div>
 </div>
 <div class="next" *ngIf='IsDisabled'>
@@ -146,7 +173,7 @@
  
 
 
-
+ 
 
 
 

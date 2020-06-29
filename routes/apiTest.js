@@ -4,6 +4,7 @@ const Student = require('../models/student')
 const ATest = require('../models/aTest');
 const CTest = require('../models/cTest');
 const { findByIdAndUpdate } = require('../models/student');
+const { post } = require('./apiScoreUpdate');
 
 
 //post new aTest in the DB
@@ -99,21 +100,59 @@ routerTest.post('/addCQuestion/:id', function(req,res,next){
 
 //update aTest data in the db
 routerTest.put('/aTestUpdate/:id', function(req,res,next){
-    console.log("enter");
-    console.log(req.params.id);
-    Student.findByIdAndUpdate(req.params.id, req.body).then(function(err, aTestRecord){
-            console.log(aTestRecord);
-    })
+    ATest.findByIdAndUpdate(req.params.id, req.body).exec().then(aTestRecord => { 
+        aTestRecord.save();
+    });
+    ATest.findById(req.params.id).then(aTestRecord => {
+        console.log(aTestRecord)
+        res.status(201).json(aTestRecord)
+    });
 });
 
 //update cTest data in the db
 routerTest.put('/cTestUpdate/:id', function(req,res,next){
-    console.log("enter");
-    console.log(req.params.id);
-    Student.findByIdAndUpdate(req.params.id, req.body).then(function(err, cTestRecord){
-            console.log(cTestRecord);
-    })
+    CTest.findByIdAndUpdate(req.params.id, req.body).exec().then(cTestRecord => {
+        cTestRecord.save();
+    });
+    CTest.findById(req.params.id).then(cTestRecord => {
+        console.log(cTestRecord)
+        res.status(201).json(cTestRecord)
+    });
 });
+
+//update aTest post-aTest info in the DB
+routerTest.put('/post-aTestUpdate/:id', function(req,res,next){
+    ATest.findByIdAndUpdate(req.params.id, req.body).exec().then(post_aTestInfo => {
+        if(req.body.score > post_aTestInfo.highestScore){
+            post_aTestInfo.highestScore = req.body.score
+            post_aTestInfo.save(post_aTestInfo.highestScore)
+        }
+        if(req.body.score < post_aTestInfo.leastScore){
+            post_aTestInfo.leastScore = req.body.score
+            post_aTestInfo.save(post_aTestInfo.leastScore)
+        }
+        res.status(201).json(post_aTestInfo)
+        console.log(post_aTestInfo)
+    });
+});
+
+
+//update cTest post-cTest info in the DB
+routerTest.put('/post-cTestUpdate/:id', function(req,res,next){
+    CTest.findByIdAndUpdate(req.params.id, req.body).exec().then(post_cTestInfo => {
+        if(req.body.score > post_cTestInfo.highestScore){
+            post_cTestInfo.highestScore = req.body.score
+            post_cTestInfo.save(post_cTestInfo.highestScore)
+        }
+        if(req.body.score < post_cTestInfo.leastScore){
+            post_cTestInfo.leastScore = req.body.score
+            post_cTestInfo.save(post_cTestInfo.leastScore)
+        }
+        res.status(201).json(post_cTestInfo)
+        console.log(post_cTestInfo)
+    });
+});
+
 
 
 module.exports = routerTest;

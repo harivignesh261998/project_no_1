@@ -3,6 +3,7 @@ const routerLogin = express.Router();
 const Student = require('../models/student');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 
 
@@ -22,7 +23,7 @@ routerLogin.post('/studentLogin', async (req,res,next) => {
                     if ( bcrypt.compareSync(req.body.password, userData.password)) {
                         const token = jwt.sign(
                             {mailId: userData.mailId, userId: userData._id},    
-                            'secrete_this_should_be_longer', 
+                            process.env.JWT_SECRETE_KEY, 
                             {expiresIn: '1h'})  
                         console.log(userData);
                         return res.status(200).json({ 

@@ -5,6 +5,12 @@ const Schema = mongoose.Schema;
 const cTestSchema = new Schema({
     testName: String,
     createdOn: Date,
+    attemptedOn: Date,
+    startTime: Date,
+    closeTime: Date,
+    highestScore: {type: Number, default: 0},
+    averageScore: {type: Number, default: 0},
+    leastScore: {type: Number, default: 99999},
     duration: Number,
 	questions: [{ ques: String,
         option1: String,

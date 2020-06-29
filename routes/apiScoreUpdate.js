@@ -11,7 +11,6 @@ routerScoreUpdate.post('/aTestScoreUpdate/:id', function(req,res,next){
         res.status(201).json(student);
         console.log(student);
     }));
-    
 });
 
 //post Student cTest Score in the DB
@@ -35,7 +34,7 @@ routerScoreUpdate.get('/aTestScore/:id', function(req,res,next){
             console.log(aTestScore.aTest);
         }
     }) 
-    });
+});
 
 //get Student cTest Score from the DB
 routerScoreUpdate.get('/cTestScore/:id', function(req,res,next){
