@@ -58,7 +58,7 @@ routerTest.get('/getCTest/:id', function(req,res,next){
 
 //get all the aTests from the ATest Collection
 routerTest.get('/getATests', function(req,res,next){
-    ATest.find({}, {_id: 1, testName: 1, createdOn: 1, duration: 1}).then((aTests) => {
+    ATest.find({}, {_id: 1, testName: 1, createdOn: 1, duration: 1,closeTime:1,startTime:1}).then((aTests) => {
         res.status(201).json(aTests)
         console.log(aTests)
     })
@@ -67,7 +67,7 @@ routerTest.get('/getATests', function(req,res,next){
 
 //get all the cTests from the CTest Collection
 routerTest.get('/getCTests', function(req,res,next){
-    CTest.find({}, {_id: 1, testName: 1, createdOn: 1, duration: 1}).then((cTests) => {
+    CTest.find({}, {_id: 1, testName: 1, createdOn: 1, duration: 1,closeTime:1,startTime:1}).then((cTests) => {
         res.status(201).json(cTests)
         console.log(cTests)
     })

@@ -7,7 +7,7 @@ import { GlobalDataSummary,GlobalData, GlobalPracticeSummary, GlobalPracticeTest
 import { Observable, Subject, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
-import { attempt } from 'lodash';
+
 @Injectable({providedIn:"root"})
 export class AuthService{
     
@@ -47,7 +47,8 @@ private clgURl:string='/assets/data/college.csv'
     createUser(firstName:string,lastName:string,mailId:string,password:string,collegeId:number){
         const authData:AuthData={firstName:firstName,lastName:lastName,mailId:mailId,password:password,collegeId:collegeId};
          this.http.post("apiRegister/studentRegister",authData).subscribe(()=>{
-             this.router.navigate["/login"];
+             console.log('register Successfully');
+             this.router.navigate(['/login']);
          },error=>{
              this.authStatusListner.next(false);
          });

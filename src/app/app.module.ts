@@ -44,9 +44,9 @@ import { CportalComponent } from './components/cportal/cportal.component';
 import { CsolveComponent } from './components/csolve/csolve.component';
 import { AsolveComponent } from './components/asolve/asolve.component';
 import { InstructionsComponent } from './components/instructions/instructions.component';
-import { CountdownModule } from 'ngx-countdown';
-import { PopupModule } from '@progress/kendo-angular-popup';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { CountdownModule } from 'ngx-countdown';
+// import { PopupModule } from '@progress/kendo-angular-popup';
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TestresultComponent } from './components/testresult/testresult.component'
 import {MatExpansionModule} from '@angular/material/expansion';
 import { Ng2GoogleChartsModule, GoogleChartsSettings } from 'ng2-google-charts';
@@ -108,9 +108,8 @@ import { Ng2GoogleChartsModule, GoogleChartsSettings } from 'ng2-google-charts';
     MatSnackBarModule,
     MatSelectModule,
     MatAutocompleteModule,
-    CountdownModule,
-    PopupModule,
-    NgbModule,
+    
+    //NgbModule,
     MatExpansionModule,
     Ng2GoogleChartsModule,
     
@@ -122,7 +121,7 @@ import { Ng2GoogleChartsModule, GoogleChartsSettings } from 'ng2-google-charts';
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},
     {provide: HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
-    {provide:MAT_SNACK_BAR_DEFAULT_OPTIONS,useClass:ErrorInterceptor,useValue:{duration:2500}},
+    {provide:MAT_SNACK_BAR_DEFAULT_OPTIONS,useClass:ErrorInterceptor,useValue:{duration:3000}},
     
 
   ],

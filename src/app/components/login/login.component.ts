@@ -1,9 +1,9 @@
 import { Component,Input, OnInit, OnDestroy } from '@angular/core';
 import {NgForm} from '@angular/forms'
-import {Router} from '@angular/router'
+
 import { AuthService } from 'src/app/auth.service';
 import {Subscription} from 'rxjs'
-import { DashboardComponent } from '../dashboard/dashboard.component';
+
 import { GlobalData } from 'src/app/models/global-data';
 
 

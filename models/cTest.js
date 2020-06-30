@@ -21,5 +21,5 @@ const cTestSchema = new Schema({
         answer: String }]
 })
 
-const CTest = mongoose.model('CTest',cTestSchema);
+const CTest = mongoose.model('CTest', cTestSchema);
 module.exports = CTest;

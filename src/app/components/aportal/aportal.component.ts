@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-aportal',
@@ -15,15 +16,22 @@ check=[];
 count1;
 count2;
 score=[];
-  constructor(private authService:AuthService,private router:Router) { }
+public now: Date = new Date();
+datee
+  constructor(private authService:AuthService,private router:Router) {
+    setInterval(() => {
+      this.datee = formatDate(this.now,'yyyy-MM-dd hh:mm:ss a', 'en-US', '+0530')
+    }, 1);
+   }
 
   ngOnInit(): void {
     this.authService.getATest().subscribe(res=>{
       this.aTest=res;
       this.count1=this.aTest.length;
       console.log(this.aTest,this.count1)
-      
-      
+      for(let a of this.aTest){
+        console.log(a.startTime);
+      }
     })
 
     this.authService.isSolvedAtest().subscribe(res=>{
@@ -34,6 +42,8 @@ score=[];
       this.fun();
 
     })
+
+
 
     
   }
@@ -47,6 +57,15 @@ score=[];
   
 
   fun(){
+    // for(let a of this.aTest){
+    //   if(a.closeTime>this.datee){
+    //     console.log(true);
+    //   }
+    //   else{
+    //     console.log(false);
+    //   }
+      
+    // }
     for(let i=0;i<this.count1;i++){
       for(let j=0;j<this.count2;j++){
         if(this.aTest[i]._id===this.Solved[j].testId){

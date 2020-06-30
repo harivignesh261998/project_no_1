@@ -4,20 +4,9 @@ const Student = require('../models/student');
 const College = require('../models/college');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
-//const { sendConfirmationEmail } = require('../services/emailService') 
-//const nodemailer = require('nodemailer');
-//const nodemailerSendgrid = require('nodemailer-sendgrid');
-//const sgmail = require('@sendgrid/mail');
-//sgmail.setApiKey = SENDGRID_API_KEY;
-
-
-
-/*const transport = nodemailer.createTransport(
-    nodemailerSendgrid({
-        apiKey: process.env.SENDGRID_API_KEY
-    })
-);*/
+//require('dotenv').config();
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey('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');
 
 
 //get student data from the db
@@ -27,7 +16,7 @@ router.get('/student', function(req,res,next){
         console.log('Registrations fetched successfully');
     });
 });
-/*
+
 //add a new student to the db
 router.post('/studentRegister', async(req,res,next) => {
     try{
@@ -50,48 +39,55 @@ router.post('/studentRegister', async(req,res,next) => {
                })
            }
            else {
-
+                console.log('->',result)
                 const token = jwt.sign({
                     _id: result._id},
-                    process.env.JWT_SECRET_KEY
+                    'secret_this_should_be_longer'
+                    
                 )
+                
 
-                const url = `http://localhost:4000/confirmation/${token}`
-                /*try{--------------------------------------
-                    console.log('token')
-                    console.log(url)
-                    transport.sendMail({
-                    from: 'mithunsolomon@gmail.com',
-                    to: "cytwwsbnmhfvatxmfg@ttirv.com",
-                    subject: "Confirmation Mail",
-                    html: `Confirmation Email <a href = ${url}> ${url} </a>`
-                }).then((res) => {
-                    // res.status(201).json({
-                    //     token: token,
-                    //     message: "Registration successful"
-                //});
-                console.log(res);
-                })}
-                catch{
-                    console.log(err);
-                }-------------------------------------
+            const url = `confirmation/${token}`
 
-                // res.status(201).json({
-                //     token: token,
-                //     message: "Registration successful"
-            //});
-            // console.log(result);
+            const msg = {
+                from: 'mithunsolomon@gmail.com',
+                to: `${req.body.mailId}`,
+                subject: "Confirmation Mail: ",
+                html: `Hello ${req.body.firstName}, you have registered at PROJECT_KAVI.<br> Click on the following URL link to confirm your Mail Id: <a href = ${url}> ${url} </a>`
+            };
 
-            
-
-           }
-       });
-    } catch{
+            sgMail.send(msg).then(() => {}, error => {
+                console.error(error);
+                if (error.response) {
+                    console.error(error.response.body)
+                }
+            });
+            (async () => {
+                try {
+                  await sgMail.send(msg);
+                  console.log("Mail sent");
+                  res.status(201).json(`Confirmation mail sent to ${req.body.mailId}. Please Confirm your Mail-ID`);
+                } catch (error) {
+                  console.error(error);
+               
+                  if (error.response) {
+                    console.error(error.response.body)
+                  }
+                }
+            })();
+        }    
+    })}
+    catch{
         res.status(500).json({
-            message: "Registration Failed"
+        message: "Registration Failed"
         });
     }
-});*/
+
+});
+
+ 
+            
+
 
 //add a new college/staff to the db
 router.post('/collegeRegister', async(req,res,next) => {

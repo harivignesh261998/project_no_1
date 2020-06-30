@@ -22,5 +22,5 @@ const aTestSchema = new Schema({
 	}]	
 })
 
-const ATest = mongoose.model('ATest',aTestSchema);
-module.exports = ATest;
+const ATest = mongoose.model('ATest', aTestSchema);
+module.exports = ATest
