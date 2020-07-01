@@ -17,6 +17,7 @@ export interface Update{
     score:string;
     testId:string;
     attempt:boolean;
+    date:Date;
     
 
 

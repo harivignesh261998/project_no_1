@@ -335,8 +335,8 @@ getName(){
      
 }
 
-updateStudent(testId,title,count,attempt){
-    const update:Update={testId:testId,testName:title,score:count,attempt:attempt}
+updateStudent(testId,title,count,attempt,date){
+    const update:Update={testId:testId,testName:title,score:count,attempt:attempt,date:date}
    console.log(update);
 
     if(this.testname=='Atest'){
@@ -344,13 +344,24 @@ updateStudent(testId,title,count,attempt){
         this.http.post(`apiScoreUpdate/aTestScoreUpdate/${this.userId}`, update).subscribe(res=>{
             console.log(res);
         }); 
+        
+        this.http.post(`apiTest/post-aTestUpdate/${update.testId}`,update.score).subscribe(res=>{
+            console.log('update--->',res);
+        });
     }
     else{
         console.log('Ctest->');
         this.http.post(`apiScoreUpdate/cTestScoreUpdate/${this.userId}`,update).subscribe(res=>{
             console.log(res)
         });
+
+         
+        this.http.post(`apiTest/post-cTestUpdate/${update.testId}`,update.score).subscribe(res=>{
+            console.log('update--->',res);
+        });
     }
+
+
 }
 
 
@@ -379,6 +390,12 @@ getnextpracticeques(id){
 
 }
 
+getAResult(){
+    return this.http.get('apiTest/getATests');
+}
+getCResult(){
+    return this.http.get('apiTest/getCTests');
+}
 
 }
 

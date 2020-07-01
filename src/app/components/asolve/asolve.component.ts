@@ -165,8 +165,10 @@ checkanswer(){
   
     }
     this.authService.getDashboardon();
+
+   let date=new Date();
    
-   this.authService.updateStudent(this.testId,this.title,count,attempt)
+   this.authService.updateStudent(this.testId,this.title,count,attempt,date)
 
   }
 

@@ -25,6 +25,8 @@ export class CsolveComponent implements OnInit {
   IsDisabled=true;
   gone=false;
   testId;
+  qno=[];
+  a:number;
     constructor(private authService:AuthService) { }
   
     ngOnInit():void{
@@ -41,6 +43,9 @@ export class CsolveComponent implements OnInit {
       this.authService.getAtestbyID().subscribe(res=>{
         this.question=this.shuffle(res['questions']);
         this.no=this.question.length;
+        for(let i=0;i<this.question.length;i++){
+          this.qno[i]=i+1;
+        }
         this.questions=this.question[this.index];
         console.log(this.questions);
       })
@@ -143,9 +148,31 @@ export class CsolveComponent implements OnInit {
     console.log('count->',count);
   //this.update.push(count);
     
-  
+  let date=new Date();
      //this.authService.updateStudent(this.title,count,this.test_id,attempt);
-   this.authService.updateStudent(this.testId,this.title,count,attempt)
+   this.authService.updateStudent(this.testId,this.title,count,attempt,date)
+
+  }
+
+  q(i){
+    this.favoriteSeason='';
+   this.favoriteSeason=this.options[i];
+   this.questions=this.question[i];
+   this.index=i;
+   if(this.index >= 1){
+    this.IsDisabled=false;
+  }
+
+  if(this.index==this.no-1){
+    this.IsSubmit=true;
+  }
+
+  if(this.index==0){
+    this.IsDisabled=true;
+  }
+  if(this.index!=this.no-1){
+    this.IsSubmit=false;
+  }
 
   }
   
