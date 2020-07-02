@@ -19,6 +19,10 @@ Ctest
 Citest=[];
 count1=0;
 count2=0;
+count3=0;
+count4=0;
+aPer;
+cPer;
 LineChart:GoogleChartInterface ={
   chartType:'LineChart'
 
@@ -63,34 +67,56 @@ LineChart:GoogleChartInterface ={
     this.Ctest=res;
     this.count2=this.calc()
   })
+  this.authService.getAResult().subscribe(res=>{
+    this.Atest=res;
+    this.count4=this.cala()
+  })
 
 
   this.authService.getIsSolved().subscribe(res=>{
     this.name=res['firstName'];
     this.atest=res['aTest'].reverse();
+    // this.aPer=this.calAper()
     this.ctest=res['cTest'].reverse();
     console.log(this.ctest);
     this.count1=this.calC();
-    this.fun();
+    this.count3=this.calA();
+    this.func();
+    this.funa()
    
 })
 }
 
 calC(){
-  console.log('first');
+ 
   let len=this.ctest.length;
-  console.log(len);
+ 
   return len;
 }
+
+calA(){
+  let len=this.atest.length;
+ 
+  return len;
+}
+
 calc(){
-  console.log('second');
+ 
   let len=this.Ctest.length;
-  console.log(len);
+ 
   return len;
 }
 
+cala(){
+  let len=this.Atest.length;
+ 
+  return len;
 
-  fun(){
+
+}
+
+
+  func(){
     console.log('inga vanthorchu')
     for(let i=0;i<this.count1;i++){
       console.log(true);
@@ -107,5 +133,31 @@ calc(){
       }
     }
   }
+
+  funa(){
+   
+    for(let i=0;i<this.count3;i++){
+   
+      for(let j=0;j<this.count4;j++){
+   
+        if(this.Atest[j]._id===this.atest[i].testId){
+        
+          this.Atest[i]=this.Atest[j];
+         
+          
+        }
+       
+ 
+      }
+    }
+  }
+
+  // calAper(){
+  //   for(let a of this.atest){
+
+  //   } 
+  //   console.log('this is percenrahe---->',percent);
+  // }
+
 
 }

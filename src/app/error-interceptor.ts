@@ -16,7 +16,7 @@ constructor(private dialog:MatSnackBar){}
         
         return next.handle(req).pipe(
             catchError((error:HttpErrorResponse)=>{
-                let errorMessage='An unknown error occured'
+                let errorMessage='Check Your Internet Connection'
                 
                 if(error.error.message){
                     errorMessage=error.error.message;

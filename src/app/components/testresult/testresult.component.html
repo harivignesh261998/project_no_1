@@ -77,11 +77,31 @@
                                 </div>
 
                                 <div class="card-body">
-                                 
-                                   
+                                  <div class="row">
+                                    <div class="col" >
+
+
                                       <p>Topper Score:<b>{{Ctest[i].highestScore}}</b></p>
                                       <p>Average Score:<b>{{Ctest[i].averageScore}}</b></p>
                                       <p>Least Score:<b>{{Ctest[i].leastScore}}</b></p>
+                                    </div>
+                                    <div class="col">
+                                      <circle-progress
+                                      [percent]="(Ctest[i].highestScore*100)/Ctest[i].maxMark"
+                                      [radius]="50"
+                                      [outerStrokeWidth]="6"
+                                      [innerStrokeWidth]="8"
+                                      [outerStrokeColor]="'#4882c2'"
+                                      [innerStrokeColor]="'#e7e8ea'"
+                                      [animation]="true"
+                                      [animationDuration]="1000"
+                                    ></circle-progress>
+
+                                    </div>
+
+                                  </div>
+                                 
+                                   
 
                                     
 
@@ -107,9 +127,29 @@
                                   Your Progress
                                 </div>
                                 <div class="card-body">
-                                  <p>Your Score:<b>{{res.score}}</b></p>
-                                  <p>Average Score:<b>{{Ctest[i].averageScore}}</b></p>
-                                  <p>Least Score:<b>{{Ctest[i].leastScore}}</b></p>
+                                  <div class="row">
+                                    <div class="col">
+
+                                      <p>Your Score:<b>{{res.score}}</b></p>
+                                      <p>Average Score:<b>{{Ctest[i].averageScore}}</b></p>
+                                      <p>Least Score:<b>{{Ctest[i].leastScore}}</b></p>
+                                    </div>
+
+                                    <div class="col">
+                                      <circle-progress
+                                      [percent]="(res.score*100)/Ctest[i].maxMark"
+                                      [radius]="50"
+                                      [outerStrokeWidth]="6"
+                                      [innerStrokeWidth]="8"
+                                      [outerStrokeColor]="'#4882c2'"
+                                      [innerStrokeColor]="'#e7e8ea'"
+                                      [animation]="true"
+                                      [animationDuration]="1000"
+                                    ></circle-progress>
+
+                                    </div>
+
+                                  </div>
                                 
                                 </div>
                                
@@ -146,7 +186,103 @@
                             {{res.testName}}
                           </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <p>This is the primary content of the panel.</p>
+
+                        <div class="row">
+                          <div class="col">
+                            <div class="container">
+                              <div class="card">
+                                <div class="card-header">
+                                  Overall Progress
+                                </div>
+
+                                <div class="card-body">
+                                  <div class="row">
+                                    <div class="col">
+
+                                      <p>Topper Score:<b>{{Atest[i].highestScore}}</b></p>
+                                      <p>Average Score:<b>{{Atest[i].averageScore}}</b></p>
+                                      <p>Least Score:<b>{{Atest[i].leastScore}}</b></p>
+                                    </div>
+
+                                    <div class="col">
+                                      <circle-progress
+                                      [percent]="(Atest[i].highestScore*100)/Atest[i].maxMark"
+                                      [radius]="50"
+                                      [outerStrokeWidth]="6"
+                                      [innerStrokeWidth]="8"
+                                      [outerStrokeColor]="'#4882c2'"
+                                      [innerStrokeColor]="'#e7e8ea'"
+                                      [animation]="true"
+                                      [animationDuration]="1000"
+                                    ></circle-progress>
+
+                                    </div>
+
+                                  </div>
+                                 
+                                   
+
+                                    
+
+                                   
+
+                                    </div>
+
+                                 
+                                  
+
+                                </div>
+                                
+                              </div>
+
+                            </div>
+
+                         
+
+                          <div class="col">
+                            <div class="container">
+                              <div class="card">
+                                <div class="card-header">
+                                  Your Progress
+                                </div>
+                                <div class="card-body">
+                                  <div class="row">
+
+                                    <div class="col">
+  
+                                      <p>Your Score:<b>{{res.score}}</b></p>
+                                      <p>Average Score:<b>{{Atest[i].averageScore}}</b></p>
+                                      <p>Least Score:<b>{{Atest[i].leastScore}}</b></p>
+                                    
+                                    </div>
+  
+                                    <div class="col">
+                                      <circle-progress
+                                      [percent]="(res.score*100)/Atest[i].maxMark"
+                                      [radius]="50"
+                                      [outerStrokeWidth]="6"
+                                      [innerStrokeWidth]="8"
+                                      [outerStrokeColor]="'#4882c2'"
+                                      [innerStrokeColor]="'#e7e8ea'"
+                                      [animation]="true"
+                                      [animationDuration]="1000"
+                                    ></circle-progress>
+                                       
+                                     
+  
+                                    </div>
+                                  </div>
+
+
+                                </div>
+                               
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+
+                       
                       </mat-expansion-panel>
 
                 </div>
@@ -180,8 +316,4 @@
 
 
 
-   
-
-
-   
    

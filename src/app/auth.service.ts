@@ -345,7 +345,7 @@ updateStudent(testId,title,count,attempt,date){
             console.log(res);
         }); 
         
-        this.http.post(`apiTest/post-aTestUpdate/${update.testId}`,update.score).subscribe(res=>{
+        this.http.put(`apiTest/post-aTestUpdate/${update.testId}`,update).subscribe(res=>{
             console.log('update--->',res);
         });
     }
@@ -356,13 +356,15 @@ updateStudent(testId,title,count,attempt,date){
         });
 
          
-        this.http.post(`apiTest/post-cTestUpdate/${update.testId}`,update.score).subscribe(res=>{
+        this.http.put(`apiTest/post-cTestUpdate/${update.testId}`,update).subscribe(res=>{
             console.log('update--->',res);
         });
+        
     }
 
 
 }
+
 
 
 

@@ -44,12 +44,11 @@ import { CportalComponent } from './components/cportal/cportal.component';
 import { CsolveComponent } from './components/csolve/csolve.component';
 import { AsolveComponent } from './components/asolve/asolve.component';
 import { InstructionsComponent } from './components/instructions/instructions.component';
-// import { CountdownModule } from 'ngx-countdown';
-// import { PopupModule } from '@progress/kendo-angular-popup';
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TestresultComponent } from './components/testresult/testresult.component'
 import {MatExpansionModule} from '@angular/material/expansion';
 import { Ng2GoogleChartsModule, GoogleChartsSettings } from 'ng2-google-charts';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+
 
 
 
@@ -112,6 +111,20 @@ import { Ng2GoogleChartsModule, GoogleChartsSettings } from 'ng2-google-charts';
     //NgbModule,
     MatExpansionModule,
     Ng2GoogleChartsModule,
+    NgCircleProgressModule.forRoot({
+      
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      showSubtitle: false,
+      animationDuration: 300,
+      startFromZero: false
+      
+    })
+    
+    
     
     
     
@@ -121,7 +134,7 @@ import { Ng2GoogleChartsModule, GoogleChartsSettings } from 'ng2-google-charts';
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},
     {provide: HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
-    {provide:MAT_SNACK_BAR_DEFAULT_OPTIONS,useClass:ErrorInterceptor,useValue:{duration:3000}},
+    {provide:MAT_SNACK_BAR_DEFAULT_OPTIONS,useClass:ErrorInterceptor,useValue:{duration:2500}},
     
 
   ],

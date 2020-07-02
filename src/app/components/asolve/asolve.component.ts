@@ -168,7 +168,8 @@ checkanswer(){
 
    let date=new Date();
    
-   this.authService.updateStudent(this.testId,this.title,count,attempt,date)
+   this.authService.updateStudent(this.testId,this.title,count,attempt,date);
+   //this.authService.updateScore(count,this.testId);
 
   }
 

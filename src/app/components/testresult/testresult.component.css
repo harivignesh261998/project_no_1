@@ -8,3 +8,11 @@
 .container{
     display: inline;
 }
+.custom-size {
+    margin-top: 10px;
+    width: 75px;
+    height: 50px;
+    background-color: white;
+    
+    
+}

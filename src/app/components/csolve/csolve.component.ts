@@ -36,7 +36,7 @@ export class CsolveComponent implements OnInit {
         this.title=res['testName'];
        this.testId=res['_id']
         this.timeleft=res['duration']*60;
-       // console.log(this.title);
+      
       })
       
   
@@ -135,8 +135,7 @@ export class CsolveComponent implements OnInit {
   }
   
   checkanswer(){
-    // console.log('options->',this.options);
-    // console.log('answers->',this.answers);
+    
     let count=0,attempt=true;
     for(let a of this.answers){
       if (a==1){
@@ -146,11 +145,13 @@ export class CsolveComponent implements OnInit {
   
     }
     console.log('count->',count);
-  //this.update.push(count);
+  
     
   let date=new Date();
-     //this.authService.updateStudent(this.title,count,this.test_id,attempt);
-   this.authService.updateStudent(this.testId,this.title,count,attempt,date)
+     
+   this.authService.updateStudent(this.testId,this.title,count,attempt,date);
+
+  
 
   }
 
