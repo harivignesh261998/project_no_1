@@ -15,6 +15,7 @@ check=[];
 count1;
 count2;
 score=[];
+math=Math;
 
   constructor(private authService:AuthService,private router:Router) { }
 

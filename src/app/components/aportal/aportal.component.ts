@@ -16,6 +16,8 @@ check=[];
 count1;
 count2;
 score=[];
+math=Math;
+
 public now: Date = new Date();
 datee
   constructor(private authService:AuthService,private router:Router) {
@@ -71,6 +73,7 @@ datee
         if(this.aTest[i]._id===this.Solved[j].testId){
           this.score[i]=this.Solved[j].score;
           this.check[i]=true;
+          
         }
         
       }

@@ -21,48 +21,14 @@ count1=0;
 count2=0;
 count3=0;
 count4=0;
-aPer;
-cPer;
-LineChart:GoogleChartInterface ={
-  chartType:'LineChart'
 
-}
   constructor(private authService:AuthService) { }
 
-  initChart(){
-     this.LineChart= {
-      chartType: 'LineChart',
-      dataTable: [
-        ['Task', 'Hours per Day'],
-        ['Work',     11],
-        ['Eat',      2],
-        ['Commute',  2],
-        ['Watch TV', 2],
-        ['Sleep',    7]
-      ],
-      //firstRowIsData: true,
-      options: {
-        hAxis:{
-          title:'Month'
-        },
-        vAxis:{
-          titile:'Temperature'
-        },
-        pointSize:5,
-        chartArea:{right:30},
-        width:600,
-
-      },
-      
-
-      
-    };
-  }
-
+ 
   ngOnInit(): void {
     
-   this.initChart();
-  // this.fun();
+   
+  
   this.authService.getCResult().subscribe(res=>{
     this.Ctest=res;
     this.count2=this.calc()
@@ -152,12 +118,7 @@ cala(){
     }
   }
 
-  // calAper(){
-  //   for(let a of this.atest){
-
-  //   } 
-  //   console.log('this is percenrahe---->',percent);
-  // }
+  
 
 
 }
