@@ -399,6 +399,11 @@ getCResult(){
     return this.http.get('apiTest/getCTests');
 }
 
+getProgress(){
+  return  this.http.get('apiProgress/monthlyProgress/'+this.userId);
+    
+}
+
 }
 
 

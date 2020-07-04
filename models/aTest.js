@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 //create aTest Schema & Models
 const aTestSchema = new Schema({
     testName: String,
-	createdOn: Date,
-	attemptedOn: Date,
+	testDate: Date,
 	startTime: Date,
 	closeTime: Date,
+	maxMark: Number,
 	highestScore: {type: Number, default: 0},
     averageScore: {type: Number, default: 0},
     leastScore: {type: Number, default: 99999},
@@ -23,4 +23,4 @@ const aTestSchema = new Schema({
 })
 
 const ATest = mongoose.model('ATest', aTestSchema);
-module.exports = ATest
+module.exports = ATest;

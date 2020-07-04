@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 //create cTest Schema & Models
 const cTestSchema = new Schema({
     testName: String,
-    createdOn: Date,
-    attemptedOn: Date,
+    testDate: Date,
     startTime: Date,
     closeTime: Date,
+    maxMark: Number,
     highestScore: {type: Number, default: 0},
     averageScore: {type: Number, default: 0},
     leastScore: {type: Number, default: 99999},

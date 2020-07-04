@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { GoogleChartInterface } from 'ng2-google-charts';
+import {Chart} from 'chart.js'
 
 
 @Component({
@@ -21,12 +22,24 @@ count1=0;
 count2=0;
 count3=0;
 count4=0;
+progress;
+month=[];
+per=[];
+
 
   constructor(private authService:AuthService) { }
 
  
   ngOnInit(): void {
     
+    this.authService.getProgress().subscribe(res=>{
+     this.progress=res;
+     console.log(this.progress);
+     for(let i=0;i<this.progress.length;i++){
+       this.month[i]=this.progress[i].month;
+       this.per[i]=this.progress[i].monthlyPercentage;
+     }
+        })
    
   
   this.authService.getCResult().subscribe(res=>{

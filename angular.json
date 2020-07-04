@@ -24,16 +24,14 @@
               "src/assets"
             ],
             "styles": [
-              
-                 "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+              },
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/custom-theme.scss",
               "src/styles.css"
-             
             ],
-            "scripts": [
-              
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -96,11 +94,11 @@
               "src/assets"
             ],
             "styles": [
-             
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+              }
             ],
-            "scripts": [
-              
-            ]
+            "scripts": []
           }
         },
         "lint": {

@@ -28,26 +28,19 @@ datee
 
   ngOnInit(): void {
     this.authService.getATest().subscribe(res=>{
+      
       this.aTest=res;
       this.count1=this.aTest.length;
-      console.log(this.aTest,this.count1)
-      for(let a of this.aTest){
-        console.log(a.startTime);
-      }
+
     })
 
     this.authService.isSolvedAtest().subscribe(res=>{
       this.Solved=res;
       this.count2=this.Solved.length;
-      console.log(this.Solved);
-      console.log(this.count2);
       this.fun();
 
     })
-
-
-
-    
+ 
   }
 
   min(id){
@@ -59,15 +52,7 @@ datee
   
 
   fun(){
-    // for(let a of this.aTest){
-    //   if(a.closeTime>this.datee){
-    //     console.log(true);
-    //   }
-    //   else{
-    //     console.log(false);
-    //   }
-      
-    // }
+   
     for(let i=0;i<this.count1;i++){
       for(let j=0;j<this.count2;j++){
         if(this.aTest[i]._id===this.Solved[j].testId){
@@ -78,7 +63,7 @@ datee
         
       }
     }
-    console.log('is solved->',this.check);
+    
   }
 
 

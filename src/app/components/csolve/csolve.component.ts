@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
-
+import { NotifierService } from 'angular-notifier';
 @Component({
   selector: 'app-csolve',
   templateUrl: './csolve.component.html',
   styleUrls: ['./csolve.component.css']
 })
 export class CsolveComponent implements OnInit {
+ 
+
+  private notifier: NotifierService;
   questions;
   favoriteSeason;
   counter=0;
   timeleft:number;
-  show=false;
+  //show=false;
   counterr;
   title;
   numberp=20;
@@ -23,11 +26,14 @@ export class CsolveComponent implements OnInit {
   options=[];
   IsSubmit=false;
   IsDisabled=true;
-  gone=false;
+  
   testId;
   qno=[];
   a:number;
-    constructor(private authService:AuthService) { }
+  fivemin
+    constructor(private authService:AuthService,notifier: NotifierService ) {
+      this.notifier = notifier;
+     }
   
     ngOnInit():void{
        
@@ -36,6 +42,7 @@ export class CsolveComponent implements OnInit {
         this.title=res['testName'];
        this.testId=res['_id']
         this.timeleft=res['duration']*60;
+        this.fivemin=this.timeleft-300;
       
       })
       
@@ -54,16 +61,15 @@ export class CsolveComponent implements OnInit {
         this.counterr= this.convertSeconds(this.timeleft - this.counter);
         this.counter++;
         if(this.counter==this.timeleft){
-          this.gone=true;
+        
           clearInterval(intervalId);
-          
+          // this.checkanswer();
          
   
         } 
-        if(this.counter==60){
-        //toastr.error('Hey Candidate Hurry up only '+this.counterr+' left');
-         this.jia=true;
-         
+        if(this.counter==this.fivemin){
+          
+          this.showNotification('warning','Hey only 5 minutes left,Hurry up!');
         }
         
     }, 1000);
@@ -176,6 +182,13 @@ export class CsolveComponent implements OnInit {
   }
 
   }
+
+  public showNotification( type: string, message: string ) {
+    
+    this.notifier.notify( type, message );
+  }
+
+ 
   
 
 }
