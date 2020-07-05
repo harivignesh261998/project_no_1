@@ -8,6 +8,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar'
 
 
 
+
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor,MatSnackBarModule{
 constructor(private dialog:MatSnackBar){}
