@@ -404,6 +404,10 @@ getProgress(){
     
 }
 
+getDailyprogress(){
+    return this.http.get('apiProgress/dailyProgress/'+this.userId);
+}
+
 }
 
 

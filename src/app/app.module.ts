@@ -49,7 +49,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { Ng2GoogleChartsModule, GoogleChartsSettings } from 'ng2-google-charts';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { NotifierModule, NotifierOptions } from "angular-notifier";
-import {Chart} from 'chart.js'
 
 
 

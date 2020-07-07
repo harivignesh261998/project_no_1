@@ -299,12 +299,17 @@
             <br>
             <div class="tab-pane fade show active" id="daily" role="tabpanel" aria-labelledby="home-tab">
                
-
+              <div *ngIf='chart'>
+                <canvas id='canvas' style="height:10vh; width:10vw">{{chart}}</canvas>
+              </div>
             </div>
             <div class="tab-pane fade" id="weekly" role="tabpanel" aria-labelledby="profile-tab">
 
             </div>
             <div class="tab-pane fade" id="monthly" role="tabpanel" aria-labelledby="contact-tab">
+              <div *ngIf='mchart'>
+                <canvas id='acanvas' style="height:10vh; width:10vw">{{mchart}}</canvas>
+              </div>
 
             </div>
           </div>
@@ -312,8 +317,8 @@
     </div>
     
 </div>
- 
+  
 
 
 
-   
+  
