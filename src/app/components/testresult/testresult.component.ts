@@ -10,7 +10,7 @@ import {Chart} from 'chart.js'
   styleUrls: ['./testresult.component.css']
 })
 export class TestresultComponent implements OnInit {
-  chart = [];
+  chart=[];
   mchart=[];
 name;
 atest;
