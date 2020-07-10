@@ -2,10 +2,9 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@a
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-// import { MatDialog } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar'
-import { NotifierService } from 'angular-notifier';
+import { NotifierService,NotifierOptions } from 'angular-notifier';
 
 
 
@@ -30,13 +29,21 @@ constructor(private dialog:MatSnackBar,notifier: NotifierService){
 
                 }
                  
-                
-                this.dialog.openFromComponent(ErrorComponent,{data:{message:errorMessage}});
-                
+                // console.log('came here',errorMessage)
+                //this.dialog.openFromComponent(ErrorComponent,{data:{message:errorMessage}});
+                this.handle(errorMessage);
                 return throwError(error);
             })
         );
     }
+
+    handle(errorMessage){
+       
+
+        this.notifier.notify('default',errorMessage);
+    }
+
+    
 
     
 }
