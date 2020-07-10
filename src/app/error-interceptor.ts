@@ -2,18 +2,17 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@a
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ErrorComponent } from './components/error/error.component';
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar'
-import { NotifierService,NotifierOptions } from 'angular-notifier';
+
+import { NotifierService, } from 'angular-notifier';
 
 
 
 
 
 @Injectable()
-export class ErrorInterceptor implements HttpInterceptor,MatSnackBarModule{
+export class ErrorInterceptor implements HttpInterceptor{
     private notifier: NotifierService;
-constructor(private dialog:MatSnackBar,notifier: NotifierService){
+constructor(notifier: NotifierService){
     this.notifier = notifier;
 
 }

@@ -33,7 +33,7 @@ import { ClockcalComponent } from './components/clockcal/clockcal.component'
 import { AuthInterceptor } from './auth-interceptor';
 import {ErrorInterceptor} from './error-interceptor';
 import {MatDialogModule} from '@angular/material/dialog';
-import { ErrorComponent } from './components/error/error.component';
+
 import {MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 import { DocsComponent } from './components/docs/docs.component';
 import {MatSelectModule} from '@angular/material/select'
@@ -67,7 +67,7 @@ const customNotifierOptions: NotifierOptions = {
 	},
   theme: "material",
   behaviour: {
-    autoHide: 5000,
+    autoHide: 2500,
     onClick: 'hide',
     onMouseover: 'pauseAutoHide',
     showDismissButton: true,
@@ -112,7 +112,7 @@ const customNotifierOptions: NotifierOptions = {
     PracticetestComponent,
     SolveComponent,
     ClockcalComponent,
-    ErrorComponent,
+    
     DocsComponent,
     PortalComponent,
     AportalComponent,
@@ -177,12 +177,12 @@ const customNotifierOptions: NotifierOptions = {
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},
     {provide: HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
-    {provide:MAT_SNACK_BAR_DEFAULT_OPTIONS,useClass:ErrorInterceptor,useValue:{duration:2500}},
+   
     
 
   ],
 
   bootstrap: [AppComponent],
-  entryComponents:[ErrorComponent]
+  entryComponents:[]
 })
 export class AppModule { }
