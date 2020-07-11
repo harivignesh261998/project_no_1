@@ -26,11 +26,20 @@ options=[];
 answers=[];
 IsSubmit=false;
 IsDisabled=true;
+hours
+seconds
+minutes;
   constructor(private authService:AuthService,notifier: NotifierService ) {
     this.notifier = notifier;
+
    }
 
   ngOnInit(): void {
+    let sdate=new Date();
+     this.hours = sdate.getHours();
+    this.minutes = sdate.getMinutes();
+    this.seconds = sdate.getSeconds();
+
     this.name=this.authService.Testname()
     if(this.name=='Atest'){
       this.afunc();
@@ -156,9 +165,18 @@ checkanswer(){
   console.log('count->',count);
 
   
-let date=new Date();
+let endate=new Date();
+let hours = endate.getHours();
+
+// current minutes
+let minutes = endate.getMinutes();
+
+// current seconds
+let seconds = endate.getSeconds();
+
+
    
- this.authService.updateStudent(this.testId,this.title,count,attempt,date);
+ this.authService.updateStudent(this.testId,count,this.hours + ":" + this.minutes+":"+this.seconds,hours + ":" + minutes+":"+seconds);
 
 // start time end time
 

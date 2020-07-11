@@ -60,7 +60,7 @@ checkanswer(){
     }
 
     this.authService.updatePractice(this.practice._id);
-    console.log(this.scorePoints);
+    this.authService.overallupdate(this.scorePoints);
     
   }
   else{

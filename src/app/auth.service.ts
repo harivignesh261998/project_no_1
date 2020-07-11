@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import{HttpClient} from '@angular/common/http';
-import {AuthData, Update} from './auth-data.model';
+import {AuthData, Update, Overall} from './auth-data.model';
 import {Auth} from './auth-data.model';
 import { GlobalDataSummary,GlobalData, GlobalPracticeSummary, GlobalPracticeTest, GlobalUserData} from './models/global-data'; 
 
@@ -340,8 +340,8 @@ getName(){
      
 }
 
-updateStudent(testId,title,count,attempt,date){
-    const update:Update={testId:testId,testName:title,score:count,attempt:attempt,date:date}
+updateStudent(testId,count,startTime,endTime){
+    const update:Update={testId:testId,score:count,startTime,endTime}
    console.log(update);
 
     if(this.testname=='Atest'){
@@ -414,7 +414,8 @@ getDailyprogress(){
 }
 
 overallupdate(score){
-    this.http.put('apiScoreUpdate/overallScoreUpdate/',this.userId);
+    const update:Overall={score:score}
+    this.http.put(`apiScoreUpdate/overallScoreUpdate/${this.userId}`,update);
 }
 
 Testname(){

@@ -13,13 +13,14 @@ export interface Auth{
 }
 
 export interface Update{
-    testName:string;
+    
     score:string;
     testId:string;
-    attempt:boolean;
-    date:Date;
+    startTime:string;
+    endTime:string;
     
-
-
+}
+export interface Overall{
+    score:string;
 }
 
