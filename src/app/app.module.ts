@@ -49,6 +49,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { Ng2GoogleChartsModule, GoogleChartsSettings } from 'ng2-google-charts';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { NotifierModule, NotifierOptions } from "angular-notifier";
+import { AcportalComponent } from './components/acportal/acportal.component';
+import { AcsolveComponent } from './components/acsolve/acsolve.component';
 
 
 
@@ -121,6 +123,8 @@ const customNotifierOptions: NotifierOptions = {
     AsolveComponent,
     InstructionsComponent,
     TestresultComponent,
+    AcportalComponent,
+    AcsolveComponent,
     
 
     

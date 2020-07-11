@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,11 +11,21 @@ import { AuthService } from 'src/app/auth.service';
 export class PortalComponent implements OnInit {
 
 
-  constructor() { }
 
+  constructor(private authService:AuthService,private router:Router) { }
+atest='Atest'
+ctest='Ctest';
   ngOnInit():void {
     
 
+  }
+  amin(){
+    this.authService.givedurationn(this.atest);
+    this.router.navigate(['practice/portal/aportal'])
+  }
+  cmin(){
+    this.authService.givedurationn(this.ctest);
+    this.router.navigate(['practice/portal/cportal']);
   }
 
 

@@ -312,6 +312,11 @@ getIsSolved(){
     return this.http.get('apiStudentDashboard/profile/'+this.userId);
 }
 
+givedurationn(name){
+    console.log(name);
+    localStorage.setItem('name',name);
+    this.testname=name;
+}
 
 giveduration(id,name){
     
@@ -406,6 +411,18 @@ getProgress(){
 
 getDailyprogress(){
     return this.http.get('apiProgress/dailyProgress/'+this.userId);
+}
+
+overallupdate(score){
+    this.http.put('apiScoreUpdate/overallScoreUpdate/',this.userId);
+}
+
+Testname(){
+    if(this.testname==null){
+        return this.testname=localStorage.getItem('name');
+    }
+    return this.testname;
+
 }
 
 }

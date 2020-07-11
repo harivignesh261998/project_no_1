@@ -1,0 +1,40 @@
+<div class="header"> 
+    <p><a routerLink='/practice'>Practice</a> ><span style="pointer-events: none;">Exam Portal</span></p>
+    <h3 class="header_1">Practice Portal</h3>
+    <hr>
+</div>
+
+<div class="row">
+
+    <div *ngFor='let ques of Test;let i=index '> 
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ques.testName}}</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <div *ngIf='!check[i]'>
+                        <a class="btn btn-outline-success float-right" (click)='min(ques._id)'>Take Test</a>
+                    </div>
+                    <div *ngIf='check[i]'>
+                        <button mat-raised-button color="success" disabled>Solved</button> 
+                    </div>
+                  </div>
+                  <div *ngIf='!check[i]'>
+                    <div class="card-footer text-muted">
+                        Duration:{{ques.duration}} minutes
+                        <p style="float:right;">Max Mark:{{ques.maxMark}}</p>
+                      </div>  
+                  </div>
+                  <div *ngIf='check[i]'>
+                    <div class="card-footer text-muted">
+                        Score:{{score[i]}}/{{ques.maxMark}}
+                       <p style='float:right;'> Percent:{{math.floor((score[i]*100)/ques.maxMark)}}%</p>
+                      </div>  
+                  </div>
+                  
+          </div>
+    </div>
+
+    </div>
+    
+  </div>

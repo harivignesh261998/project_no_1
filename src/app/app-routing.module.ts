@@ -22,6 +22,8 @@ import { AsolveComponent } from './components/asolve/asolve.component';
 import { CsolveComponent } from './components/csolve/csolve.component';
 import { InstructionsComponent } from './components/instructions/instructions.component';
 import { TestresultComponent } from './components/testresult/testresult.component';
+import { AcportalComponent } from './components/acportal/acportal.component';
+import { AcsolveComponent } from './components/acsolve/acsolve.component';
 
 
 
@@ -71,8 +73,7 @@ const routes: Routes = [
   {path:'practice/portal/cportal/instructions',component:InstructionsComponent,canActivate:[AuthGuard]},
   {path:'practice/portal/aportal/instructions',component:InstructionsComponent,canActivate:[AuthGuard]},
   {path:'testresult',component:TestresultComponent,canActivate:[AuthGuard]},  
-
-
+  {path:'acsolve',component:AcsolveComponent,canActivate:[AuthGuard]}
 
 
 
