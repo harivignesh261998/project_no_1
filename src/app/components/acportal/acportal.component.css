@@ -19,7 +19,11 @@ a{
 .card{
     margin-left: 30%;
     width: 25em;
+    margin-top: 15%;
 }
 button{
     float: right;
 }
+/* .row{
+    margin-top: 2%;
+} */

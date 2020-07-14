@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { NotifierService } from 'angular-notifier';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-acsolve',
@@ -29,7 +30,7 @@ IsDisabled=true;
 hours
 seconds
 minutes;
-  constructor(private authService:AuthService,notifier: NotifierService ) {
+  constructor(private authService:AuthService,notifier: NotifierService,private router:Router) {
     this.notifier = notifier;
 
    }
@@ -168,17 +169,17 @@ checkanswer(){
 let endate=new Date();
 let hours = endate.getHours();
 
-// current minutes
+
 let minutes = endate.getMinutes();
 
-// current seconds
+
 let seconds = endate.getSeconds();
 
 
    
  this.authService.updateStudent(this.testId,count,this.hours + ":" + this.minutes+":"+this.seconds,hours + ":" + minutes+":"+seconds);
+ this.router.navigate(['/testresult']);
 
-// start time end time
 
 }
 
@@ -200,9 +201,15 @@ neram(){
     this.counterr= this.convertSeconds(this.timeleft - this.counter);
     this.counter++;
     if(this.counter==this.timeleft){
+
     
       clearInterval(intervalId);
-      // this.checkanswer();
+    
+      if (confirm('Time Up ! Click ok to submit')) {
+        this.checkanswer();
+      } 
+      
+          
      
 
     } 

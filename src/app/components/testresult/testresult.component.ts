@@ -161,6 +161,7 @@ monthy=['January','Febraury','March','April','May','June','July','August','Septe
     this.atest=res['aTest'].reverse();
     this.ctest=res['cTest'].reverse();
     
+    
     this.count1=this.calC();
     this.count3=this.calA();
     this.func();

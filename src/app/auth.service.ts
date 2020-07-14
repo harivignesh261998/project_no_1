@@ -7,6 +7,8 @@ import { GlobalDataSummary,GlobalData, GlobalPracticeSummary, GlobalPracticeTest
 import { Observable, Subject, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
+import { NotifierService } from 'angular-notifier';
+
 
 @Injectable({providedIn:"root"})
 export class AuthService{
@@ -30,7 +32,10 @@ private clgURl:string='/assets/data/college.csv'
     public count;
     public fildata;
     private authStatusListner=new Subject<boolean>();
-    constructor(private http:HttpClient,private router:Router){}
+    private notifier: NotifierService;
+    constructor(private http:HttpClient,private router:Router,notifier: NotifierService){
+        this.notifier = notifier;
+    }
     getToken(){
         return this.token;
 
@@ -66,6 +71,7 @@ private clgURl:string='/assets/data/college.csv'
             const token=response.token;
             this.token=token;
             this.userId=response.studentId;
+            this.handle();
             
             
            
@@ -424,6 +430,12 @@ Testname(){
     }
     return this.testname;
 
+}
+
+handle(){
+       
+
+    this.notifier.notify('default','Login Successfull');
 }
 
 }
