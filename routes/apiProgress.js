@@ -1,134 +1,258 @@
 const express = require('express');
 const routerProgress = express.Router();
 const Student = require('../models/student');
+const TestScore = require('../models/testScore');
+var dateArr = new Array();
+var scoreArr = new Array()       // -----------CHANGE THE SCORE INTO PERCENTAGE, PERFORM AVERAGE AND ADD IT TO THE SCOREARR ----------------
+var sum = 0;
+var conflict = new Boolean();
 
-routerProgress.post('/daily/:id', function(req,res,next){
-    Student.findByIdAndUpdate(req.params.id).then(student => {
-        var unCalculated = new Array()
-        unCalculated = student.progress.dailyProgress.filter(docs => docs.calculated === false)
-        if(unCalculated.length === 0){
-            var newDateProgress = req.body
-            student.progress.dailyProgress.push(newDateProgress)
-            student.save(newDateProgress)
-            res.status(201).json(student.progress)
-            console.log(student.progress)
-        }
-        else if(unCalculated.length > 1)
-        {
-            res.status(503).json('Progress update not calculated for '+unCalculated.length+' days')
-        } 
-        else {
-            var previous = unCalculated[0]
-            
-            var cDate = new Date(req.body.date)
-            var cDateD = String(cDate.getDate()+'-')
-            var cDateM = String(cDate.getMonth()+1+'-')
-            var cDateY = String(cDate.getYear()+1900)
-            var currentDate = cDateD.concat(cDateM)
-            currentDate = currentDate.concat(cDateY)
-            
-            var pDate = new Date(previous.date)
-            var pDateD = String(pDate.getDate()+'-')
-            var pDateM = String(pDate.getMonth()+1+'-')
-            var pDateY = String(pDate.getYear()+1900)
-            var previousDate = pDateD.concat(pDateM)
-            previousDate = previousDate.concat(pDateY)
 
-            if(previousDate == currentDate){
-                unCalculated[0].sum = unCalculated[0].sum + req.body.sum
-                unCalculated[0].nthEntry = unCalculated[0].nthEntry + 1
-                student.save(unCalculated[0])
-                res.status(201).json(student.progress)
-                console.log(student.progress)
-            }
-            else{
-                unCalculated[0].dailyPercentage = unCalculated[0].sum / unCalculated[0].nthEntry
-                unCalculated[0].calculated = true
-                var newDateProgress = req.body
-                student.progress.dailyProgress.push(newDateProgress)
-                student.save(newDateProgress)
-                res.status(201).json(student.progress)
-                console.log(student.progress)
-            }
-        }
-    })
-})
-
-////Update Monthly progress in Student DB (id = Student-ID, body = date, sum (i.e. score percentage), nthEntry)
-routerProgress.post('/monthly/:id', function(req,res,next){
-    Student.findByIdAndUpdate(req.params.id).then(student => {
-        var unCalculated = new Array()
-        unCalculated = student.progress.monthlyProgress.filter(docs => docs.calculated === false)
-        if(unCalculated.length === 0)
-        {
-            var newMonthProgress = req.body
-            var cDate = new Date(req.body.date)
-            var currentMonth = cDate.getMonth() + 1
-            newMonthProgress.month = currentMonth
-            newMonthProgress.lastUpdate = req.body.date
-            student.progress.monthlyProgress.push(newMonthProgress)
-            student.save(newMonthProgress)
-            res.status(201).json(student.progress)
-            console.log(student.progress)      
-        }
-        else if(unCalculated.length > 1){
-            res.status(503).json('Progress update not calculated for '+unCalculated.length+' months')
-        }
-        else{
-            var previous = unCalculated[0]
-            var pDate = new Date(previous.lastUpdate)
-            var cDate = new Date(req.body.date)
-            var previousMonth = pDate.getMonth() + 1
-            var currentMonth = cDate.getMonth() + 1
-
-            if(previousMonth == currentMonth){
-                unCalculated[0].sum = unCalculated[0].sum + req.body.sum
-                unCalculated[0].nthEntry = unCalculated[0].nthEntry + 1
-                unCalculated[0].lastUpdate = req.body.date
-                student.save(unCalculated[0])
-                res.status(201).json(student.progress)
-                console.log(student.progress)
-            }
-            else{
-                unCalculated[0].monthlyPercentage = unCalculated[0].sum / unCalculated[0].nthEntry
-                unCalculated[0].calculated = true
-                var newMonthProgress = req.body
-                newMonthProgress.month = currentMonth
-                newMonthProgress.lastUpdate = req.body.date
-                student.progress.monthlyProgress.push(newMonthProgress)
-                student.save(newMonthProgress)
-                res.status(201).json(student.progress)
-                console.log(student.progress)   
-            }
-        }
-    })
-})
-
-//Retrieve Daily Progress from the Student DB (id = Student-ID)
-routerProgress.get('/dailyProgress/:id', function(req, res,next){
+//get daily progress (id: studentId)
+routerProgress.get('/daily/:id', function(req,res,next){
     Student.findById(req.params.id).then(student => {
-        if(student.progress.dailyProgress === null){
-            res.status(200).json('No Progress yet')
-            console.log('No Progress yet')
-        }
-        else{
-            res.status(200).json(student.progress.dailyProgress)
-            console.log(student.progress.dailyProgress)
-        }
+        TestScore.findById(student.testScore).then(testScore => {
+            dateArr = []
+            scoreArr = []
+            console.log(testScore+'==summa') 
+            for(var i = 0; i < testScore.aTest.length; i++){
+                conflict = false
+                var date1 = new String(testScore.aTest[i].startTime.getDate())
+                date1 = date1.concat('-', new String(testScore.aTest[i].startTime.getMonth()+1), '-', new String(testScore.aTest[i].startTime.getYear()+1900))
+                dateArr.forEach(element => {
+                    if(element === date1)
+                        conflict = true
+                });
+                if(conflict === true)  
+                    continue
+                dateArr.push(date1)
+                sum = testScore.aTest[i].score
+                for(var j = i+1; j < testScore.aTest.length; j++){
+                    var date2 = new String(testScore.aTest[j].startTime.getDate())
+                    date2 = date2.concat('-', new String(testScore.aTest[j].startTime.getMonth()+1), '-', new String(testScore.aTest[j].startTime.getYear()+1900))
+                    if(date1 === date2)
+                        sum = sum + testScore.aTest[j].score
+                }
+                for(var k = 0; k < testScore.cTest.length; k++){
+                    var date2 = new String(testScore.cTest[k].startTime.getDate())
+                    date2 = date2.concat('-', new String(testScore.cTest[k].startTime.getMonth()+1), '-', new String(testScore.cTest[k].startTime.getYear()+1900))
+                    if(date1 === date2)
+                        sum = sum + testScore.cTest[k].score
+                }
+                scoreArr.push(sum)
+            }
+            for(var i = 0;  i < testScore.cTest.length; i++){
+                conflict = false
+                var date1 = new String(testScore.cTest[i].startTime.getDate())
+                date1 = date1.concat('-', new String(testScore.cTest[i].startTime.getMonth()+1), '-', new  String(testScore.cTest[i].startTime.getYear()+1900))
+                dateArr.forEach(element => {
+                    if(element === date1)
+                        conflict = true
+                });
+                if(conflict === true)
+                    continue
+                dateArr.push(date1)
+                scoreArr.push(testScore.cTest[i].score)
+            }
+            console.log(dateArr)
+            console.log(scoreArr)
+            res.status(201).json({
+                dateArr: dateArr,
+                scoreArr: scoreArr
+            })
+        })
     })
 })
 
-//Retrieve Monthly Progress from the Student DB (id = Student-ID)
-routerProgress.get('/monthlyProgress/:id', function(req, res,next){
+
+//get monthly progress (id: studentId)
+routerProgress.get('/monthly/:id', function(req,res,next){
     Student.findById(req.params.id).then(student => {
-        if(student.progress.monthlyProgress === null){
-            res.status(200).json('No Progress yet')
-            console.log('No Progress yet')
-        }
-        else{
-            res.status(200).json(student.progress.monthlyProgress)
-            console.log(student.progress.monthlyProgress)
-        }
+        TestScore.findById(student.testScore).then(testScore => {
+            dateArr = []
+            scoreArr = []
+            for(var i = 0; i < testScore.aTest.length; i++){
+                conflict = false
+                var date1 = testScore.aTest[i].startTime.getMonth()+1
+                dateArr.forEach(element => {
+                    if(element === date1)
+                        conflict = true
+                });
+                if(conflict === true)  
+                    continue
+                dateArr.push(date1)
+                sum = testScore.aTest[i].score
+                for(var j = i+1; j < testScore.aTest.length; j++){
+                    var date2 = testScore.aTest[j].startTime.getMonth()+1
+                    if(date1 === date2)
+                        sum = sum + testScore.aTest[j].score
+                }
+                for(var k = 0; k < testScore.cTest.length; k++){
+                    var date2 = testScore.cTest[k].startTime.getMonth()+1
+                    if(date1 === date2)
+                        sum = sum + testScore.cTest[k].score
+                }
+                scoreArr.push(sum)
+            }
+            for(var i = 0;  i < testScore.cTest.length; i++){
+                conflict = false
+                var date1 = testScore.cTest[i].startTime.getMonth()+1
+                dateArr.forEach(element => {
+                    if(element === date1)
+                        conflict = true
+                });
+                if(conflict === true)
+                    continue
+                dateArr.push(date1)
+                scoreArr.push(testScore.cTest[i].score)
+            }
+            console.log(dateArr)
+            console.log(scoreArr)
+            res.status(201).json({
+                monthArr: dateArr,
+                scoreArr: scoreArr
+            })
+        })
+    })
+})
+
+// get weekly progress (id: studentId)
+routerProgress.get('/weekly/:id', function(req,res,next){
+    Student.findById(req.params.id).then(student => {
+        TestScore.findById(student.testScore).then(testScore => {
+
+            // Defining required varibales, constants and arrays
+            var dFactor = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+            var firstEntry = new Array();
+            var secondEntry = new Array();
+            var weekStartDate = new Number();
+            var weekStartMonth = new Number();
+            var weekStartYear = new Number();
+            var weekStartDay = new Number();
+            var weekEndDate = new Number();
+            var weekEndMonth = new Number();
+            var weekEndYear = new Number();
+            var week = new Number();
+            var continueIteration = new Boolean(true);
+            const today = new Date();
+            var filteredFirstArr = new Array();
+            var filteredSecondArr = new Array();
+            dateArr = []
+            scoreArr = []
+
+            // Finding whether aTest or cTest has the 1st testScore attended
+            if(testScore.aTest[0].startTime.getYear()+1900 < testScore.cTest[0].startTime.getYear()+1900){
+                firstEntry = testScore.aTest
+                secondEntry = testScore.cTest
+            }
+            else if(testScore.aTest[0].startTime.getYear()+1900 === testScore.cTest[0].startTime.getYear()+1900){
+                if(testScore.aTest[0].startTime.getMonth()+1 < testScore.cTest[0].startTime.getMonth()+1){
+                    firstEntry = testScore.aTest
+                    secondEntry = testScore.cTest
+                }
+                else if(testScore.aTest[0].startTime.getMonth()+1 === testScore.cTest[0].startTime.getMonth()+1){
+                    if(testScore.aTest[0].startTime.getDate() <= testScore.cTest[0].startTime.getDate()){
+                        firstEntry = testScore.aTest
+                        secondEntry = testScore.cTest
+                    }
+                }
+                else{
+                    firstEntry = testScore.cTest
+                    secondEntry = testScore.aTest
+                }
+            }   
+            else{ 
+                firstEntry = testScore.cTest
+                secondEntry = testScore.aTest
+            }
+
+            
+            // Iterating to get the week and filter all the dates that fall in that week
+            // Initialize weekStartDate
+                weekStartDate = firstEntry[0].startTime.getDate()
+                weekStartMonth = firstEntry[0].startTime.getMonth() + 1
+                weekStartYear = firstEntry[0].startTime.getYear()+1900
+                weekStartDay = firstEntry[0].startTime.getDay()
+            for(var i = 0; continueIteration; i++){
+                // Find the either Leap Year or not and update the dFactor Array
+                if(weekStartYear % 4 === 0){
+                    if(weekStartYear % 100 === 0){
+                        if(weekStartYear % 400 === 0)
+                            dFactor[1] = 29
+                        else    
+                            dFactor[1] = 28
+                    }
+                    else   
+                        dFactor[1] = 29
+                }
+                else
+                    dFactor[1] = 28
+                // Determining the weekEndDate
+                var sum = 0
+                filteredFirstArr = []
+                filteredSecondArr = []
+                if(i === 0)
+                    week = 1
+                else week++
+                if(i === 0){
+                    var addToGetWeekEnd =  6 - weekStartDay
+                    weekEndDate = (weekStartDate + addToGetWeekEnd) % dFactor[weekStartMonth-1]
+                }
+                else
+                    weekEndDate = (weekStartDate + 6) > dFactor[weekStartMonth-1]?(weekStartDate + 6) % dFactor[weekStartMonth-1]:weekStartDate + 6
+                if((weekStartDate+6) > dFactor[weekStartMonth-1])
+                    weekEndMonth = (weekStartMonth + 1) % 12
+                else    
+                    weekEndMonth = weekStartMonth
+                if((weekStartMonth + 1) > 12)
+                    weekEndYear = (weekStartYear + 1)
+                else 
+                    weekEndYear = weekStartYear    
+
+                // Filtering out the dates falling in current week
+                firstEntry.filter(value => {
+                    if(((value.startTime.getYear()+1900) >= weekStartYear) && ((value.startTime.getYear()+1900) <= weekEndYear)){
+                        if(((value.startTime.getMonth()+1 >= weekStartMonth) && (value.startTime.getMonth()+1 <= weekEndMonth)) || ((value.startTime.getMonth()+2 % 12) === 1)){
+                            if(((value.startTime.getDate() >= weekStartDate ) && (value.startTime.getDate() <= weekEndDate)) || (((value.startTime.getDate() + (6 - value.startTime.getDay())) % dFactor[value.startTime.getMonth()]) <= 7)){
+                                filteredFirstArr.push(value.score)
+                            }
+                        } 
+                    }
+                })
+                secondEntry.filter(value => {
+                    if(((value.startTime.getYear()+1900) >= weekStartYear) && ((value.startTime.getYear()+1900) <= weekEndYear)){
+                        if(((value.startTime.getMonth()+1 >= weekStartMonth) && (value.startTime.getMonth()+1 <= weekEndMonth)) || ((value.startTime.getMonth()+2 % 12) === 1)){
+                            if(((value.startTime.getDate() >= weekStartDate ) && (value.startTime.getDate())) || (((value.startTime.getDate() + (6 - value.startTime.getDay())) % dFactor[value.startTime.getMonth()]) <= 7)){
+                                filteredSecondArr.push(value.score)
+                            }
+                        } 
+                    }
+                })
+
+                sum = sum + (filteredFirstArr.length === 0? 0:filteredFirstArr.reduce((a,b) => a+b)) + (filteredSecondArr.length === 0? 0:filteredSecondArr.reduce((a,b) => a+b))
+
+                dateArr.push(week)
+                scoreArr.push(sum)
+
+                weekStartDate = (weekEndDate + 1) > dFactor[weekEndMonth-1]? (weekEndDate + 1) % dFactor[weekEndMonth-1]:(weekEndDate + 1)
+                weekStartMonth = (weekEndDate + 1) > dFactor[weekEndMonth-1]? ((weekEndMonth + 1) % 12): weekEndMonth
+                weekStartYear = (weekStartMonth === 1)? weekEndYear+1:(weekEndYear)
+                
+                //Determining the end of the iteration
+                if((today.getYear()+1900) < weekStartYear)
+                    continueIteration = false
+                else if((today.getYear()+1900) === weekStartYear && (today.getMonth()+1) < weekStartMonth)
+                    continueIteration = false
+                else if(((today.getYear()+1900) === weekStartYear) && ((today.getMonth()+1) === weekStartMonth) && (today.getDate() < weekStartDate))
+                    continueIteration = false
+                else
+                    continueIteration = true
+            }
+            res.status(201).json({
+                weekArr: dateArr,
+                scoreArr: scoreArr
+            })
+        })
     })
 })
 

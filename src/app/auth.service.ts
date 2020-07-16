@@ -411,12 +411,13 @@ getCResult(){
 }
 
 getProgress(){
-  return  this.http.get('apiProgress/monthlyProgress/'+this.userId);
+  return  this.http.get('apiProgress/monthly/'+this.userId);
     
 }
 
 getDailyprogress(){
-    return this.http.get('apiProgress/dailyProgress/'+this.userId);
+    
+    return this.http.get('apiProgress/daily/'+this.userId);
 }
 
 overallupdate(score){

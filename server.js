@@ -28,8 +28,10 @@ app.use('/apiLogin',require('./routes/apiLogin'));
 app.use('/apiTest',require('./routes/apiTest'));
 app.use('/apiPractice', require('./routes/apiPractice'));
 app.use('/apiStudentDashboard', require('./routes/apiStudentDashboard'));
+app.use('/apiPracticedQuestionsUpdate', require('./routes/apiPracticedQuestionsUpdate'));
 app.use('/apiScoreUpdate', require('./routes/apiScoreUpdate'));
 app.use('/apiProgress', require('./routes/apiProgress'));
+// app.use('/apiDevelopment', require('./routes/apiDevelopment'));
 
 //listen for request
 app.listen(process.env.port||4600,function(){
