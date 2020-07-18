@@ -1,15 +1,15 @@
 <div>
-    <img class="q" [src]=image1 style="width: 5%;"> 
-    <h4 class="w"><b>{{firstname}}</b></h4>
-    <p class="e">{{mail}}</p>
-    <p class="r">Dr.N.G.P Institute of Technology</p>
-</div>
-<div>
-    <div class="container">
-        <div class="card" style="width: 50em;height: 15em;">
-            <div class="card-body">
-              
-            </div>
+    <ng-template #customLoadingTemplate></ng-template>
+    
+    <div class="row">
+        <div class="col">
+    
+            <img  [src]=image1 style="width: 5%;"> 
+            <h4><b>{{firstname}}</b></h4>
+            <p>{{mail}}</p>
+            <p>Dr.N.G.P Institute of Technology</p>
         </div>
+       
     </div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
 </div>

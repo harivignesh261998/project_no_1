@@ -53,6 +53,7 @@ private clgURl:string='/assets/data/college.csv'
         const authData:AuthData={firstName:firstName,lastName:lastName,mailId:mailId,password:password,collegeId:collegeId};
          this.http.post("apiRegister/studentRegister",authData).subscribe(()=>{
              console.log('register Successfully');
+             this.handle1()
              this.router.navigate(['/login']);
          },error=>{
              this.authStatusListner.next(false);
@@ -437,6 +438,11 @@ handle(){
        
 
     this.notifier.notify('default','Login Successfull');
+}
+handle1(){
+    this.notifier.notify('default','Register Successfull');
+
+
 }
 
 }

@@ -1,168 +1,182 @@
 
 
+  
+<div>
+  <ng-template #customLoadingTemplate>
+  </ng-template>
 
-
-<div class="header">
-    <a  class="logo">Exam Portal</a>
-    <div class="header-right">
-      <p>Test Title:<b>{{title}}</b></p> 
-    </div>
-  </div>
-  
-  <div id="mybutton">
-    <button class="feedback">{{counterr}}</button>
-    </div>
-   
-  <div class="questions">
-    <p><b>{{index+1}} of {{no}} questions</b></p>
-  </div>
-  
-  <div  class="container maincon">
-    <div  class="row">
-        <div class="col-4-lg" style="width: 50em;">
-          <div class="card" style="background-color: whitesmoke;">
-            <div class="card-body">
-               <div>
-                <div  class="container">
-                  <div  class="row">
-                      <div class="col-4-lg">
-                       
-                            <div class="card" style="width:47em;">
-                              <div class="card-body" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" 
-                              unselectable="on"
-                              onselectstart="return false;" 
-                              onmousedown="return false;">
-                                  <p>{{questions?.ques}}</p>
+    <div class="header">
+        <a  class="logo">Exam Portal</a>
+        <div class="header-right">
+          <p>Test Title:<b>{{title}}</b></p> 
+        </div>
+      </div>
+      
+      
+      <div id="mybutton">
+        <button class="feedback">{{counterr}}</button>
+        </div>
+       
+      <div class="questions">
+        <p><b>{{index+1}} of {{no}} questions</b></p>
+      </div>
+      
+      <div  class="container maincon">
+        <div  class="row">
+            <div class="col-4-lg" style="width: 50em;">
+              <div class="card" style="background-color: whitesmoke;">
+                <div class="card-body">
+                   <div>
+                    <div  class="container">
+                      <div  class="row">
+                          <div class="col-4-lg">
+                           
+                                <div class="card" style="width:47em;">
+                                  <div class="card-body" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" 
+                                  unselectable="on"
+                                  onselectstart="return false;" 
+                                  onmousedown="return false;">
+                                      <p>{{questions?.ques}}</p>
+                                  </div>
                               </div>
+                            
+                             
                           </div>
-                        
-                         
-                      </div>
-              
-                  </div>
-              </div>
-  
-              <mat-radio-group aria-label="Select an option"   (change)='answer()' [(ngModel)]="favoriteSeason">
-                <div  class="container">
-                  <div  class="row">
-                      <div class="col-4-lg ml-5">
-                      
-                            <div class="card mt-4" style="width: 18em;">
-                              <div class="card-body">
-                                <mat-radio-button  value={{questions.option1}}>{{questions?.option1}}</mat-radio-button>
-                              </div>
-                          </div>
-                       
-                         
-                      </div>
-                      <div class="col-4-lg ml-5">
-                      
-                            <div class="card mt-4" style="width: 18em;">
-                              <div class="card-body">
-                                <mat-radio-button   value={{questions.option2}}>{{questions?.option2}}</mat-radio-button>
-                              </div>
-                          </div>
-                     
-                         
-                      </div>
-              
-                  </div>
-                  <div  class="row">
-                    <div class="col-4-lg ml-5">
-                      
-                          <div class="card mt-4" style="width: 18em;">
-                            <div class="card-body">
-                              <mat-radio-button  value={{questions.option3}}>{{questions?.option3}}</mat-radio-button>
-                            </div>
-                        </div>
-                      
-                       
-                    </div>
-                    <div class="col-4-lg ml-5">
-                     
-                          <div class="card mt-4" style="width: 18em;">
-                            <div class="card-body">
-                              <mat-radio-button  value={{questions.option4}}>{{questions?.option4}}</mat-radio-button>
-                            </div>
-                        </div>
-                      
-                       
-                    </div>
-              
-                </div>
                   
-               </div>
-              
-              
-              
-              </mat-radio-group>
-                
-              
-               </div>
-            </div>
-        </div>
-         
-           
-        </div>
-  
-        <div class="col" style="margin-left: 5%;">
-  
-                <div *ngFor="let item of qno; let i = index">
-                  <div *ngIf="i % 5 == 0" class="row">
-                    <div *ngIf='options[item-1]'> <button type="button" class="btn btn-success" (click)='q(item-1)'>{{item}}</button></div>
-                    <div *ngIf='!options[item-1]'><a class="btn btn-outline-success" (click)='q(item-1)'>{{item}}</a> </div>
-                    
-                    <div *ngIf='options[qno[i+1]-1]'>
-                      <div *ngIf="i + 1 < qno.length"> <button type="button" class="btn btn-success" (click)='q(qno[i+1]-1)'>{{qno[i + 1]}}</button></div>
-                    </div>
-                    <div *ngIf='!options[qno[i+1]-1]'>
-                      <div *ngIf="i + 1 < qno.length"> <a class="btn btn-outline-success" (click)='q(qno[i+1]-1)'>{{ qno[i + 1] }}</a></div>
-                    </div>
-  
-                    <div *ngIf='options[qno[i+2]-1]'>
-                      <div *ngIf="i + 2 < qno.length"><button type="button" class="btn btn-success" (click)='q(qno[i+2]-1)'>{{qno[i + 2]}}</button> </div>
-                    </div>
-  
-                    <div *ngIf='!options[qno[i+2]-1]'>
-                      <div *ngIf="i + 2 < qno.length"> <a class="btn btn-outline-success" (click)='q(qno[i + 2]-1)'>{{ qno[i + 2] }}</a></div>
-                    </div>
-  
-                    <div *ngIf='options[qno[i+3]-1]'>
-                      <div *ngIf="i + 3 < qno.length"> <button type="button" class="btn btn-success" (click)='q(qno[i+3]-1)'>{{qno[i + 3]}}</button></div>
-                    </div>
-                    <div *ngIf='options[qno[i+3]-1]'>
-                      <div *ngIf="i + 3 < qno.length"> <a class="btn btn-outline-success" (click)='q(qno[i + 3]-1)'>{{ qno[i + 3] }}</a></div>
-                    </div>
-  
-  
-  
-                    <div *ngIf='options[qno[i+4]-1]'>
-                      <div *ngIf="i + 4 < qno.length"> <button type="button" class="btn btn-success" (click)='q(qno[i+4]-1)'>{{qno[i + 4]}}</button></div>
-                    </div>
-  
-                    <div *ngIf='options[qno[i+4]-1]'>
-                      <div *ngIf="i + 4 < qno.length"> <a class="btn btn-outline-success" (click)='q(qno[i + 4]-1)'>{{ qno[i + 4] }}</a></div>
-  
-                    </div>
-  
+                      </div>
                   </div>
+      
+                  <mat-radio-group aria-label="Select an option"   (change)='answer()' [(ngModel)]="favoriteSeason">
+                    <div  class="container">
+                      <div  class="row">
+                          <div class="col-4-lg ml-5">
+                          
+                                <div class="card mt-4" style="width: 18em;">
+                                  <div class="card-body">
+                                    <mat-radio-button  value={{questions.option1}}>{{questions?.option1}}</mat-radio-button>
+                                  </div>
+                              </div>
+                           
+                             
+                          </div>
+                          <div class="col-4-lg ml-5">
+                          
+                                <div class="card mt-4" style="width: 18em;">
+                                  <div class="card-body">
+                                    <mat-radio-button   value={{questions.option2}}>{{questions?.option2}}</mat-radio-button>
+                                  </div>
+                              </div>
+                         
+                             
+                          </div>
+                  
+                      </div>
+                      <div  class="row">
+                        <div class="col-4-lg ml-5">
+                          
+                              <div class="card mt-4" style="width: 18em;">
+                                <div class="card-body">
+                                  <mat-radio-button  value={{questions.option3}}>{{questions?.option3}}</mat-radio-button>
+                                </div>
+                            </div>
+                          
+                           
+                        </div>
+                        <div class="col-4-lg ml-5">
+                         
+                              <div class="card mt-4" style="width: 18em;">
+                                <div class="card-body">
+                                  <mat-radio-button  value={{questions.option4}}>{{questions?.option4}}</mat-radio-button>
+                                </div>
+                            </div>
+                          
+                           
+                        </div>
+                  
+                    </div>
+                      
+                   </div>
+                  
+                  
+                  
+                  </mat-radio-group>
+                    
+                  
+                   </div>
                 </div>
-          
-    </div>
-  </div>
-  <div class="next" *ngIf='IsDisabled'>
-    <button mat-raised-button color="success" disabled>Previous</button>&nbsp;  
-    <a class="btn btn-outline-success" (click)='next()'>Save & Next</a>
-   </div>
-  
-   <div class="next" *ngIf='!IsDisabled && !IsSubmit'>
-    <a class="btn btn-outline-success" (click)='previous()'>Previous</a>&nbsp;  
-    <a class="btn btn-outline-success" (click)='next()'>Save & Next</a>
-   </div>
-   <div class="sub" *ngIf='IsSubmit'>
-    <a class="btn btn-outline-success" (click)='previous()'>Previous</a>&nbsp;  
-    <a class="btn btn-outline-success" (click)='checkanswer()'>Submit</a>
-   </div>
+            </div>
+             
+               
+            </div>
+      
+            <div class="col" style="margin-left: 5%;">
+      
+                    <div *ngFor="let item of qno; let i = index">
+                      <div *ngIf="i % 5 == 0" class="row">
+                        <div *ngIf='options[item-1]'> <button type="button" class="btn btn-success" (click)='q(item-1)'>{{item}}</button></div>
+                        <div *ngIf='!options[item-1]'><a class="btn btn-outline-success" (click)='q(item-1)'>{{item}}</a> </div>
+                        
+                        <div *ngIf='options[qno[i+1]-1]'>
+                          <div *ngIf="i + 1 < qno.length"> <button type="button" class="btn btn-success" (click)='q(qno[i+1]-1)'>{{qno[i + 1]}}</button></div>
+                        </div>
+                        <div *ngIf='!options[qno[i+1]-1]'>
+                          <div *ngIf="i + 1 < qno.length"> <a class="btn btn-outline-success" (click)='q(qno[i+1]-1)'>{{ qno[i + 1] }}</a></div>
+                        </div>
+      
+                        <div *ngIf='options[qno[i+2]-1]'>
+                          <div *ngIf="i + 2 < qno.length"><button type="button" class="btn btn-success" (click)='q(qno[i+2]-1)'>{{qno[i + 2]}}</button> </div>
+                        </div>
+      
+                        <div *ngIf='!options[qno[i+2]-1]'>
+                          <div *ngIf="i + 2 < qno.length"> <a class="btn btn-outline-success" (click)='q(qno[i + 2]-1)'>{{ qno[i + 2] }}</a></div>
+                        </div>
+      
+                        <div *ngIf='options[qno[i+3]-1]'>
+                          <div *ngIf="i + 3 < qno.length"> <button type="button" class="btn btn-success" (click)='q(qno[i+3]-1)'>{{qno[i + 3]}}</button></div>
+                        </div>
+                        <div *ngIf='options[qno[i+3]-1]'>
+                          <div *ngIf="i + 3 < qno.length"> <a class="btn btn-outline-success" (click)='q(qno[i + 3]-1)'>{{ qno[i + 3] }}</a></div>
+                        </div>
+      
+      
+      
+                        <div *ngIf='options[qno[i+4]-1]'>
+                          <div *ngIf="i + 4 < qno.length"> <button type="button" class="btn btn-success" (click)='q(qno[i+4]-1)'>{{qno[i + 4]}}</button></div>
+                        </div>
+      
+                        <div *ngIf='options[qno[i+4]-1]'>
+                          <div *ngIf="i + 4 < qno.length"> <a class="btn btn-outline-success" (click)='q(qno[i + 4]-1)'>{{ qno[i + 4] }}</a></div>
+      
+                        </div>
+      
+                      </div>
+                    </div>
+              
+         </div>
+      </div>
+      </div>
+      <div class="next" *ngIf='IsDisabled'>
+        <button mat-raised-button color="success" disabled>Previous</button>&nbsp;  
+        <a class="btn btn-outline-success" (click)='next()'>Save & Next</a>
+       </div>
+      
+       <div class="next" *ngIf='!IsDisabled && !IsSubmit'>
+        <a class="btn btn-outline-success" (click)='previous()'>Previous</a>&nbsp;  
+        <a class="btn btn-outline-success" (click)='next()'>Save & Next</a>
+       </div>
+       <div class="sub" *ngIf='IsSubmit'>
+        <a class="btn btn-outline-success" (click)='previous()'>Previous</a>&nbsp;  
+        <a class="btn btn-outline-success" (click)='checkanswer()'>Submit</a>
+      </div>
+    
+    
+    
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+</div>
+
+
+
+
   
    
   

@@ -29,6 +29,7 @@ per=[];
 dailypro;
 d=[];
 data=[];
+public loading=false;
 monthy=['January','Febraury','March','April','May','June','July','August','September','October','November','December']
 
   constructor(private authService:AuthService) { }
@@ -37,56 +38,57 @@ monthy=['January','Febraury','March','April','May','June','July','August','Septe
 
  
   ngOnInit(): void {
+    this.loading=true;
 
-    // this.authService.getDailyprogress().subscribe(res=>{
-    //   console.log(res);
-    //   this.dailypro=res;
-    //   console.log(this.dailypro);
-    //  for(let i=0;i<this.dailypro.length;i++){
-    //    this.d[i]=this.dailypro[i].date;
-    //    this.data[i]=this.dailypro[i].dailyPercentage
-    //  }
-    //   let dates=[];
-    //   this.d.forEach((res)=>{
-    //     dates.push(res.slice(5,10));
-    //   })
-    //   console.log('->',dates);
-    //   let data=[];
-    //   this.data.forEach((res)=>{
-    //     data.push(res);
-    //   })
-    //   console.log(data);
+    this.authService.getDailyprogress().subscribe(res=>{
+      console.log(res);
+      this.dailypro=res;
+      console.log(this.dailypro);
+     for(let i=0;i<this.dailypro.length;i++){
+       this.d[i]=this.dailypro[i].date;
+       this.data[i]=this.dailypro[i].dailyPercentage
+     }
+      let dates=[];
+      this.d.forEach((res)=>{
+        dates.push(res.slice(5,10));
+      })
+      console.log('->',dates);
+      let data=[];
+      this.data.forEach((res)=>{
+        data.push(res);
+      })
+      console.log(data);
 
-    //   this.chart=new Chart('canvas',{
-    //     type:'line',
-    //     data:{
-    //       labels:dates,
-    //       datasets:[
-    //       {
-    //         data:data,
-    //         borderColor:'#3cba9f',
-    //         fill:false
+      this.chart=new Chart('canvas',{
+        type:'line',
+        data:{
+          labels:dates,
+          datasets:[
+          {
+            data:data,
+            borderColor:'#3cba9f',
+            fill:false
 
-    //       }
-    //     ]
-    //     },
-    //     options:{
-    //       legend:{
-    //         display:false
-    //       },
-    //       scales:{
-    //         xAxes:[{
-    //           display:true
-    //         }],
-    //         yAxes:[{
-    //           display:true
-    //         }]
-    //       }
-    //     }
+          }
+        ]
+        },
+        options:{
+          legend:{
+            display:false
+          },
+          scales:{
+            xAxes:[{
+              display:true
+            }],
+            yAxes:[{
+              display:true
+            }]
+          }
+        }
 
-    //   })
+      })
       
-    // })
+    })
     
     this.authService.getProgress().subscribe(res=>{
       // console.log(res);
@@ -168,7 +170,7 @@ monthy=['January','Febraury','March','April','May','June','July','August','Septe
     this.count3=this.calA();
     this.func();
     this.funa()
-   
+   this.loading=false;
 })
 }
 

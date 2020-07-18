@@ -30,12 +30,14 @@ IsDisabled=true;
 hours
 seconds
 minutes;
+public loading=false;
   constructor(private authService:AuthService,notifier: NotifierService,private router:Router) {
     this.notifier = notifier;
 
    }
 
   ngOnInit(): void {
+    this.loading=true;
     let sdate=new Date();
      this.hours = sdate.getHours();
     this.minutes = sdate.getMinutes();
@@ -62,6 +64,7 @@ minutes;
     })
     this.summa();
     this.neram();
+    this.loading=false;
     
 
   }
@@ -78,6 +81,7 @@ minutes;
 
     this.summa();
     this.neram();
+    this.loading=false;
 
     
 

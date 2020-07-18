@@ -1,12 +1,12 @@
-<div class="login-page" *ngIf="!isLoading">
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<div class="login-page">
     <mat-card class="mat-elevation-z12">
       <mat-card-title style="text-align:center;">SignIn/SignUp</mat-card-title>
       <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
         <mat-tab label="Sign In">
+          
             <mat-card-content>
-               
-              <form (submit)="onLogin(loginForm)" #loginForm="ngForm"  >
+              <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
                 <mat-form-field>
                   <input
                     matInput
@@ -50,14 +50,18 @@
   
                 
               </form>
+              <ng-template #customLoadingTemplate></ng-template>
             </mat-card-content>
-        </mat-tab>
+         
+          </mat-tab>
+       
+        
 
         <mat-tab label="Sign Up">
 
           <mat-card-content>
-            <mat-spinner *ngIf="isLoading"></mat-spinner>
-            <form (submit)="OnSignup(signupForm)" #signupForm="ngForm"  *ngIf="!isLoading">
+            
+            <form (submit)="OnSignup(signupForm)" #signupForm="ngForm">
               <mat-form-field>
                 <input
                   matInput
@@ -174,7 +178,10 @@
       </mat-tab-group>
     </mat-card>
     
+    
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
   </div>
+
   
   
   

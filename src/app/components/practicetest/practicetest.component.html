@@ -1,88 +1,93 @@
 
-
-    <div class="header"> 
-        <p><a routerLink='/practice'>Practice</a> ><span style="pointer-events: none;"> Practice Test</span></p>
-        <h3 class="header_1">Practice Portal</h3>
-        <hr>
-    </div>
-    <div style="background-color: whitesmoke;">
-      <div class="container">
-        <div class="row">
-            <div class="col-4-lg">
-              
-                <div *ngFor='let ques of filterdata;let i=index' > 
-                  <div class="card" style="width: 50rem;height: 9rem;">
-                    <div class="card-body">
-                        <h5>{{ques.message}}</h5>
-                        <div *ngIf="ques.difficulty=='Easy'"> 
-                          <p class="e"><span style="color: green;">{{ques.difficulty}}</span>,Max Score:15</p>
-                        </div>
-                        <div *ngIf="ques.difficulty=='Medium'"> 
-                          <p class="e"><span style="color: orangered;">{{ques.difficulty}}</span>,Max Score:20</p>
-                        </div>
-                        <div *ngIf="ques.difficulty=='Hard'"> 
-                          <p class="e"><span style="color: red;">{{ques.difficulty}}</span>,Max Score:30</p>
-                        </div>
-                       <div *ngIf='!check[i]'>
-                         <a  class="btn btn-outline-success float-right" (click)='solve(ques._id)'>Solve Challenge</a>   
-                       </div>
-                       <div *ngIf='check[i]'>
-                        <a  class="btn btn-outline-success float-right" style="width: 18%;">Try Again</a>   
+<div>
+  <ng-template #customLoadingTemplate></ng-template>
+  <div class="header"> 
+      <p><a routerLink='/practice'>Practice</a> ><span style="pointer-events: none;"> Practice Test</span></p>
+      <h3 class="header_1">Practice Portal</h3>
+      <hr>
+  </div>
+  <div style="background-color: whitesmoke;">
+    <div class="container">
+      <div class="row">
+          <div class="col-4-lg">
+            
+              <div *ngFor='let ques of filterdata;let i=index' > 
+                <div class="card" style="width: 50rem;height: 9rem;">
+                  <div class="card-body">
+                      <h5>{{ques.message}}</h5>
+                      <div *ngIf="ques.difficulty=='Easy'"> 
+                        <p class="e"><span style="color: green;">{{ques.difficulty}}</span>,Max Score:15</p>
                       </div>
-                    
+                      <div *ngIf="ques.difficulty=='Medium'"> 
+                        <p class="e"><span style="color: orangered;">{{ques.difficulty}}</span>,Max Score:20</p>
+                      </div>
+                      <div *ngIf="ques.difficulty=='Hard'"> 
+                        <p class="e"><span style="color: red;">{{ques.difficulty}}</span>,Max Score:30</p>
+                      </div>
+                     <div *ngIf='!check[i]'>
+                       <a  class="btn btn-outline-success float-right" (click)='solve(ques._id)'>Solve Challenge</a>   
+                     </div>
+                     <div *ngIf='check[i]'>
+                      <a  class="btn btn-outline-success float-right" style="width: 18%;">Try Again</a>   
                     </div>
-                   
-                </div>
+                  
+                  </div>
+                 
               </div>
             </div>
-        </div>
-    </div>
- 
+          </div>
+      </div>
+  </div>
+
 <div class="filter">
 <p>STATUS</p>  
-  <mat-radio-group [(ngModel)]="status" (change)="filterExact('status',status)" >
-    <mat-radio-button value='Solved' >Solved</mat-radio-button>
+<mat-radio-group [(ngModel)]="status" (change)="filterExact('status',status)" >
+  <mat-radio-button value='Solved' >Solved</mat-radio-button>
+  <br>
+  <mat-radio-button [checked]='true' value='Unsolved'>Unsolved</mat-radio-button>       
     <br>
-    <mat-radio-button [checked]='true' value='Unsolved'>Unsolved</mat-radio-button>       
-      <br>
-      <div *ngIf='status'>
-        <a  class="btn btn-outline-success" (click)="removeFilter('status')">Remove Filter</a>
-      </div>
-      
-      <div>
-        <hr style="width: 180%;">
-      </div>
-      </mat-radio-group>
-  <p>DIFFICULTY</p>
-  <mat-radio-group [(ngModel)]="difficulty" (change)="filterExact('difficulty',difficulty)">
-    <mat-radio-button value=Easy>Easy</mat-radio-button>
-    <br>
-    <mat-radio-button value=Medium >Medium</mat-radio-button>
-    <br>
-    <mat-radio-button value=Hard >Hard</mat-radio-button>
-      <br>
-      <div *ngIf='difficulty'>
-        <a  class="btn btn-outline-success" (click)="removeFilter('difficulty')">Remove Filter</a>
-      </div>
+    <div *ngIf='status'>
+      <a  class="btn btn-outline-success" (click)="removeFilter('status')">Remove Filter</a>
+    </div>
     
     <div>
       <hr style="width: 180%;">
     </div>
-      </mat-radio-group>
-  <p>DOMAIN</p>
-  <mat-radio-group [(ngModel)]="topic" (change)="filterExact('topic',topic)">
-    <mat-radio-button value="Ages and Partnership">Ages and Partnership</mat-radio-button>
+    </mat-radio-group>
+<p>DIFFICULTY</p>
+<mat-radio-group [(ngModel)]="difficulty" (change)="filterExact('difficulty',difficulty)">
+  <mat-radio-button value=Easy>Easy</mat-radio-button>
+  <br>
+  <mat-radio-button value=Medium >Medium</mat-radio-button>
+  <br>
+  <mat-radio-button value=Hard >Hard</mat-radio-button>
     <br>
-    <mat-radio-button value="Ratios and Proportions">Ratios and Proportions</mat-radio-button>
-    <br>
-    <mat-radio-button value="Direction">Direction</mat-radio-button>
-      </mat-radio-group>
-      <br>
-      <div *ngIf='topic'>
-        <a  class="btn btn-outline-success" (click)="removeFilter('topic')">Remove Filter</a>
-      </div>
-      
+    <div *ngIf='difficulty'>
+      <a  class="btn btn-outline-success" (click)="removeFilter('difficulty')">Remove Filter</a>
     </div>
+  
+  <div>
+    <hr style="width: 180%;">
+  </div>
+    </mat-radio-group>
+<p>DOMAIN</p>
+<mat-radio-group [(ngModel)]="topic" (change)="filterExact('topic',topic)">
+  <mat-radio-button value="Ages and Partnership">Ages and Partnership</mat-radio-button>
+  <br>
+  <mat-radio-button value="Ratios and Proportions">Ratios and Proportions</mat-radio-button>
+  <br>
+  <mat-radio-button value="Direction">Direction</mat-radio-button>
+    </mat-radio-group>
+    <br>
+    <div *ngIf='topic'>
+      <a  class="btn btn-outline-success" (click)="removeFilter('topic')">Remove Filter</a>
+    </div>
+    
+  </div>
 
-    </div>
+  </div>
+
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+
+</div>
       

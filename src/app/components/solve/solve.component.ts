@@ -23,12 +23,14 @@ export class SolveComponent implements OnInit{
    public scorePoints;
    public fillid;
    public index;
+   public loading=false;
 global:GlobalPracticeTest[];
 
 practice;
   
   constructor(private authService:AuthService){}
   ngOnInit() {
+    this.loading=true;
     this.authService.getSolve().subscribe(res=>{
     this.global=res['practiceQuestions']
     this.practice=this.global
@@ -37,6 +39,7 @@ practice;
     this.authService.getstatusbar_1().subscribe(res=>{
       this.message=res;
       console.log(this.message);
+      this.loading=false;
     })
     this.fillid=this.authService.getFilterids();
     console.log(this.fillid);

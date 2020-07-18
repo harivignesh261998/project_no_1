@@ -17,13 +17,16 @@ import { GlobalData } from 'src/app/models/global-data';
 })
 export class LoginComponent implements OnInit,OnDestroy {
 private authStatusSub:Subscription;
+public loading = false;
 
 global:GlobalData[];
 college:string[]=[];
   ngOnInit(){
+    // this.loading=false
+    
    this.authStatusSub= this.authService.getAuthStatusListner().subscribe(
      authStatus=>{
-       this.isLoading=false;
+       this.loading=false;
      }
    );
 
@@ -41,7 +44,7 @@ college:string[]=[];
 
 
   @Input() deviceXz:boolean;
-  isLoading=false;
+  // isLoading=false;
   hide=true;
 
 
@@ -50,19 +53,20 @@ college:string[]=[];
     if(form.invalid){
       return;
     }
-    this.isLoading=true;
+    this.loading=true;
 
     this.authService.createUser(form.value.firstName,form.value.lastName,form.value.mailId,form.value.password,form.value.collegeId)
   
-    
+    // this.loading=false;
   }
 
   onLogin(form:NgForm){
     if(form.invalid){
       return;
     }
-    this.isLoading=true;
+    this.loading=true;
    this.authService.login(form.value.mailId,form.value.password);
+   //this.loading=false;
   //  console.log('ahi '+a);
   
     

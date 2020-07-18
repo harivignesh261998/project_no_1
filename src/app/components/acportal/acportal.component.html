@@ -3,6 +3,7 @@
     <h3 class="header_1">Practice Portal</h3>
     <hr>
 </div>
+<ng-template #customLoadingTemplate></ng-template>
 
 <div class="row">
 
@@ -38,3 +39,4 @@
     </div>
     
   </div>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>

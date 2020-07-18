@@ -29,7 +29,8 @@ count1;
 count2;
 filteringdata:any;
 allcaught=false;
-image1:string="assets/image/all_caught_up"
+image1:string="assets/image/all_caught_up";
+public loading=false;
 
 
 filters={}
@@ -37,6 +38,7 @@ filters={}
   constructor(private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
+    this.loading=true;
 
     this.authService.getPractice().subscribe(res=>{
       this.globalPractice=res;
@@ -49,7 +51,9 @@ filters={}
      this.count2=this.solvedData.length;
      this.applyFilters(); 
      this.fun();
+     this.loading=false;
    })
+
 
   }
 

@@ -10,19 +10,19 @@ import { AuthService } from 'src/app/auth.service';
 export class ProfileComponent implements OnInit {
  public mail:any;
  public firstname:any;
+ public loading=false;
 
   image1:string="assets/image/people.png";
 
   constructor(private authService:AuthService) { }
   ngOnInit(): void {
-
+    this.loading=true;
     this.authService.getUsername().subscribe(res=>{
       this.mail=res['mailId'];
       this.firstname=res['firstName']
-      
-
-     
+      this.loading=false;
     })
+    
 
 
     

@@ -52,7 +52,7 @@ import { NotifierModule, NotifierOptions } from "angular-notifier";
 import { AcportalComponent } from './components/acportal/acportal.component';
 import { AcsolveComponent } from './components/acsolve/acsolve.component';
 
-
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 const customNotifierOptions: NotifierOptions = {
@@ -169,6 +169,7 @@ const customNotifierOptions: NotifierOptions = {
       
     }),
     NotifierModule.withConfig(customNotifierOptions),
+    NgxLoadingModule.forRoot({}),
     
     
     

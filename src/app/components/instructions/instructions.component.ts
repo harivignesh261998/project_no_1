@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 
 
 export class InstructionsComponent implements OnInit{
+  public loading=false;
 name;
 counter=0;
 timeleft=10;
@@ -26,9 +27,11 @@ duration;
 
 
   ngOnInit(): void {
+    this.loading=true;
     this.authService.getDashboardoff();
     this.authService.getUsername().subscribe(res=>{
-      this.name=res['firstName']
+      this.name=res['firstName'];
+
     })
 
 
@@ -38,6 +41,7 @@ this.authService.getDuration().subscribe(res=>{
   this.noofq=res['questions']
   this.noofq=this.noofq.length;
   this.topic=res['testName']
+  this.loading=false;
   
 })
 

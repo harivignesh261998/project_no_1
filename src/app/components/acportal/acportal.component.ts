@@ -18,8 +18,9 @@ Solved
 count2
 score=[];
 check=[];
-name
-math=Math
+name;
+math=Math;
+public loading = false;
   constructor(private authService:AuthService,private router:Router) {
     setInterval(() => {
       this.datee = formatDate(this.now,'yyyy-MM-dd hh:mm:ss a', 'en-US', '+0530')
@@ -27,6 +28,7 @@ math=Math
    }
 
   ngOnInit(): void {
+    this.loading=true;
      this.name=this.authService.Testname()
     if(this.name=='Atest'){
       console.log(true);
@@ -51,6 +53,7 @@ math=Math
       this.Solved=res;
       this.count2=this.Solved.length;
       this.fun();
+      this.loading=false;
 
     })
    
@@ -73,6 +76,7 @@ math=Math
       console.log(this.score);
       this.count2=this.Solved.length;
       this.fun();
+      this.loading=false;
     })
 
   }
