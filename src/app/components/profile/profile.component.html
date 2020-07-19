@@ -1,10 +1,10 @@
-<div class="row">
+<!-- <div class="row">
 
     <div class="col">
 
         <div class="card">
             <div class="card-header">
-                <!-- <img src= alt="Profile Image" class="profile-img"> -->
+               
                 <img class="profile-img" [src]=image> 
             </div>
             <div class="card-body">
@@ -12,14 +12,7 @@
                 <p class="username">{{mail}}</p>
                 <p class="city">Coimbatore</p>
                 <p class="desc">Full stack developer, avid reader, love to take a long walk, swim.</p>
-                <!-- <p>
-                    <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon tumblr"><i class="fab fa-tumblr"></i></a>
-                    <a href="#" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="social-icon linkedin"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="social-icon google-plus"><i class="fab fa-google-plus"></i></a>
-                </p> -->
+               
             </div>
             <div class="card-footer">
                 <div class="row">
@@ -40,10 +33,10 @@
         <ng-template #customLoadingTemplate></ng-template>
         
         <div class="form-group" *ngIf='edit'>
-            <label for="image">Choose file to update profile picture</label>
+            <label for="file">Choose file to update profile picture</label>
             <input type="file"
                    id="file"
-                   name='image'
+                   
                    (change)="handleFileInput($event)">
         </div><br>
         <div class="in" *ngIf='edit'>
@@ -52,7 +45,7 @@
                     <input
                       matInput
                       placeholder="First Name"
-                      
+                      value="{{firstname}}"
                       name="firstName"
                       ngModel
                       >
@@ -61,20 +54,12 @@
                     <input
                       matInput
                       placeholder="Last Name"
-                      
+                      value={{lastName}}
                       name="lastName"
                       ngModel
                       >
                   </mat-form-field><br>
-                  <!-- <mat-form-field>
-                    <input
-                      matInput
-                      placeholder="E-mail"
-                      
-                      name="mailId"
-                      ngModel
-                      >
-                  </mat-form-field><br> -->
+                
                 
                     <button
                           mat-raised-button
@@ -104,3 +89,168 @@
    
 </div>
 
+
+  -->
+  <div class="row">
+
+      <div class="col">
+      
+          <div class="container">
+            <div class="col-lg-8">
+                <div class="panel profile-cover">
+                    <div class="profile-cover__img">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" />
+                        
+                        <h3 class="h3">{{firstname}}</h3>
+                        <h3 class="h3">Dr.N.G.P Institute of Technology</h3>
+                        
+                    </div>
+                    <div class="profile-cover__action bg--img" data-overlay="0.3">
+                        <button class="btn btn-rounded btn-info">
+                            <i class="fa fa-share" aria-hidden="true"></i>&nbsp;
+                            <span>{{mail}}</span>
+                        </button>
+                        <button class="btn btn-rounded btn-info">
+                            <i class="fa fa-phone"></i>&nbsp;
+                            <span>9677980614</span>
+                        </button>
+                        <button class="btn btn-rounded btn-info">
+                            <i class="fa fa-code-fork"></i>&nbsp;
+                            <span>B.E</span>
+                        </button>
+                        <button class="btn btn-rounded btn-info">
+                            <i class="fa fa-code-fork"></i>&nbsp;
+                            <span>Computer Science and Engineering</span>
+                        </button>
+                    </div>
+                    <div class="profile-cover__info">
+                        <ul class="nav">    
+                            <li><strong>{{aTest}}</strong>College Test</li>
+                            <li><strong>{{cTest}}</strong>Admin Test</li>
+                            <!-- <li><strong>136</strong>Following</li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="btn">
+
+                    <button class="btn btn-rounded btn-info"(click)='openBottomSheet()'>
+                        <i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;
+                        <span>Edit Profile</span>
+                    </button>
+                </div>
+        
+                
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Notification Feed</h3>
+                    </div>
+                    <div class="panel-content panel-activity">
+                       
+                        <ul class="panel-activity__list">
+                            <li>
+                                <i class="activity__list__icon fa fa-question-circle-o"></i>
+                                <div class="activity__list__header">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" />
+                                    <a href="#">John Doe</a> Posted the question: <a href="#">How can I change my annual reports for the better effect?</a>
+                                </div>
+                                <div class="activity__list__body entry-content">
+                                    <p>
+                                        <strong>Lorem ipsum dolor sit amet</strong>, consectetur adipisicing elit. Voluptatibus ab a nostrum repudiandae dolorem ut quaerat veniam asperiores, rerum voluptatem magni dolores corporis!
+                                        <em>Molestiae commodi nesciunt a, repudiandae repellendus ea.</em>
+                                    </p>
+                                </div>
+                                <div class="activity__list__footer">
+                                    <a href="#"> <i class="fa fa-thumbs-up"></i>123</a>
+                                    <a href="#"> <i class="fa fa-comments"></i>23</a>
+                                    <span> <i class="fa fa-clock"></i>2 hours ago</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="activity__list__icon fa fa-question-circle-o"></i>
+                                <div class="activity__list__header">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                                    <a href="#">John Doe</a> Posted the question: <a href="#">How can I change my annual reports for the better effect?</a>
+                                </div>
+                                <div class="activity__list__body entry-content">
+                                    <blockquote>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus ab a nostrum repudiandae dolorem ut quaerat veniam asperiores, rerum voluptatem magni dolores corporis! Molestiae commodi nesciunt a,
+                                            repudiandae repellendus ea.
+                                        </p>
+                                    </blockquote>
+                                </div>
+                                <div class="activity__list__footer">
+                                    <a href="#"> <i class="fa fa-thumbs-up"></i>123</a>
+                                    <a href="#"> <i class="fa fa-comments"></i>23</a>
+                                    <span> <i class="fa fa-clock"></i>2 hours ago</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="activity__list__icon fa fa-image"></i>
+                                <div class="activity__list__header">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                                    <a href="#">John Doe</a> Uploaded 4 Image: <a href="#">Office Working Time</a>
+                                </div>
+                                <div class="activity__list__body entry-content">
+                                    <ul class="gallery">
+                                        <li>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                                        </li>
+                                        <li>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" />
+                                        </li>
+                                        <li>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" />
+                                        </li>
+                                        <li>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" />
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="activity__list__footer">
+                                    <a href="#"> <i class="fa fa-thumbs-up"></i>123</a>
+                                    <a href="#"> <i class="fa fa-comments"></i>23</a>
+                                    <span> <i class="fa fa-clock"></i>2 hours ago</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="activity__list__icon fa fa-question-circle-o"></i>
+                                <div class="activity__list__header">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" />
+                                    <a href="#">John Doe</a> Posted the question: <a href="#">How can I change my annual reports for the better effect?</a>
+                                </div>
+                                <div class="activity__list__body entry-content">
+                                    <blockquote>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus ab a nostrum repudiandae dolorem ut quaerat veniam asperiores, rerum voluptatem magni dolores corporis! Molestiae commodi nesciunt a,
+                                            repudiandae repellendus ea.
+                                        </p>
+                                    </blockquote>
+                                </div>
+                                <div class="activity__list__footer">
+                                    <a href="#"> <i class="fa fa-thumbs-up"></i>123</a>
+                                    <a href="#"> <i class="fa fa-comments"></i>23</a>
+                                    <span> <i class="fa fa-clock"></i>2 hours ago</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="activity__list__icon fa fa-lightbulb-o"></i>
+                                <div class="activity__list__header">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                                    <a href="#">John Doe</a> bookmarked a page: <a href="#">Awesome Idea</a>
+                                </div>
+                                <div class="activity__list__footer">
+                                    <a href="#"> <i class="fa fa-thumbs-up"></i>123</a>
+                                    <a href="#"> <i class="fa fa-comments"></i>23</a>
+                                    <span> <i class="fa fa-clock"></i>2 hours ago</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      
+  </div>

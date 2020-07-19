@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import {MatButtonModule} from '@angular/material/button';
 import { Router } from '@angular/router';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { DocsComponent } from '../docs/docs.component';
+
+
 
 
 @Component({
@@ -10,9 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  // public minDate: Date = new Date ("01/01/1990");
-  // public maxDate: Date = new Date ("12/31/2050");
-  // public value: Date = new Date ("05/16/2017");
+ 
  public mail:any;
  public firstname:any;
  public loading=false;
@@ -28,7 +30,7 @@ updatefirstName;
 updateLastName;
 updateemail;
 image1:string='assets/image/download.svg'
-  constructor(private authService:AuthService,private router:Router) { }
+  constructor(private authService:AuthService,private router:Router,private _bottomSheet: MatBottomSheet) { }
   ngOnInit(): void {
     this.loading=true;
     this.authService.getUsername().subscribe(res=>{
@@ -83,6 +85,14 @@ image1:string='assets/image/download.svg'
 
   }
 
+
+  openBottomSheet(): void {
+    console.log('hai')
+    this._bottomSheet.open(DocsComponent);
+  }
+ 
+
+  
 
 }
   

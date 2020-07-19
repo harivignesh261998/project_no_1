@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-docs',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocsComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private _bottomSheetRef: MatBottomSheetRef<DocsComponent>) {}
   ngOnInit(): void {
+    throw new Error("Method not implemented.");
   }
 
+  openLink(event: MouseEvent): void {
+    this._bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
+  cancel(){
+    console.log('hai');
+  }
+  onLogin(form){
+    console.log(form.firstName.value);
+  }
 }

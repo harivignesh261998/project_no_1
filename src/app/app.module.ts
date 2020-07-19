@@ -53,7 +53,10 @@ import { AcportalComponent } from './components/acportal/acportal.component';
 import { AcsolveComponent } from './components/acsolve/acsolve.component';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { NgxLoadingModule } from 'ngx-loading';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
+
+import {MatListModule} from '@angular/material/list';
 
 
 const customNotifierOptions: NotifierOptions = {
@@ -127,6 +130,9 @@ const customNotifierOptions: NotifierOptions = {
     AcportalComponent,
     AcsolveComponent,
     
+    
+    
+    
 
     
   ],
@@ -171,7 +177,9 @@ const customNotifierOptions: NotifierOptions = {
     }),
     NotifierModule.withConfig(customNotifierOptions),
     NgxLoadingModule.forRoot({}),
-    CalendarModule
+    CalendarModule,
+    MatBottomSheetModule,
+    MatListModule,
     
     
     
