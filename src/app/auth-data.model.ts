@@ -24,3 +24,10 @@ export interface Overall{
     score:string;
 }
 
+export interface updateProfile{
+    firstName:string;
+    lastName:string;
+    // mailId:string;
+    // profilePicture:any
+}
+

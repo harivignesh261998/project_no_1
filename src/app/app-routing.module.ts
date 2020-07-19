@@ -30,7 +30,6 @@ import { AcsolveComponent } from './components/acsolve/acsolve.component';
 
 
 
-
 const routes: Routes = [
   
   //{path:'',redirectTo:'login'},

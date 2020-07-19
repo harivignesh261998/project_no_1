@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import{HttpClient} from '@angular/common/http';
-import {AuthData, Update, Overall} from './auth-data.model';
+import {AuthData, Update, Overall,updateProfile} from './auth-data.model';
 import {Auth} from './auth-data.model';
 import { GlobalDataSummary,GlobalData, GlobalPracticeSummary, GlobalPracticeTest, GlobalUserData} from './models/global-data'; 
 
@@ -8,6 +8,7 @@ import { Observable, Subject, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
 import { NotifierService } from 'angular-notifier';
+import { first } from 'rxjs/operators';
 
 
 @Injectable({providedIn:"root"})
@@ -443,6 +444,10 @@ handle1(){
     this.notifier.notify('default','Register Successfull');
 
 
+}
+updateProfile(firstName:string,lastName:string){
+    const updateProfile:updateProfile={firstName:firstName,lastName:lastName}
+     return this.http.put(`apiStudentDashboard/profile/${this.userId}`,updateProfile)
 }
 
 }

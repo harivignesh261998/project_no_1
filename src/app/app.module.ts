@@ -51,8 +51,9 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { NotifierModule, NotifierOptions } from "angular-notifier";
 import { AcportalComponent } from './components/acportal/acportal.component';
 import { AcsolveComponent } from './components/acsolve/acsolve.component';
-
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { NgxLoadingModule } from 'ngx-loading';
+
 
 
 const customNotifierOptions: NotifierOptions = {
@@ -170,6 +171,7 @@ const customNotifierOptions: NotifierOptions = {
     }),
     NotifierModule.withConfig(customNotifierOptions),
     NgxLoadingModule.forRoot({}),
+    CalendarModule
     
     
     
