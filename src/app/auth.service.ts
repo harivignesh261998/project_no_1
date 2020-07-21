@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
 import { NotifierService } from 'angular-notifier';
 import { first } from 'rxjs/operators';
+import { update } from 'lodash';
 
 
 @Injectable({providedIn:"root"})
@@ -446,8 +447,14 @@ handle1(){
 
 }
 updateProfile(firstName:string,lastName:string){
+    
     const updateProfile:updateProfile={firstName:firstName,lastName:lastName}
-     return this.http.put(`apiStudentDashboard/profile/${this.userId}`,updateProfile)
+    console.log(updateProfile);
+      this.http.put(`apiStudentDashboard/profile/${this.userId}`,updateProfile).subscribe(res=>{
+          console.log('successfull')
+      });err=>{
+         console.log('not'); 
+      }
 }
 
 }

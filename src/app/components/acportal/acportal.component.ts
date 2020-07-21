@@ -20,6 +20,7 @@ score=[];
 check=[];
 name;
 math=Math;
+message;
 public loading = false;
   constructor(private authService:AuthService,private router:Router) {
     setInterval(() => {
@@ -31,10 +32,12 @@ public loading = false;
     this.loading=true;
      this.name=this.authService.Testname()
     if(this.name=='Atest'){
+      this.message='Admin Portal'
       console.log(true);
       this.afunction();
     }
     else{
+      this.message='College Portal'
       this.cfunction();
     }
 

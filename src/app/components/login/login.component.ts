@@ -5,6 +5,10 @@ import { AuthService } from 'src/app/auth.service';
 import {Subscription} from 'rxjs'
 
 import { GlobalData } from 'src/app/models/global-data';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import { DocsComponent } from '../docs/docs.component';
+import { PasswordComponent } from '../password/password.component';
+
 
 
   
@@ -75,11 +79,16 @@ college:string[]=[];
    
   }
 
-  constructor(public authService:AuthService) { }
+  constructor(public authService:AuthService,private _bottomSheet: MatBottomSheet) { }
 
   ngOnDestroy(){
     this.authStatusSub.unsubscribe();
   
 
   }
+  openBottomSheet(): void {
+    this._bottomSheet.open(PasswordComponent);
+  }
+
+  
 }

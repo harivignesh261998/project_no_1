@@ -39,7 +39,10 @@
                     </mat-error>
                     <mat-icon  matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}} </mat-icon>
                 </mat-form-field>
-                <mat-checkbox>Remember Me!</mat-checkbox>
+                <div class="pass">
+                  <button mat-button (click)='openBottomSheet()'>Forgot Password ?</button>
+
+                </div>
                 <button
                   mat-raised-button
                   color="primary"

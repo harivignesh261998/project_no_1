@@ -3,7 +3,7 @@
         <input
           matInput
           placeholder="First Name"
-          
+          [(ngModel)]="data.names[0]" 
           name="firstName"
           ngModel
           >
@@ -12,7 +12,7 @@
         <input
           matInput
           placeholder="Last Name"
-         
+          [(ngModel)]="data.names[1]" 
           name="lastName"
           ngModel
           >
@@ -47,7 +47,7 @@
       <br>
     
     
-        <button (click)='openLink($event)'
+        <button 
               mat-raised-button
               color="primary"
               class="login-button">
@@ -60,7 +60,5 @@
             (click)='cancel()'>
             cancel 
           </button>
-
-   
-  </form>
+     </form>
     

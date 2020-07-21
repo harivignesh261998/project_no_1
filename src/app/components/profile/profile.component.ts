@@ -46,54 +46,13 @@ image1:string='assets/image/download.svg'
       this.loading=false;
     })
   }
-
-  editProfile(){
-    this.edit=true;
-
-  }
-  cancel(){
-    this.edit=false;
-  }
-  handleFileInput(event){
-    this.fileToUpload = <File>event.target.files[0];
-   
-   
-   
-  }
-  
-  onLogin(form){
-    this.loading=true;
-    this.updatefirstName=form.value.firstName;
-    this.updateLastName=form.value.lastName;
- 
-
-    this.updateProfile();
-  }
-  updateProfile(){
-
-    // const fd=new FormData();
-    // fd.append('image',this.fileToUpload,this.fileToUpload.name);
-    //console.log(fd);
-    this.authService.updateProfile(this.updatefirstName,this.updateLastName).subscribe(res=>{
-      // console.log(res);
-      this.cancel();
-      this.ngOnInit();
-      
-      this.loading=false;
-    }); 
-    
-
-  }
-
-
   openBottomSheet(): void {
-    console.log('hai')
-    this._bottomSheet.open(DocsComponent);
+   
+    this._bottomSheet.open(DocsComponent,{
+      data:{names:[this.firstname,this.lastName]},
+    });
+   
   }
- 
-
-  
-
 }
   
 

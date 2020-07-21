@@ -1,26 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-docs',
-  templateUrl: './docs.component.html',
+  templateUrl:'./docs.component.html',
   styleUrls: ['./docs.component.css']
 })
 export class DocsComponent implements OnInit {
+  firstName
+  lastName
 
-  constructor(private _bottomSheetRef: MatBottomSheetRef<DocsComponent>) {}
+  constructor(private _bottomSheetRef: MatBottomSheetRef<DocsComponent>,private authService:AuthService,@Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {}
   ngOnInit(): void {
-    throw new Error("Method not implemented.");
+   
+    
   }
+  
 
-  openLink(event: MouseEvent): void {
-    this._bottomSheetRef.dismiss();
-    event.preventDefault();
-  }
+  
   cancel(){
-    console.log('hai');
+    this._bottomSheetRef.dismiss();
   }
   onLogin(form){
-    console.log(form.firstName.value);
+    this.authService.updateProfile(form.value.firstName,form.value.lastName);
+    this._bottomSheetRef.dismiss();
+
   }
+
 }

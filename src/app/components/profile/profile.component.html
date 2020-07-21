@@ -91,6 +91,8 @@
 
 
   -->
+ 
+  <ng-template #customLoadingTemplate></ng-template>
   <div class="row">
 
       <div class="col">
@@ -115,11 +117,11 @@
                             <span>9677980614</span>
                         </button>
                         <button class="btn btn-rounded btn-info">
-                            <i class="fa fa-code-fork"></i>&nbsp;
+                            <i class="fa fa-cogs"></i>&nbsp;
                             <span>B.E</span>
                         </button>
                         <button class="btn btn-rounded btn-info">
-                            <i class="fa fa-code-fork"></i>&nbsp;
+                            <i class="fa fa-graduation-cap"></i>&nbsp;
                             <span>Computer Science and Engineering</span>
                         </button>
                     </div>
@@ -251,6 +253,6 @@
             </div>
         </div>
       </div>
-
+      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
       
   </div>

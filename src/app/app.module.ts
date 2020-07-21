@@ -57,7 +57,9 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 
 import {MatListModule} from '@angular/material/list';
+import { PasswordComponent } from './components/password/password.component';
 
+import { NgOtpInputModule } from  'ng-otp-input';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -129,6 +131,7 @@ const customNotifierOptions: NotifierOptions = {
     TestresultComponent,
     AcportalComponent,
     AcsolveComponent,
+    PasswordComponent,
     
     
     
@@ -180,6 +183,7 @@ const customNotifierOptions: NotifierOptions = {
     CalendarModule,
     MatBottomSheetModule,
     MatListModule,
+    NgOtpInputModule
     
     
     
@@ -198,6 +202,6 @@ const customNotifierOptions: NotifierOptions = {
   ],
 
   bootstrap: [AppComponent],
-  entryComponents:[]
+  entryComponents:[PasswordComponent]
 })
 export class AppModule { }
