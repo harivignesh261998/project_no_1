@@ -10,9 +10,9 @@ const { post } = require('./apiScoreUpdate');
 //post new aTest in the DB
 routerTest.post('/newATest', function(req,res,next){
     const aTest = new ATest({
-        testName: req.body.testName,
+        // testName: req.body.testName,
         createdOn: req.body.createdOn,
-        questions: req.body.questions
+        // questions: req.body.questions
     })
     aTest.save(function(err,newATest){
         res.status(201).json({
@@ -24,11 +24,7 @@ routerTest.post('/newATest', function(req,res,next){
 
 //post new cTest in the DB
 routerTest.post('/newCTest', function(req,res,next){
-    const cTest = new CTest({
-        testName: req.body.testName,
-        createdOn: req.body.createdOn,
-        questions: req.body.questions
-    });
+    const cTest = new CTest(req.body);
     cTest.save(function(err,newCTest){
         res.status(201).json({
             message: "College Test Successfully Created"
@@ -58,7 +54,7 @@ routerTest.get('/getCTest/:id', function(req,res,next){
 
 //get all the aTests from the ATest Collection
 routerTest.get('/getATests', function(req,res,next){
-    ATest.find({}, {_id: 1, testName: 1, createdOn: 1, duration: 1,closeTime:1,startTime:1,highestScore:1,leastScore:1,averageScore:1,maxMark:1}).then((aTests) => {
+    ATest.find({}, {_id: 1, testName: 1, duration: 1, closeTime: 1, startTime: 1, maxMark: 1}).then((aTests) => {
         res.status(201).json(aTests)
         console.log(aTests)
     })
@@ -67,7 +63,7 @@ routerTest.get('/getATests', function(req,res,next){
 
 //get all the cTests from the CTest Collection
 routerTest.get('/getCTests', function(req,res,next){
-    CTest.find({}, {_id: 1, testName: 1, createdOn: 1, duration: 1,closeTime:1,startTime:1,highestScore:1,leastScore:1,averageScore:1,maxMark:1}).then((cTests) => {
+    CTest.find({}, {_id: 1, testName: 1, duration: 1, closeTime: 1, startTime: 1, maxMark: 1}).then((cTests) => {
         res.status(201).json(cTests)
         console.log(cTests)
     })
@@ -123,8 +119,6 @@ routerTest.put('/cTestUpdate/:id', function(req,res,next){
 //update aTest post-aTest info in the DB
 routerTest.put('/post-aTestUpdate/:id', function(req,res,next){
     ATest.findByIdAndUpdate(req.params.id, req.body).exec().then(post_aTestInfo => {
-        // console.log(req.body.score);
-
         if(req.body.score > post_aTestInfo.highestScore){
             post_aTestInfo.highestScore = req.body.score
             post_aTestInfo.save(post_aTestInfo.highestScore)
@@ -142,7 +136,6 @@ routerTest.put('/post-aTestUpdate/:id', function(req,res,next){
 //update cTest post-cTest info in the DB
 routerTest.put('/post-cTestUpdate/:id', function(req,res,next){
     CTest.findByIdAndUpdate(req.params.id, req.body).exec().then(post_cTestInfo => {
-        // console.log(req.body.score);
         if(req.body.score > post_cTestInfo.highestScore){
             post_cTestInfo.highestScore = req.body.score
             post_cTestInfo.save(post_cTestInfo.highestScore)

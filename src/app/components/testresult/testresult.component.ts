@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import {Chart} from 'chart.js'
+// import { forEach } from 'lodash';
 
 
 
@@ -12,6 +13,7 @@ import {Chart} from 'chart.js'
 export class TestresultComponent implements OnInit {
   chart=null;
   mchart=null;
+  wchart=null;
 name;
 atest;
 ctest;
@@ -31,6 +33,7 @@ d=[];
 data=[];
 public loading=false;
 monthy=['January','Febraury','March','April','May','June','July','August','September','October','November','December']
+  monPro: any;
 
   constructor(private authService:AuthService) { }
 
@@ -38,26 +41,27 @@ monthy=['January','Febraury','March','April','May','June','July','August','Septe
 
  
   ngOnInit(): void {
-    this.loading=true;
+    // this.loading=true;
 
     this.authService.getDailyprogress().subscribe(res=>{
-      console.log(res);
-      this.dailypro=res;
-      console.log(this.dailypro);
-     for(let i=0;i<this.dailypro.length;i++){
-       this.d[i]=this.dailypro[i].date;
-       this.data[i]=this.dailypro[i].dailyPercentage
+      //console.log(res);
+      let date=res['dateArr'];
+      let score=res['scoreArr'];
+  
+     for(let i=0;i<date.length;i++){
+       this.d[i]=date[i];
+       this.data[i]=score[i];
      }
       let dates=[];
       this.d.forEach((res)=>{
-        dates.push(res.slice(5,10));
+        dates.push(res);
       })
-      console.log('->',dates);
+     // console.log('->',dates);
       let data=[];
       this.data.forEach((res)=>{
         data.push(res);
       })
-      console.log(data);
+//      console.log(data);
 
       this.chart=new Chart('canvas',{
         type:'line',
@@ -91,33 +95,37 @@ monthy=['January','Febraury','March','April','May','June','July','August','Septe
     })
     
     this.authService.getProgress().subscribe(res=>{
-      // console.log(res);
-     this.progress=res;
+     // console.log(res);
+    let monthArr=res['monthArr'];
+    let scoreArr=res['scoreArr']; 
    
-     this.progress.sort((a,b) => a.month.toString().localeCompare(b.month.toString()));
-     
-     for(let i=0;i<this.progress.length;i++){
-       this.month[i]=this.progress[i].month
-       this.per[i]=this.progress[i].monthlyPercentage;
+     monthArr.sort((a,b) => a.toString().localeCompare(b.toString()));
+     console.log(monthArr);
+     let month=[];
+     let data=[];
+     for(let i=0;i<monthArr.length;i++){
+       month[i]=monthArr[i];
+       data[i]=scoreArr[i];
      }
 
-     let month=[];
-     this.month.forEach((res)=>{
-       month.push(this.monthy[res-1]);
+     let montho=[];
+     month.forEach((res)=>{
+       montho.push(this.monthy[res.slice(0,1)-1]);
       })
+      
     
-     let data=[]
-     this.per.forEach((res)=>{
-       data.push(res);
+     let dataa=[]
+     data.forEach((res)=>{
+       dataa.push(res);
      })
     
      this.mchart=new Chart('acanvas',{
       type:'line',
       data:{
-        labels:month,
+        labels:montho,
         datasets:[
         {
-          data:data,
+          data:dataa,
           borderColor:'#3cba9f',
           fill:false
 
@@ -148,7 +156,61 @@ monthy=['January','Febraury','March','April','May','June','July','August','Septe
 
 
         })
+   this.authService.getweeklyProgress().subscribe(res=>{
+     console.log(res);
+     let weekArr=res['weekArr'];
+     let scoreArr=res['scoreArr'];
+     let week=[];
+     let score=[];
+     for(let i=0;i<weekArr.length;i++){
+      week[i]=weekArr[i];
+      score[i]=scoreArr[i];
+    }
+    let weeky=[];
+    week.forEach((res)=>{
+      weeky.push(res);
+     })
+     
    
+    let data=[]
+    score.forEach((res)=>{
+      data.push(res);
+    })
+   
+    this.wchart=new Chart('ccanvas',{
+     type:'line',
+     data:{
+       labels:weeky,
+       datasets:[
+       {
+         data:data,
+         borderColor:'#3cba9f',
+         fill:false
+
+       }
+     ]
+     },
+     options:{
+       legend:{
+         display:false
+       },
+       scales:{
+         xAxes:[{
+           gridLines:{
+
+             display:true
+           }
+         }],
+         yAxes:[{
+           gridLines:{
+
+             display:true
+           }
+         }]
+       }
+     }
+   })
+   })
   
   this.authService.getCResult().subscribe(res=>{
     this.Ctest=res;
@@ -215,7 +277,6 @@ cala(){
       }
     }
   }
-
   
 
 

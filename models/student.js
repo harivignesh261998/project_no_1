@@ -1,50 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//create Progress Schema & Models
-const ProgressSchema = new Schema({
-    monthlyProgress: [{
-        month: Number,
-        sum: {type: Number, default: 0},
-        nthEntry: {type: Number, default: 0},
-        calculated: {type: Boolean, default: false},
-        monthlyPercentage: {type: Number, default: 0},
-        lastUpdate: Date
-        }],
-    weeklyProgress: [{
-                    weekNumber: Number,
-                    weekNumberOfMonth: Number,
-                    startDate: Date,
-                    endDate: Date,
-                    weeklyPercentage: {type: Number, default: 0}
-        }],
-    dailyProgress: [{
-            date: Date,
-            sum: {type: Number, default: 0},
-            nthEntry: {type: Number, default: 0},
-            calculated: {type: Boolean, default: false},
-            dailyPercentage: {type: Number, default: 0}
-        }],
-});
-
-//create Atest Schema & Models
-const ATestSchema = new Schema({
-    testId: {type: mongoose.Schema.Types.ObjectId, ref: 'ATest'},
-    testName: String,
-    score: Number,
-    attempt: Boolean,
-    attemptedDate: Date
-});
-
-//create CTest Schema & Models
-const CTestSchema = new Schema({
-    testId: {type: mongoose.Schema.Types.ObjectId, ref: 'CTest'},
-    testName: String,
-    score: Number,
-    attempt: Boolean,
-    attemptedDate: Date
-});
-
 //create Student Schema & Models
 const StudentSchema = new Schema({
     firstName: {
@@ -74,9 +30,8 @@ const StudentSchema = new Schema({
     collegeName:{ type: String},
     practicedQuestions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Practice' }],
     overallScore: {type: Number, default: 0},
-    aTest: [ ATestSchema ],
-    cTest: [ CTestSchema ],
-    progress: {type: ProgressSchema}
+    testScore: {type: mongoose.Schema.Types.ObjectId, ref: 'TestScore'},
+    progress: {type: mongoose.Schema.Types.ObjectId, ref: 'Progress'}
 })
 
 

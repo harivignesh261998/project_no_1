@@ -8,8 +8,6 @@ import { Observable, Subject, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
 import { NotifierService } from 'angular-notifier';
-import { first } from 'rxjs/operators';
-import { update } from 'lodash';
 
 
 @Injectable({providedIn:"root"})
@@ -357,7 +355,7 @@ updateStudent(testId,count,startTime,endTime){
         console.log('Atest->')
         this.http.post(`apiScoreUpdate/aTestScoreUpdate/${this.userId}`, update).subscribe(res=>{
             console.log(res);
-        }); 
+        });
         
         this.http.put(`apiTest/post-aTestUpdate/${update.testId}`,update).subscribe(res=>{
             console.log('update--->',res);
@@ -414,15 +412,20 @@ getCResult(){
 }
 
 getProgress(){
+    console.log(this.userId);
   return  this.http.get('apiProgress/monthly/'+this.userId);
     
 }
 
 getDailyprogress(){
+    console.log(this.userId);
     
-    return this.http.get('apiProgress/daily/'+this.userId);
+     return this.http.get('apiProgress/daily/'+this.userId)
 }
-
+getweeklyProgress(){
+    console.log(this.userId);
+    return this.http.get('apiProgress/weekly/'+this.userId);
+}
 overallupdate(score){
     const update:Overall={score:score}
     this.http.put(`apiScoreUpdate/overallScoreUpdate/${this.userId}`,update);

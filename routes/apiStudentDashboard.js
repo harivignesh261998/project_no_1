@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const checkAuth = require('../middleware/check-auth');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -41,8 +42,7 @@ routerStudentDashboard.get('/profile/:id', function(req,res,next){
         firstName: studentProfile.firstName,
         lastName: studentProfile.lastName,
         mailId: studentProfile.mailId,
-        aTest: studentProfile.aTest,
-        cTest: studentProfile.cTest
+        contact: studentProfile.contact
         });
     }));
 });

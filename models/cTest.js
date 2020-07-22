@@ -3,22 +3,18 @@ const Schema = mongoose.Schema;
 
 //create cTest Schema & Models
 const cTestSchema = new Schema({
+    createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'College'},
     testName: String,
-    testDate: Date,
     startTime: Date,
     closeTime: Date,
     maxMark: Number,
+    createdOn: Date,
     highestScore: {type: Number, default: 0},
     averageScore: {type: Number, default: 0},
     leastScore: {type: Number, default: 99999},
     duration: Number,
-	questions: [{ ques: String,
-        option1: String,
-        option2: String,
-        option3: String,
-        option4: String,
-        option5: String,
-        answer: String }]
+    questions: [{type: mongoose.Schema.Types.ObjectId, ref: 'TestQuestions',
+                mark: Number}]
 })
 
 const CTest = mongoose.model('CTest', cTestSchema);

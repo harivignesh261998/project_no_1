@@ -5,7 +5,9 @@ const TestScore = require('../models/testScore');
 var dateArr = new Array();
 var scoreArr = new Array()       // -----------CHANGE THE SCORE INTO PERCENTAGE, PERFORM AVERAGE AND ADD IT TO THE SCOREARR ----------------
 var sum = 0;
+var count = 0
 var conflict = new Boolean();
+
 
 
 //get daily progress (id: studentId)
@@ -14,8 +16,10 @@ routerProgress.get('/daily/:id', function(req,res,next){
         TestScore.findById(student.testScore).then(testScore => {
             dateArr = []
             scoreArr = []
-            console.log(testScore+'==summa') 
             for(var i = 0; i < testScore.aTest.length; i++){
+                // Identify if a date has already been added to the dateArr[] and scoreArr[]
+                sum = 0
+                count = 1
                 conflict = false
                 var date1 = new String(testScore.aTest[i].startTime.getDate())
                 date1 = date1.concat('-', new String(testScore.aTest[i].startTime.getMonth()+1), '-', new String(testScore.aTest[i].startTime.getYear()+1900))
@@ -26,24 +30,32 @@ routerProgress.get('/daily/:id', function(req,res,next){
                 if(conflict === true)  
                     continue
                 dateArr.push(date1)
-                sum = testScore.aTest[i].score
+                sum = sum + (testScore.aTest[i].score * 100)/testScore.aTest[i].maxMark
+                // Compare every date in aTest array with aTest array and cTest array (Adds dates that are present commonly in aTest & cTest and that are present only in aTest)
                 for(var j = i+1; j < testScore.aTest.length; j++){
                     var date2 = new String(testScore.aTest[j].startTime.getDate())
                     date2 = date2.concat('-', new String(testScore.aTest[j].startTime.getMonth()+1), '-', new String(testScore.aTest[j].startTime.getYear()+1900))
-                    if(date1 === date2)
-                        sum = sum + testScore.aTest[j].score
+                    if(date1 === date2){
+                        sum = sum + (testScore.aTest[j].score * 100)/testScore.aTest[j].maxMark
+                        count++    
+                    }    
                 }
                 for(var k = 0; k < testScore.cTest.length; k++){
-                    var date2 = new String(testScore.cTest[k].startTime.getDate())
+                    let date2 = new String(testScore.cTest[k].startTime.getDate())
                     date2 = date2.concat('-', new String(testScore.cTest[k].startTime.getMonth()+1), '-', new String(testScore.cTest[k].startTime.getYear()+1900))
-                    if(date1 === date2)
-                        sum = sum + testScore.cTest[k].score
+                    if(date1 === date2){
+                        sum = sum + (testScore.cTest[k].score * 100)/testScore.cTest[k].maxMark
+                        count++
+                    }
                 }
-                scoreArr.push(sum)
+                scoreArr.push(sum/count)
             }
+            // Adding the date and score that is present ONLY in cTest
             for(var i = 0;  i < testScore.cTest.length; i++){
+                sum = 0
+                count = 1
                 conflict = false
-                var date1 = new String(testScore.cTest[i].startTime.getDate())
+                let date1 = new String(testScore.cTest[i].startTime.getDate())
                 date1 = date1.concat('-', new String(testScore.cTest[i].startTime.getMonth()+1), '-', new  String(testScore.cTest[i].startTime.getYear()+1900))
                 dateArr.forEach(element => {
                     if(element === date1)
@@ -52,7 +64,16 @@ routerProgress.get('/daily/:id', function(req,res,next){
                 if(conflict === true)
                     continue
                 dateArr.push(date1)
-                scoreArr.push(testScore.cTest[i].score)
+                sum = sum + (testScore.cTest[i].score * 100)/testScore.cTest[i].maxMark
+                for(var j = i+1; j<testScore.cTest.length; j++){
+                    let date2 = new String(testScore.cTest[j].startTime.getDate())
+                    date2 = date2.concat('-', new String(testScore.cTest[j].startTime.getMonth()+1), '-', new String(testScore.cTest[j].startTime.getYear()+1900))
+                    if(date1 === date2) {
+                        sum = sum + (testScore.cTest[j].score * 100)/testScore.cTest[j].maxMark
+                        count++
+                    }
+                }
+                scoreArr.push(sum/count)
             }
             console.log(dateArr)
             console.log(scoreArr)
@@ -72,8 +93,11 @@ routerProgress.get('/monthly/:id', function(req,res,next){
             dateArr = []
             scoreArr = []
             for(var i = 0; i < testScore.aTest.length; i++){
+                sum = 0
+                count = 1
                 conflict = false
-                var date1 = testScore.aTest[i].startTime.getMonth()+1
+                let date1 = new String(testScore.aTest[i].startTime.getMonth()+1)
+                date1 = date1.concat('-', new String (testScore.aTest[i].startTime.getYear()+1900)) 
                 dateArr.forEach(element => {
                     if(element === date1)
                         conflict = true
@@ -81,22 +105,31 @@ routerProgress.get('/monthly/:id', function(req,res,next){
                 if(conflict === true)  
                     continue
                 dateArr.push(date1)
-                sum = testScore.aTest[i].score
+                sum = sum + (testScore.aTest[i].score * 100)/testScore.aTest[i].maxMark
                 for(var j = i+1; j < testScore.aTest.length; j++){
-                    var date2 = testScore.aTest[j].startTime.getMonth()+1
-                    if(date1 === date2)
-                        sum = sum + testScore.aTest[j].score
+                    let date2 = new String(testScore.aTest[j].startTime.getMonth()+1)
+                    date2 = date2.concat('-',new String (testScore.aTest[j].startTime.getYear()+1900))
+                    if(date1 === date2){
+                        sum = sum + (testScore.aTest[j].score * 100)/testScore.aTest[j].maxMark
+                        count++
+                    }
                 }
                 for(var k = 0; k < testScore.cTest.length; k++){
-                    var date2 = testScore.cTest[k].startTime.getMonth()+1
-                    if(date1 === date2)
-                        sum = sum + testScore.cTest[k].score
+                    let date2 = new String(testScore.cTest[k].startTime.getMonth()+1)
+                    date2 = date2.concat('-',new String (testScore.cTest[k].startTime.getYear()+1900))
+                    if(date1 === date2){
+                        sum = sum + (testScore.cTest[k].score * 100)/testScore.cTest[k].maxMark
+                        count++
+                    }
                 }
-                scoreArr.push(sum)
+                scoreArr.push(sum/count)
             }
             for(var i = 0;  i < testScore.cTest.length; i++){
+                sum = 0
+                count = 1
                 conflict = false
-                var date1 = testScore.cTest[i].startTime.getMonth()+1
+                let date1 =new String(testScore.cTest[i].startTime.getMonth()+1)
+                date1 = date1.concat('-',new String (testScore.cTest[i].startTime.getYear()+1900))
                 dateArr.forEach(element => {
                     if(element === date1)
                         conflict = true
@@ -104,7 +137,16 @@ routerProgress.get('/monthly/:id', function(req,res,next){
                 if(conflict === true)
                     continue
                 dateArr.push(date1)
-                scoreArr.push(testScore.cTest[i].score)
+                sum = sum + (testScore.aTest[i].score * 100)/testScore.aTest[i].maxMark
+                for(var j = i+1; j < testScore.cTest.length;j++){
+                    let date2 = new String(testScore.cTest[j].startTime.getDate())
+                    date2 = date2.concat('-',new String (testScore.cTest[j].startTime.getYear()+1900))
+                    if(date1 === date2){
+                        sum = sum + (testScore.cTest[j].score * 100)/testScore.cTest[j].maxMark
+                        count++
+                    }
+                }
+                scoreArr.push(sum/count)
             }
             console.log(dateArr)
             console.log(scoreArr)
@@ -166,6 +208,8 @@ routerProgress.get('/weekly/:id', function(req,res,next){
                 secondEntry = testScore.aTest
             }
 
+            // console.log(firstEntry)
+            // console.log(secondEntry)
             
             // Iterating to get the week and filter all the dates that fall in that week
             // Initialize weekStartDate
@@ -188,7 +232,7 @@ routerProgress.get('/weekly/:id', function(req,res,next){
                 else
                     dFactor[1] = 28
                 // Determining the weekEndDate
-                var sum = 0
+                sum = 0
                 filteredFirstArr = []
                 filteredSecondArr = []
                 if(i === 0)
@@ -209,12 +253,15 @@ routerProgress.get('/weekly/:id', function(req,res,next){
                 else 
                     weekEndYear = weekStartYear    
 
+                // console.log(weekStartDate+"-"+weekStartMonth+"-"+weekStartYear)
+                // console.log(weekEndDate+"-"+weekEndMonth+"-"+weekEndYear)
+
                 // Filtering out the dates falling in current week
                 firstEntry.filter(value => {
                     if(((value.startTime.getYear()+1900) >= weekStartYear) && ((value.startTime.getYear()+1900) <= weekEndYear)){
                         if(((value.startTime.getMonth()+1 >= weekStartMonth) && (value.startTime.getMonth()+1 <= weekEndMonth)) || ((value.startTime.getMonth()+2 % 12) === 1)){
                             if(((value.startTime.getDate() >= weekStartDate ) && (value.startTime.getDate() <= weekEndDate)) || (((value.startTime.getDate() + (6 - value.startTime.getDay())) % dFactor[value.startTime.getMonth()]) <= 7)){
-                                filteredFirstArr.push(value.score)
+                                filteredFirstArr.push((value.score * 100)/value.maxMark)
                             }
                         } 
                     }
@@ -222,14 +269,19 @@ routerProgress.get('/weekly/:id', function(req,res,next){
                 secondEntry.filter(value => {
                     if(((value.startTime.getYear()+1900) >= weekStartYear) && ((value.startTime.getYear()+1900) <= weekEndYear)){
                         if(((value.startTime.getMonth()+1 >= weekStartMonth) && (value.startTime.getMonth()+1 <= weekEndMonth)) || ((value.startTime.getMonth()+2 % 12) === 1)){
-                            if(((value.startTime.getDate() >= weekStartDate ) && (value.startTime.getDate())) || (((value.startTime.getDate() + (6 - value.startTime.getDay())) % dFactor[value.startTime.getMonth()]) <= 7)){
-                                filteredSecondArr.push(value.score)
+                            if(((value.startTime.getDate() >= weekStartDate ) && (value.startTime.getDate() <= weekEndDate)) || (((value.startTime.getDate() + (6 - value.startTime.getDay())) % dFactor[value.startTime.getMonth()]) <= 7)){
+                                filteredSecondArr.push((value.score * 100)/value.maxMark)
                             }
                         } 
                     }
                 })
 
-                sum = sum + (filteredFirstArr.length === 0? 0:filteredFirstArr.reduce((a,b) => a+b)) + (filteredSecondArr.length === 0? 0:filteredSecondArr.reduce((a,b) => a+b))
+                filteredFirstArrLength = filteredFirstArr.length
+                filteredSecondArrLength = filteredSecondArr.length
+
+                sum = sum + (filteredFirstArrLength === 0? 0:(filteredFirstArr.reduce((a,b) => a+b))) + (filteredSecondArrLength === 0? 0:(filteredSecondArr.reduce((a,b) => a+b)))
+                if(filteredFirstArrLength+filteredSecondArrLength != 0)
+                    sum = sum/(filteredFirstArrLength+filteredSecondArrLength)
 
                 dateArr.push(week)
                 scoreArr.push(sum)
@@ -248,6 +300,9 @@ routerProgress.get('/weekly/:id', function(req,res,next){
                 else
                     continueIteration = true
             }
+            
+            console.log(dateArr)
+            console.log(scoreArr)
             res.status(201).json({
                 weekArr: dateArr,
                 scoreArr: scoreArr

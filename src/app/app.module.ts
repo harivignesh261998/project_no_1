@@ -183,7 +183,8 @@ const customNotifierOptions: NotifierOptions = {
     CalendarModule,
     MatBottomSheetModule,
     MatListModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    
     
     
     

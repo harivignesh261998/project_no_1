@@ -4,9 +4,9 @@ const Student = require('../models/student');
 const College = require('../models/college');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-//require('dotenv').config();
+require('dotenv').config();
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 
 //get student data from the db
@@ -16,6 +16,15 @@ router.get('/student', function(req,res,next){
         console.log('Registrations fetched successfully');
     });
 });
+
+//get college names and _id
+router.get('/registration',function(req,res,next){
+    College.find({},{collegeName: 1, _id: 1}).then(doc => {
+        res.status(201).json(doc)
+        console.log(doc)
+    });
+});
+
 
 //add a new student to the db
 router.post('/studentRegister', async(req,res,next) => {
@@ -29,7 +38,8 @@ router.post('/studentRegister', async(req,res,next) => {
                 contact: req.body.contact,
                 degree: req.body.degree,
                 department: req.body.department,
-                graduatingYear: req.graduatingYear
+                graduatingYear: req.graduatingYear,
+                collegeName: req.body.collegeName
             });
        student.save(function(err,result){
            if(err){
@@ -38,22 +48,21 @@ router.post('/studentRegister', async(req,res,next) => {
                    message: "E-Mail ID already exists. Try again with a different E-Mail ID"
                })
            }
-           else {
-                console.log('->',result)
+           else {            
                 const token = jwt.sign({
+                    mailId: result.mailId,
                     _id: result._id},
-                    'secret_this_should_be_longer'
-                    
+                    process.env.JWT_SECRET_KEY,
+                    {expiresIn: 600}
                 )
-                
 
-            const url = `confirmation/${token}`
+            const url = `http://localhost:4000/confirmation/${token}`
 
             const msg = {
                 from: 'mithunsolomon@gmail.com',
-                to: `${req.body.mailId}`,
+                to: /*`${req.body.mailId}`*/ 'jyxxnkbgukilijlwcn@ttirv.net',
                 subject: "Confirmation Mail: ",
-                html: `Hello ${req.body.firstName}, you have registered at PROJECT_KAVI.<br> Click on the following URL link to confirm your Mail Id: <a href = ${url}> ${url} </a>`
+                html: `<b>Hello ${req.body.firstName}, you have registered at PROJECT_KAVI.<br> Click on the following URL link to confirm your Mail Id: <a href = ${url}> ${url} </a> <br> <b>THIS URL EXPIRES IN 10 MINUTES.</b></b>`
             };
 
             sgMail.send(msg).then(() => {}, error => {
@@ -66,7 +75,7 @@ router.post('/studentRegister', async(req,res,next) => {
                 try {
                   await sgMail.send(msg);
                   console.log("Mail sent");
-                  res.status(201).json(`Confirmation mail sent to ${req.body.mailId}. Please Confirm your Mail-ID`);
+                  res.status(201).json(`Confirmation mail expiring in 10 minutes is sent to ${req.body.mailId}. Please Confirm your Mail-ID`);
                 } catch (error) {
                   console.error(error);
                
@@ -75,6 +84,17 @@ router.post('/studentRegister', async(req,res,next) => {
                   }
                 }
             })();
+            
+            // (async (_, {token}) => {
+            //     try{
+            //         const verifyToken = jwt.verify(token, process.env.JWT_SECRET_KEY)
+            //         return true
+            //     }
+            //     catch(err){
+            //         return false
+            //     }
+            // })();
+
         }    
     })}
     catch{
@@ -85,8 +105,11 @@ router.post('/studentRegister', async(req,res,next) => {
 
 });
 
- 
-            
+
+router.get('/confirmation/:token', async(req,res,next) => {
+    console.log(req.params.token);
+})
+
 
 
 //add a new college/staff to the db
