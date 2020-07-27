@@ -50,7 +50,9 @@ image1:string='assets/image/download.svg'
    
     this._bottomSheet.open(DocsComponent,{
       data:{names:[this.firstname,this.lastName]},
+      
     });
+    this.ngOnInit();
    
   }
 }

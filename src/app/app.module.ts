@@ -58,14 +58,17 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 import {MatListModule} from '@angular/material/list';
 import { PasswordComponent } from './components/password/password.component';
-
+import {MatSidenavModule} from '@angular/material/sidenav';
 import { NgOtpInputModule } from  'ng-otp-input';
-
+import { DocComponent } from './components/doc/doc.component';
+import { SidebarModule } from 'ng-sidebar';
+import { ComfirmationComponent } from './components/comfirmation/comfirmation.component';
+import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 const customNotifierOptions: NotifierOptions = {
   position: {
 		horizontal: {
-			position: 'right',
-			distance: 600
+			position: 'left',
+			distance: 12
 		},
 		vertical: {
 			position: 'bottom',
@@ -79,7 +82,7 @@ const customNotifierOptions: NotifierOptions = {
     onClick: 'hide',
     onMouseover: 'pauseAutoHide',
    showDismissButton: false,
-    stacking: 4
+    stacking: 1
   },
   animations: {
     enabled: true,
@@ -132,6 +135,9 @@ const customNotifierOptions: NotifierOptions = {
     AcportalComponent,
     AcsolveComponent,
     PasswordComponent,
+    DocComponent,
+    ComfirmationComponent,
+    ResetpasswordComponent,
     
     
     
@@ -184,6 +190,8 @@ const customNotifierOptions: NotifierOptions = {
     MatBottomSheetModule,
     MatListModule,
     NgOtpInputModule,
+    SidebarModule.forRoot(),
+    MatSidenavModule
     
     
     

@@ -76,12 +76,12 @@ public loading=false;
      this.testId=res['_id']
       this.timeleft=res['duration']*60;
       this.fivemin=this.timeleft-300;
+      this.loading=false;
     
     })
 
     this.summa();
     this.neram();
-    this.loading=false;
 
     
 

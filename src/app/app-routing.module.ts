@@ -24,6 +24,9 @@ import { InstructionsComponent } from './components/instructions/instructions.co
 import { TestresultComponent } from './components/testresult/testresult.component';
 import { AcportalComponent } from './components/acportal/acportal.component';
 import { AcsolveComponent } from './components/acsolve/acsolve.component';
+import { DocComponent } from './components/doc/doc.component';
+import { ComfirmationComponent } from './components/comfirmation/comfirmation.component';
+import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 
 
 
@@ -72,10 +75,10 @@ const routes: Routes = [
   {path:'practice/portal/cportal/instructions',component:InstructionsComponent,canActivate:[AuthGuard]},
   {path:'practice/portal/aportal/instructions',component:InstructionsComponent,canActivate:[AuthGuard]},
   {path:'testresult',component:TestresultComponent,canActivate:[AuthGuard]},  
-  {path:'acsolve',component:AcsolveComponent,canActivate:[AuthGuard]}
-
-
-
+  {path:'acsolve',component:AcsolveComponent,canActivate:[AuthGuard]},
+  {path:'doc',component:DocComponent,canActivate:[AuthGuard]},
+  {path:'comfirmation',component:ComfirmationComponent},
+  {path:'resetpassword',component:ResetpasswordComponent},
 ];
 
 @NgModule({

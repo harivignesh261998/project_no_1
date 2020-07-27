@@ -4,7 +4,7 @@ const Practice = require('../models/practice');
 const Student = require('../models/student');
 var solved = [];
 var pQuestionsIds = [];
-var unsolved = [];
+var unsolved = []
 
 //Get Practice Questions from the DB
 routerPractice.get('/practice', function(req,res,next){

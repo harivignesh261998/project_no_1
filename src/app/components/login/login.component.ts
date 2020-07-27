@@ -22,11 +22,11 @@ import { PasswordComponent } from '../password/password.component';
 export class LoginComponent implements OnInit,OnDestroy {
 private authStatusSub:Subscription;
 public loading = false;
-
+email=false;
 global:GlobalData[];
 college:string[]=[];
   ngOnInit(){
-    // this.loading=false
+     this.loading=false
     
    this.authStatusSub= this.authService.getAuthStatusListner().subscribe(
      authStatus=>{
@@ -53,25 +53,24 @@ college:string[]=[];
 
 
   OnSignup(form:NgForm){
+    this.loading=true;
    console.log(form.value);
     if(form.invalid){
       return;
     }
-    this.loading=true;
 
     this.authService.createUser(form.value.firstName,form.value.lastName,form.value.mailId,form.value.password,form.value.collegeId)
-  
-    // this.loading=false;
+  this.email=true;
   }
 
   onLogin(form:NgForm){
+     this.loading=true;
     if(form.invalid){
+      this.loading=false;
       return;
     }
-    this.loading=true;
    this.authService.login(form.value.mailId,form.value.password);
-   //this.loading=false;
-  //  console.log('ahi '+a);
+  
   
     
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import {Chart} from 'chart.js'
-// import { forEach } from 'lodash';
+
 
 
 
@@ -41,7 +41,7 @@ monthy=['January','Febraury','March','April','May','June','July','August','Septe
 
  
   ngOnInit(): void {
-    // this.loading=true;
+      this.loading=true;
 
     this.authService.getDailyprogress().subscribe(res=>{
       //console.log(res);
@@ -103,14 +103,19 @@ monthy=['January','Febraury','March','April','May','June','July','August','Septe
      console.log(monthArr);
      let month=[];
      let data=[];
+     let monthu=[];
      for(let i=0;i<monthArr.length;i++){
        month[i]=monthArr[i];
        data[i]=scoreArr[i];
      }
-
-     let montho=[];
      month.forEach((res)=>{
-       montho.push(this.monthy[res.slice(0,1)-1]);
+       monthu.push(res.split("-"));
+     })
+     console.log('heloooo',monthu);
+     let montho=[];
+     monthu.forEach((res)=>{
+       console.log('unna vitta ',res[0])
+       montho.push(this.monthy[res[0]-1]);
       })
       
     
@@ -222,17 +227,24 @@ monthy=['January','Febraury','March','April','May','June','July','August','Septe
   })
 
 
-  this.authService.getIsSolved().subscribe(res=>{
-    this.name=res['firstName'];
-    this.atest=res['aTest'].reverse();
-    this.ctest=res['cTest'].reverse();
+  this.authService.getIsAtest().subscribe(res=>{
+    console.log(res);
     
+     this.atest=res
+     this.atest=this.atest.reverse();
+     this.count3=this.calA();
+     this.funa()
+     
+    })
     
-    this.count1=this.calC();
-    this.count3=this.calA();
-    this.func();
-    this.funa()
-   this.loading=false;
+    this.authService.getIsCtest().subscribe(res=>{
+      console.log(res);
+      this.ctest=res;
+      this.ctest=this.ctest.reverse();
+      this.count1=this.calC();
+      this.func();
+      this.loading=false;
+      
 })
 }
 

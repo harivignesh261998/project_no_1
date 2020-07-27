@@ -38,19 +38,22 @@ filters={}
   constructor(private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
-    this.loading=true;
+    this.loading=true
 
     this.authService.getPractice().subscribe(res=>{
+      console.log(res);
       this.globalPractice=res;
       this.practice=this.globalPractice['practiceQuestions']; 
       this.count1=this.practice.length; 
     })
 
    this.authService.getIsSolved().subscribe(res=>{
-     this.solvedData=res['practicedQuestions'];
-     this.count2=this.solvedData.length;
-     this.applyFilters(); 
-     this.fun();
+     console.log(res);
+    this.solvedData=res['solved'];
+    
+      this.count2=this.solvedData.length;
+      this.applyFilters(); 
+      this.fun();
      this.loading=false;
    })
 
@@ -71,10 +74,12 @@ filters={}
   }
 
   filterExact(property:string,rule:any){
+    this.loading=true;
     
     this.filters[property]=val=>val==rule
     this.applyFilters();
     this.fun();
+    this.loading=false
   }
 
  

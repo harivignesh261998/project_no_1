@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import{HttpClient} from '@angular/common/http';
+import{HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthData, Update, Overall,updateProfile} from './auth-data.model';
 import {Auth} from './auth-data.model';
 import { GlobalDataSummary,GlobalData, GlobalPracticeSummary, GlobalPracticeTest, GlobalUserData} from './models/global-data'; 
@@ -51,11 +51,12 @@ private clgURl:string='/assets/data/college.csv'
 
     createUser(firstName:string,lastName:string,mailId:string,password:string,collegeId:number){
         const authData:AuthData={firstName:firstName,lastName:lastName,mailId:mailId,password:password,collegeId:collegeId};
-         this.http.post("apiRegister/studentRegister",authData).subscribe(()=>{
+        return this.http.post("apiRegister/studentRegister",authData).subscribe(()=>{
              console.log('register Successfully');
              this.handle1()
              this.router.navigate(['/login']);
          },error=>{
+            
              this.authStatusListner.next(false);
          });
 
@@ -314,9 +315,14 @@ getUsername():Observable<GlobalUserData[]>{
 //    getCtestbyID(){
 //        return this.http.get('apiTest/getCTest/'+this.testid);
 //    }
-getIsSolved(){
+getIsAtest(){
     this.userId=JSON.parse(localStorage.getItem('userId'));
-    return this.http.get('apiStudentDashboard/profile/'+this.userId);
+    return this.http.get('apiScoreUpdate/aTestScore/'+this.userId);
+}
+
+getIsCtest(){
+    this.userId=JSON.parse(localStorage.getItem('userId'));
+    return this.http.get('apiScoreUpdate/cTestScore/'+this.userId)
 }
 
 givedurationn(name){
@@ -445,7 +451,7 @@ handle(){
     this.notifier.notify('default','Login Successfull');
 }
 handle1(){
-    this.notifier.notify('default','Register Successfull');
+    this.notifier.notify('default','Register Successfull Verify your mail sent your registered e-mail id');
 
 
 }
@@ -453,12 +459,39 @@ updateProfile(firstName:string,lastName:string){
     
     const updateProfile:updateProfile={firstName:firstName,lastName:lastName}
     console.log(updateProfile);
-      this.http.put(`apiStudentDashboard/profile/${this.userId}`,updateProfile).subscribe(res=>{
-          console.log('successfull')
-      });err=>{
-         console.log('not'); 
-      }
+       this.http.put(`apiStudentDashboard/profile/${this.userId}`,updateProfile);
 }
+
+getIsSolved(){
+    this.userId=JSON.parse(localStorage.getItem('userId'));  
+    console.log(this.userId);
+    return this.http.get(`apiPractice/practiceId/${this.userId}`);
+}
+verify(token){
+   
+    const tokens={token:token};
+   
+    this.http.put('apiRegister/confirmation',tokens).subscribe(res=>{
+        console.log(res);
+    });err=>{
+        console.log(err);
+    }
+    }
+
+
+    email(mailId){
+        console.log('here')
+        const mail={mailId:mailId}
+        console.log(mail);
+       return this.http.post('apiRegister/forgotPassword',mail)
+    }
+
+    updatePassword(token,newPassword){
+        const updatepassword={token:token,newPassword:newPassword}
+        console.log(updatepassword);
+        return this.http.put('apiRegister/resetPassword',updatepassword);
+    }
+
 
 }
 
