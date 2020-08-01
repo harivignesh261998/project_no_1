@@ -29,7 +29,7 @@ count1;
 count2;
 filteringdata:any;
 allcaught=false;
-image1:string="assets/image/all_caught_up";
+image1:string='assets/image/all.png';
 public loading=false;
 
 

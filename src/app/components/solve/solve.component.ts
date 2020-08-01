@@ -35,11 +35,11 @@ practice;
     this.global=res['practiceQuestions']
     this.practice=this.global
     console.log(this.practice);
+    this.loading=false;
     })
     this.authService.getstatusbar_1().subscribe(res=>{
       this.message=res;
       console.log(this.message);
-      this.loading=false;
     })
     this.fillid=this.authService.getFilterids();
     console.log(this.fillid);

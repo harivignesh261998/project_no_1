@@ -37,6 +37,10 @@
             </div>
           </div>
       </div>
+      <div *ngIf='allcaught'>
+        <img class="image_place" [src]=image1 style="width:30%;"> 
+        Nothing to show :)
+      </div>
   </div>
 
 <div class="filter">
@@ -86,6 +90,7 @@
   </div>
 
   </div>
+
 
   <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
 

@@ -1,10 +1,17 @@
 <div>
   <ng-template #customLoadingTemplate></ng-template>
 
-  <div class="header"> 
-      <p><a routerLink='/practice'>Practice</a> > <a routerLink='/practice/practicetest'>Practice Test</a> > Solve</p>
-      <h3 class="header_1">Solve the Challenge</h3>
-      <hr>
+  <div class="header">
+    <div class="row">
+      <div class="col">
+        <p><a routerLink='/practice'>Practice</a> > <a routerLink='/practice/practicetest'>Practice Test</a> > Solve</p>
+        <h3 class="header_1">Solve the Challenge</h3>
+        <hr>
+      </div>
+      <!-- <div class="col"></div>
+
+      <p>Overall Score</p>
+    </div>  -->
   </div>
   
   
@@ -132,11 +139,11 @@
       <div  class="row">
           <div class="col-4-lg mt-4" style="width: 50em;">
             <div class="card">
-              <div class="card-body" style="background: red;color: white;white-space: nowrap;height: 7em;">
-                <h4>Wrong answer</h4>
+              <div class="card-body" style="background: white;color: red;white-space: nowrap;height: 7em;">
+                <h4>Wrong answer :)</h4>
                  <p>Try again</p>
                 <div class="btn_1 example-button-row">
-                  <button mat-raised-button style="width: 10em;background:white;color: black;" (click)='wrong()'>Try Again</button>
+                  <button mat-raised-button style="width: 10em;background:red;color: white;" (click)='wrong()'>Try Again</button>
                 </div>
               </div>
             </div>
