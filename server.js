@@ -31,6 +31,7 @@ app.use('/apiStudentDashboard', require('./routes/apiStudentDashboard'));
 app.use('/apiPracticedQuestionsUpdate', require('./routes/apiPracticedQuestionsUpdate'));
 app.use('/apiScoreUpdate', require('./routes/apiScoreUpdate'));
 app.use('/apiProgress', require('./routes/apiProgress'));
+app.use('/apiDocx',require('./routes/apiDocx'))
 // app.use('/apiDevelopment', require('./routes/apiDevelopment'));
 
 //listen for request
